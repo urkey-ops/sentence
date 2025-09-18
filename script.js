@@ -16,7 +16,6 @@ class App {
             placeholderText: document.getElementById('placeholderText'),
             interactiveContainer: document.getElementById('interactiveContainer'),
             submitBtn: document.getElementById('submitBtn'),
-            readAloudBtn: document.getElementById('readAloudBtn'),
             nextBtn: document.getElementById('nextBtn'),
             clearBtn: document.getElementById('clearBtn'),
             backToLessonsBtn: document.getElementById('backToLessonsBtn'),
@@ -33,7 +32,6 @@ class App {
             currentLessonIndex: -1,
             currentChallengeIndex: 0,
             currentSentenceArray: [],
-            wordBank: [],
             originalScrambleSentence: '',
             userAnswer: []
         };
@@ -59,7 +57,7 @@ class App {
             this.state.allWordsData = await wordsResponse.json();
         } catch (error) {
             console.error('Failed to load data files:', error);
-            this._showMessage('Failed to load lessons. Please check the files.', 'failure');
+            this._showMessage('Failed to load lessons. Please check the files.', 'failure', 0);
         }
     }
 
@@ -76,8 +74,8 @@ class App {
         });
 
         this.elements.lessonSelector.addEventListener('click', (e) => {
-            if (e.target.matches('.lesson-button') || e.target.closest('.lesson-button')) {
-                const btn = e.target.closest('.lesson-button');
+            const btn = e.target.closest('.lesson-button');
+            if (btn) {
                 const index = parseInt(btn.dataset.lessonIndex);
                 this.state.currentLessonIndex = index;
                 this.state.currentChallengeIndex = 0;
@@ -89,7 +87,6 @@ class App {
         this.elements.lessonDisplay.addEventListener('click', this._handleInteractiveClick.bind(this));
 
         this.elements.submitBtn.addEventListener('click', this._handleSubmit.bind(this));
-        this.elements.readAloudBtn.addEventListener('click', this._handleReadAloud.bind(this));
         this.elements.nextBtn.addEventListener('click', this._handleNext.bind(this));
         this.elements.clearBtn.addEventListener('click', this._handleClear.bind(this));
         this.elements.backToLessonsBtn.addEventListener('click', this._showLessonSelector.bind(this));
@@ -123,9 +120,7 @@ class App {
         this.elements.submitBtn.classList.add('hidden');
         this.elements.nextBtn.classList.add('hidden');
         this.elements.clearBtn.classList.add('hidden');
-        this.elements.readAloudBtn.classList.remove('hidden');
         this.state.currentSentenceArray = [];
-
         this._resetSteps();
 
         switch (lesson.type) {
@@ -135,14 +130,8 @@ class App {
             case 'identify':
                 this._loadIdentify();
                 break;
-            case 'build':
-                this._loadBuild();
-                break;
             case 'scramble':
                 this._loadScramble();
-                break;
-            case 'punctuate':
-                this._loadPunctuate();
                 break;
             case 'make_it_a_sentence':
                 this._loadMakeItASentence();
@@ -151,7 +140,7 @@ class App {
                 this._loadSillySentences();
                 break;
             default:
-                this._showMessage(`Unknown lesson type: ${lesson.type}`, 'failure');
+                this._showMessage(`Unknown lesson type: ${lesson.type}`, 'failure', 0);
         }
     }
 
@@ -274,10 +263,9 @@ class App {
     _handleInteractiveClick(e) {
         const lesson = this.state.allLessonsData[this.state.currentLessonIndex];
         
-        // Handling for sentence builders
         if (lesson.type === 'scramble' || lesson.type === 'make_it_a_sentence' || lesson.type === 'silly_sentences') {
             const button = e.target.closest('.word-button');
-            if (button) {
+            if (button && !button.disabled) {
                 const word = button.dataset.word;
                 this.state.currentSentenceArray.push(word);
                 this._renderCurrentSentence();
@@ -286,7 +274,6 @@ class App {
             }
         }
         
-        // Handling for identify lessons
         if (lesson.type === 'identify') {
             const wordSpan = e.target.closest('.word-in-sentence');
             if (wordSpan) {
@@ -331,13 +318,13 @@ class App {
             
             case 'scramble':
                 const userSentence = this.state.currentSentenceArray.join(' ').toLowerCase();
-                isCorrect = userSentence === challenge.words.join(' ').toLowerCase();
+                isCorrect = userSentence === this.state.originalScrambleSentence.toLowerCase();
                 message = isCorrect ? 'Fantastic! You put the words in the right order!' : `Oops, that's not right. The correct sentence is: ${this.state.originalScrambleSentence}`;
                 break;
             
             case 'make_it_a_sentence':
                 const userSentenceMake = this.state.currentSentenceArray.join(' ').toLowerCase();
-                isCorrect = userSentenceMake === challenge.correct_answer.toLowerCase();
+                isCorrect = userSentenceMake.includes(challenge.correct_answer.toLowerCase());
                 message = isCorrect ? 'You did it! That makes a complete sentence!' : `Almost! Try again to make a complete sentence.`;
                 break;
             
@@ -365,9 +352,14 @@ class App {
 
     _handleClear() {
         this.state.currentSentenceArray = [];
-        this.elements.lessonDisplay.innerHTML = `<span id="placeholderText" class="placeholder-text">Click the words below to build your sentence!</span>`;
+        this._renderCurrentSentence();
         this.elements.placeholderText.style.display = 'block';
-        this._renderWordBank();
+        
+        // Re-enable all word buttons
+        const wordButtons = this.elements.interactiveContainer.querySelectorAll('.word-button');
+        wordButtons.forEach(button => {
+            button.disabled = false;
+        });
     }
 
     _handleReadAloud(text) {
