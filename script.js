@@ -36,13 +36,11 @@ const callGeminiAPI = async (prompt) => {
     }
 };
 
-
 class SentenceJourney {
     constructor() {
         this.state = {
             allWordsData: null,
             allLessonsData: null,
-            currentTheme: null,
             currentLessonIndex: 0,
             currentChallengeIndex: 0,
             currentSentenceArray: [],
@@ -51,6 +49,7 @@ class SentenceJourney {
         this.elements = {};
         this.messageTimeout = null;
         this._getElements();
+        this.debouncedSubmit = this._debounce(this._handleSubmit, 2000); 
         this._setupEventListeners();
     }
 
@@ -62,7 +61,12 @@ class SentenceJourney {
             ]);
             this.state.allWordsData = await wordsResponse.json();
             this.state.allLessonsData = await lessonsResponse.json();
-            this._renderThemeSelector();
+            
+            this.elements.themeSelector.classList.add('hidden');
+            this.elements.appContainer.classList.remove('hidden');
+            this.elements.appContainer.classList.add('flex');
+            this._startLesson();
+            
         } catch (error) {
             console.error("Failed to load initial data:", error);
             this.elements.themeSelector.innerHTML = `<h1 class="text-2xl text-red-600">Error: Could not load game data.</h1>`;
@@ -74,6 +78,7 @@ class SentenceJourney {
             themeSelector: document.getElementById('themeSelector'),
             themeButtonsContainer: document.getElementById('themeButtonsContainer'),
             appContainer: document.getElementById('appContainer'),
+            lessonGoalDisplay: document.getElementById('lessonGoalDisplay'), // 💡 ADDED: New element to display the lesson goal permanently
             lessonDisplay: document.getElementById('lessonDisplay'),
             interactiveContainer: document.getElementById('interactiveContainer'),
             placeholderText: document.getElementById('placeholderText'),
@@ -91,23 +96,28 @@ class SentenceJourney {
         this.elements.goBackBtn.addEventListener('click', () => this._handleGoBack());
         this.elements.clearBtn.addEventListener('click', () => this._handleClear());
         this.elements.readAloudBtn.addEventListener('click', () => this._handleReadAloud());
-        this.elements.submitBtn.addEventListener('click', () => this._handleSubmit());
+        this.elements.submitBtn.addEventListener('click', () => this.debouncedSubmit());
         this.elements.interactiveContainer.addEventListener('click', (e) => this._handleInteraction(e));
         this.elements.lessonDisplay.addEventListener('click', (e) => this._handleInteraction(e));
     }
-
-    _selectTheme(themeName) {
-        this.state.currentTheme = themeName;
-        this.elements.themeSelector.classList.add('hidden');
-        this.elements.appContainer.classList.remove('hidden');
-        this.elements.appContainer.classList.add('flex');
-        this._startLesson();
+    
+    _debounce(func, delay) {
+        let timeoutId;
+        return (...args) => {
+            clearTimeout(timeoutId);
+            timeoutId = setTimeout(() => {
+                func.apply(this, args);
+            }, delay);
+        };
     }
 
     _startLesson() {
         this._resetCurrentState();
         const lesson = this.state.allLessonsData[this.state.currentLessonIndex];
-        if (!lesson) return;
+        if (!lesson) {
+            this.elements.appContainer.innerHTML = `<h1 class="text-4xl text-green-600 text-center">You've completed all lessons! 🎉</h1>`;
+            return;
+        }
 
         this.elements.submitBtn.classList.add('hidden');
         this._updateProgress();
@@ -124,8 +134,8 @@ class SentenceJourney {
         const lesson = this.state.allLessonsData[this.state.currentLessonIndex];
         const challenge = lesson.challenges[this.state.currentChallengeIndex];
         
-        const progressText = `${lesson.goal} (${this.state.currentChallengeIndex + 1} / ${lesson.challenges.length})`;
-        this._showMessage(progressText, 'bg-info', 5000);
+        // 💡 MODIFIED: Display the challenge instruction permanently
+        this.elements.lessonGoalDisplay.textContent = `${lesson.goal} (${this.state.currentChallengeIndex + 1} / ${lesson.challenges.length})`;
         this._resetSelectionState();
         this._renderLesson(lesson, challenge);
     }
@@ -315,7 +325,8 @@ class SentenceJourney {
         this.elements.progressText.textContent = `Lesson ${current} of ${totalLessons}`;
         this.elements.progressFill.style.width = `${(current / totalLessons) * 100}%`;
         const lesson = this.state.allLessonsData[this.state.currentLessonIndex];
-        this._showMessage(lesson.goal, 'bg-info', 5000);
+        // 💡 MODIFIED: Display the lesson goal permanently
+        this.elements.lessonGoalDisplay.textContent = lesson.goal;
     }
     _renderSentenceDisplay() {
         if (this.state.currentSentenceArray.length === 0) {
@@ -345,7 +356,10 @@ class SentenceJourney {
         if (this.state.allWordsData.miscWords[nextPart]) {
             words = this.state.allWordsData.miscWords[nextPart];
         } else if (this.state.allWordsData.words[nextPart]) {
-            words = this.state.allWordsData.words[nextPart][this.state.currentTheme];
+            // Note: This relies on your words.json having a key for the theme or a general one.
+            words = this.state.allWordsData.words[nextPart][this.state.currentTheme]; 
+        } else {
+             console.error(`Words for type "${nextPart}" not found.`);
         }
         
         const wordBank = words.sort(() => 0.5 - Math.random()).slice(0, 7);
