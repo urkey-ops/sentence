@@ -1,0 +1,42 @@
+{
+  "themes": [
+    { "name": "Animals", "emoji": "🐾" },
+    { "name": "Space", "emoji": "🚀" },
+    { "name": "Food", "emoji": "🍕" },
+    { "name": "School", "emoji": "🎒" }
+  ],
+  "typeColors": {
+    "noun": "noun-color",
+    "verb": "verb-color",
+    "adjective": "adjective-color",
+    "determiner": "determiner-color",
+    "preposition": "preposition-color",
+    "punctuation": "punctuation-color",
+    "other": "other-color"
+  },
+  "words": {
+    "noun": {
+      "Animals": ["lion", "bird", "fish", "dog", "cat", "rabbit", "whale"],
+      "Space": ["rocket", "star", "planet", "moon", "alien", "comet"],
+      "Food": ["pizza", "apple", "cookie", "cake", "banana", "sandwich"],
+      "School": ["desk", "book", "pen", "teacher", "student", "class"]
+    },
+    "verb": {
+      "Animals": ["runs", "flies", "swims", "jumps", "eats", "sleeps", "hops"],
+      "Space": ["flies", "travels", "launches", "orbits", "explores"],
+      "Food": ["eats", "bakes", "cooks", "chews", "shares", "makes"],
+      "School": ["learns", "reads", "writes", "plays", "listens", "studies"]
+    },
+    "adjective": {
+      "Animals": ["big", "small", "fluffy", "scary", "friendly", "fast"],
+      "Space": ["bright", "dark", "giant", "shiny", "mysterious"],
+      "Food": ["sweet", "salty", "fresh", "delicious", "hot"],
+      "School": ["hard", "easy", "long", "short", "fun", "boring"]
+    }
+  },
+  "miscWords": {
+    "determiner": ["a", "the", "an"],
+    "preposition": ["in", "on", "under", "with", "near"],
+    "punctuation": [".", "!", "?"]
+  }
+}

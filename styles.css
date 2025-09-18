@@ -1,0 +1,139 @@
+:root {
+  --font-display: 'Comic Neue', cursive;
+}
+
+body {
+  font-family: var(--font-display);
+  background-color: #ffe4e1;
+  background-image: 
+    radial-gradient(circle at 1px 1px, #ffd1dc 2px, transparent 2px),
+    radial-gradient(circle at 10px 10px, #ffd1dc 2px, transparent 2px);
+  background-size: 20px 20px;
+  background-position: 0 0, 10px 10px;
+  font-size: 1.125rem;
+  margin: 0;
+  padding: 0;
+}
+
+.squircle { border-radius: 2rem; }
+.bg-api { background-color: #d0e0ff; transition: background-color 0.5s ease; }
+.bg-json { background-color: #b80722; transition: background-color 0.5s ease; }
+
+.base-button, .word-button, .theme-button, .punctuation-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  font-weight: 700;
+  transition: all 0.2s ease-in-out;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-display);
+  min-width: 50px;
+  min-height: 50px;
+  border-radius: 1.75rem;
+  padding: 1rem 2rem;
+}
+
+.action-button {
+  padding: 0.75rem 1.5rem;
+  font-size: 1.25rem;
+  border-radius: 9999px;
+  color: white;
+  background-color: #f472b6; /* Pink-400 */
+}
+.action-button:hover { background-color: #ec4899; } /* Pink-500 */
+
+.theme-button {
+  padding: 1rem 2rem;
+  font-size: 1.5rem;
+  border-radius: 2.5rem;
+  background-color: #a78bfa; /* Purple-400 */
+  color: white;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.word-button {
+  padding: 1rem 2rem;
+  font-size: 1.25rem;
+  border-radius: 9999px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  color: #fff;
+}
+
+.word-button.noun-color { background-color: #8cc366; }
+.word-button.verb-color { background-color: #5aa6cc; }
+.word-button.adjective-color { background-color: #e691a0; }
+.word-button.determiner-color { background-color: #e6b800; }
+.word-button.preposition-color { background-color: #a074a0; }
+.word-button.punctuation-color { background-color: #696969; }
+.word-button.other-color { background-color: #b0b0b0; }
+
+.sentence-word {
+  font-weight: bold;
+  padding: 0.75rem 1.5rem;
+  border-radius: 9999px;
+  color: white;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  display: inline-block;
+  font-size: 1.5rem;
+}
+.sentence-word.clickable { cursor: pointer; border: 2px dashed #a78bfa; }
+.sentence-word.clickable:hover { transform: translateY(-2px); box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+.sentence-word.selected { border: 4px solid #ec4899; transform: scale(1.05); }
+
+.sentence-word.noun-color { background-color: #8cc366; }
+.sentence-word.verb-color { background-color: #5aa6cc; }
+.sentence-word.adjective-color { background-color: #e691a0; }
+.sentence-word.determiner-color { background-color: #e6b800; }
+.sentence-word.preposition-color { background-color: #a074a0; }
+.sentence-word.punctuation-color { background-color: #696969; }
+.sentence-word.other-color { background-color: #b0b0b0; }
+
+.placeholder-text {
+  color: #404040;
+  font-style: italic;
+  font-size: 1rem;
+}
+
+.message-box {
+  position: absolute; top: 2rem; left: 50%;
+  transform: translateX(-50%) translateY(-150%);
+  padding: 1.25rem 2.5rem; border-radius: 2rem;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  font-weight: 700; transition: all 0.5s ease-in-out;
+  font-size: 1.25rem; opacity: 0; visibility: hidden; z-index: 100;
+}
+.message-box.visible { transform: translateX(-50%) translateY(0); opacity: 1; visibility: visible; }
+.message-box.bg-success { background-color: #d4edda; color: #155724; }
+.message-box.bg-info { background-color: #cce5ff; color: #004085; }
+.message-box.bg-warning { background-color: #fff3cd; color: #856404; }
+.message-box.bg-danger { background-color: #f8d7da; color: #721c24; }
+
+.progress-bar { width: 100%; height: 14px; background-color: #e2e8f0; border-radius: 7px; overflow: hidden; margin-top: 1rem; }
+.progress-fill { height: 100%; width: 0%; background-color: #6366f1; transition: width 0.3s ease-in-out; border-radius: 7px; }
+
+.fade-in { animation: fadeIn 0.5s ease-in; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+.emoji { font-size: 3rem; }
+
+/* New styles for different modes */
+.punctuation-button { font-size: 2.5rem; font-weight: bold; width: 80px; height: 80px; padding: 0; background-color: #cce5ff; color: #004085; }
+.punctuation-button:hover { background-color: #b8daff; }
+
+.free-write-input {
+  width: 100%;
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  padding: 1rem;
+  border-radius: 1rem;
+  border: 2px solid #a78bfa;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  text-align: center;
+}
+.free-write-input:focus {
+  outline: none;
+  border-color: #ec4899;
+  box-shadow: 0 0 0 4px rgba(236, 72, 153, 0.3);
+}
