@@ -214,3 +214,12 @@ body {
   0% { transform: scale(0.5); opacity: 0; }
   100% { transform: scale(1); opacity: 1; }
 }
+/* Add this to the end of your styles.css file */
+.word-in-sentence.active {
+    background-color: #f7941d; /* A cheerful orange */
+    color: #ffffff; /* White text for contrast */
+    border-radius: 0.5rem;
+    padding: 0.25rem 0.5rem;
+    transition: all 0.2s ease-in-out;
+}
+
