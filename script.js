@@ -78,7 +78,6 @@ class SentenceJourney {
     _getElements() {
         this.elements = {
             themeSelector: document.getElementById('themeSelector'),
-            themeButtonsContainer: document.getElementById('themeButtonsContainer'),
             appContainer: document.getElementById('appContainer'),
             // 💡 ADDED: New element to display the lesson goal permanently
             lessonGoalDisplay: document.getElementById('lessonGoalDisplay'),
