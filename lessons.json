@@ -1,0 +1,80 @@
+[
+  { 
+    "lesson": 1, 
+    "type": "sentence_or_not", 
+    "goal": "Is this a complete sentence?",
+    "challenges": [
+      { "text": "The dog barks.", "isSentence": true },
+      { "text": "In the house.", "isSentence": false },
+      { "text": "My friend is happy.", "isSentence": true },
+      { "text": "A big blue car.", "isSentence": false },
+      { "text": "She sings a song.", "isSentence": true },
+      { "text": "Runs fast.", "isSentence": false },
+      { "text": "The boy runs fast.", "isSentence": true }
+    ]
+  },
+  { 
+    "lesson": 2, 
+    "type": "identify", 
+    "goal": "Click the Naming Part (who or what the sentence is about).",
+    "challenges": [
+      { "sentence": "My mom smiles.", "answer": ["my", "mom"] },
+      { "sentence": "The big red ball bounced.", "answer": ["the", "big", "red", "ball"] },
+      { "sentence": "A small mouse ran.", "answer": ["a", "small", "mouse"] },
+      { "sentence": "The car stops.", "answer": ["the", "car"] }
+    ]
+  },
+  { 
+    "lesson": 3, 
+    "type": "identify", 
+    "goal": "Click the Telling Part (what the naming part is doing).",
+    "challenges": [
+      { "sentence": "The cat naps.", "answer": ["naps"] },
+      { "sentence": "My friend is happy.", "answer": ["is", "happy"] },
+      { "sentence": "The sun shines.", "answer": ["shines"] }
+    ]
+  },
+  {
+    "lesson": 4,
+    "type": "build",
+    "goal": "Let's build a sentence! (Naming Part + Telling Part)",
+    "structure": ["determiner", "noun", "verb", "punctuation"]
+  },
+  { 
+    "lesson": 5, 
+    "type": "scramble", 
+    "goal": "Put the words in the right order!",
+    "challenges": [
+      { "words": ["we", "play", "outside"] },
+      { "words": ["the", "sky", "is", "blue"] },
+      { "words": ["i", "go", "to", "school"] }
+    ]
+  },
+  { 
+    "lesson": 6, 
+    "type": "punctuate", 
+    "goal": "Choose the right end mark.",
+    "challenges": [
+      { "sentence": "I am happy", "answer": "."},
+      { "sentence": "Do you want to play", "answer": "?"},
+      { "sentence": "What a big bug", "answer": "!"},
+      { "sentence": "The puppy is cute", "answer": "."}
+    ]
+  },
+  {
+    "lesson": 7,
+    "type": "build",
+    "goal": "Let's add a describing word (adjective).",
+    "structure": ["determiner", "adjective", "noun", "verb", "punctuation"]
+  },
+  {
+    "lesson": 8,
+    "type": "free_write",
+    "goal": "Write a sentence about your favorite animal."
+  },
+  {
+    "lesson": 9,
+    "type": "final_challenge",
+    "goal": "Awesome work! You finished the learning journey!"
+  }
+]
