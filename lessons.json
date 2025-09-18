@@ -46,24 +46,21 @@
   },
   { 
     "lesson": 5, 
-    "type": "build", 
-    "goal": "Let's build a sentence! (Naming Part + Telling Part)",
-    "structure": ["determiner", "noun", "verb", "punctuation"]
+    "type": "make_it_a_sentence", 
+    "goal": "Add a word to make a complete sentence!",
+    "challenges": [
+        { "incomplete_sentence": "The red apple", "word_type": "verb", "correct_answer": "The red apple is on the table." },
+        { "incomplete_sentence": "Jumps high", "word_type": "noun", "correct_answer": "The boy jumps high." },
+        { "incomplete_sentence": "The baby", "word_type": "verb", "correct_answer": "The baby cries." }
+    ]
   },
   { 
     "lesson": 6, 
-    "type": "punctuate", 
-    "goal": "Choose the right end mark.",
+    "type": "silly_sentences", 
+    "goal": "Let's make some silly sentences!",
     "challenges": [
-      { "sentence": "I am happy", "answer": "."},
-      { "sentence": "Do you want to play", "answer": "?"},
-      { "sentence": "What a big bug", "answer": "!"},
-      { "sentence": "The puppy is cute", "answer": "."}
+        { "description": "Make a sentence with a person and an action.", "word_types": ["noun", "verb"] },
+        { "description": "Make a sentence about an animal with a verb.", "word_types": ["noun", "verb"] }
     ]
-  },
-  {
-    "lesson": 7,
-    "type": "guided_build",
-    "goal": "Write your own sentence following the 5 steps!"
   }
 ]
