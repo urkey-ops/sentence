@@ -49,6 +49,7 @@ class SentenceJourney {
         this.elements = {};
         this.messageTimeout = null;
         this._getElements();
+        // 💡 DEBOUNCE: Use a debounced function for the submit button to limit API calls
         this.debouncedSubmit = this._debounce(this._handleSubmit, 2000); 
         this._setupEventListeners();
     }
@@ -62,6 +63,7 @@ class SentenceJourney {
             this.state.allWordsData = await wordsResponse.json();
             this.state.allLessonsData = await lessonsResponse.json();
             
+            // 💡 REMOVED THEME SELECTION: Start the first lesson directly
             this.elements.themeSelector.classList.add('hidden');
             this.elements.appContainer.classList.remove('hidden');
             this.elements.appContainer.classList.add('flex');
@@ -78,7 +80,8 @@ class SentenceJourney {
             themeSelector: document.getElementById('themeSelector'),
             themeButtonsContainer: document.getElementById('themeButtonsContainer'),
             appContainer: document.getElementById('appContainer'),
-            lessonGoalDisplay: document.getElementById('lessonGoalDisplay'), // 💡 ADDED: New element to display the lesson goal permanently
+            // 💡 ADDED: New element to display the lesson goal permanently
+            lessonGoalDisplay: document.getElementById('lessonGoalDisplay'),
             lessonDisplay: document.getElementById('lessonDisplay'),
             interactiveContainer: document.getElementById('interactiveContainer'),
             placeholderText: document.getElementById('placeholderText'),
@@ -96,11 +99,13 @@ class SentenceJourney {
         this.elements.goBackBtn.addEventListener('click', () => this._handleGoBack());
         this.elements.clearBtn.addEventListener('click', () => this._handleClear());
         this.elements.readAloudBtn.addEventListener('click', () => this._handleReadAloud());
+        // 💡 DEBOUNCE: Use the debounced submit handler
         this.elements.submitBtn.addEventListener('click', () => this.debouncedSubmit());
         this.elements.interactiveContainer.addEventListener('click', (e) => this._handleInteraction(e));
         this.elements.lessonDisplay.addEventListener('click', (e) => this._handleInteraction(e));
     }
     
+    // 💡 DEBOUNCE: Helper function to limit rapid function calls
     _debounce(func, delay) {
         let timeoutId;
         return (...args) => {
@@ -134,8 +139,9 @@ class SentenceJourney {
         const lesson = this.state.allLessonsData[this.state.currentLessonIndex];
         const challenge = lesson.challenges[this.state.currentChallengeIndex];
         
-        // 💡 MODIFIED: Display the challenge instruction permanently
-        this.elements.lessonGoalDisplay.textContent = `${lesson.goal} (${this.state.currentChallengeIndex + 1} / ${lesson.challenges.length})`;
+        // 💡 PERMANENT GOAL: Display the challenge instruction permanently
+        const progressText = `${lesson.goal} (${this.state.currentChallengeIndex + 1} / ${lesson.challenges.length})`;
+        this.elements.lessonGoalDisplay.textContent = progressText;
         this._resetSelectionState();
         this._renderLesson(lesson, challenge);
     }
@@ -325,7 +331,7 @@ class SentenceJourney {
         this.elements.progressText.textContent = `Lesson ${current} of ${totalLessons}`;
         this.elements.progressFill.style.width = `${(current / totalLessons) * 100}%`;
         const lesson = this.state.allLessonsData[this.state.currentLessonIndex];
-        // 💡 MODIFIED: Display the lesson goal permanently
+        // 💡 PERMANENT GOAL: Update the permanent goal display
         this.elements.lessonGoalDisplay.textContent = lesson.goal;
     }
     _renderSentenceDisplay() {
@@ -341,6 +347,7 @@ class SentenceJourney {
     }
 
     // --- WORD BANK & UTILITY ---
+    // 💡 FIXED: This function now correctly pulls words without needing a "theme"
     async _fetchAndRenderWordBank(data) {
         const structure = data.structure;
         const nextPartIndex = this.state.currentSentenceArray.length;
@@ -356,8 +363,7 @@ class SentenceJourney {
         if (this.state.allWordsData.miscWords[nextPart]) {
             words = this.state.allWordsData.miscWords[nextPart];
         } else if (this.state.allWordsData.words[nextPart]) {
-            // Note: This relies on your words.json having a key for the theme or a general one.
-            words = this.state.allWordsData.words[nextPart][this.state.currentTheme]; 
+            words = this.state.allWordsData.words[nextPart];
         } else {
              console.error(`Words for type "${nextPart}" not found.`);
         }
