@@ -95,7 +95,7 @@ class App {
     _loadLesson() {
         const lesson = this.state.allLessonsData[this.state.currentLessonIndex];
         if (!lesson) {
-            this._showMessage('You have completed all lessons!', 'bg-success');
+            this._showMessage('You have completed all lessons!', 'bg-success', 0);
             return;
         }
 
