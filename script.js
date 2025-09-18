@@ -52,7 +52,15 @@ class App {
     async _loadData() {
         try {
             const lessonsResponse = await fetch('lessons.json');
-            this.state.allLessonsData = await lessonsResponse.json();
+            // Shuffle the challenges for each lesson when loading
+            const lessons = await lessonsResponse.json();
+            lessons.forEach(lesson => {
+                if (lesson.challenges) {
+                    lesson.challenges = this._shuffleArray(lesson.challenges);
+                }
+            });
+            this.state.allLessonsData = lessons;
+            
             const wordsResponse = await fetch('words.json');
             this.state.allWordsData = await wordsResponse.json();
         } catch (error) {
@@ -355,7 +363,6 @@ class App {
         this._renderCurrentSentence();
         this.elements.placeholderText.style.display = 'block';
         
-        // Re-enable all word buttons
         const wordButtons = this.elements.interactiveContainer.querySelectorAll('.word-button');
         wordButtons.forEach(button => {
             button.disabled = false;
