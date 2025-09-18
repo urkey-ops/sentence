@@ -5,6 +5,10 @@ document.addEventListener('DOMContentLoaded', () => {
 class App {
     constructor() {
         this.elements = {
+            // NEW ELEMENTS
+            introScreen: document.getElementById('introScreen'),
+            startLessonsBtn: document.getElementById('startLessonsBtn'),
+
             themeSelector: document.getElementById('themeSelector'),
             lessonSelector: document.getElementById('lessonSelector'),
             lessonView: document.getElementById('lessonView'),
@@ -44,6 +48,8 @@ class App {
         await this._loadData();
         this._renderLessonButtons();
         this._setupEventListeners();
+        this.elements.introScreen.classList.remove('hidden'); // Show the intro screen first
+        this.elements.themeSelector.classList.add('hidden'); // Hide the lesson selector
     }
 
     async _loadData() {
@@ -65,6 +71,12 @@ class App {
     }
 
     _setupEventListeners() {
+        // NEW: Event listener for the intro screen button
+        this.elements.startLessonsBtn.addEventListener('click', () => {
+            this.elements.introScreen.classList.add('hidden');
+            this._showLessonSelector();
+        });
+
         this.elements.lessonSelector.addEventListener('click', (e) => {
             if (e.target.matches('.lesson-button')) {
                 const index = parseInt(e.target.dataset.lessonIndex);
@@ -74,7 +86,6 @@ class App {
             }
         });
 
-        // The corrected event listeners:
         this.elements.interactiveContainer.addEventListener('click', this._handleInteractiveClick.bind(this));
         this.elements.lessonDisplay.addEventListener('click', this._handleInteractiveClick.bind(this));
 
@@ -141,12 +152,12 @@ class App {
     
     _resetSteps() {
         const steps = [this.elements.stepSay, this.elements.stepCapital, this.elements.stepSpace, this.elements.stepEnd, this.elements.stepRead];
-        steps.forEach(step => step.classList.remove('active'));
+        steps.forEach(step => step.classList.add('hidden'));
     }
 
     _activateStep(stepElement) {
         this._resetSteps();
-        stepElement.classList.add('active');
+        stepElement.classList.remove('hidden');
     }
 
     _loadSentenceOrNot() {
@@ -173,7 +184,6 @@ class App {
         }
         this.elements.placeholderText.style.display = 'none';
         
-        // This is the corrected line to make words clickable and change the cursor
         this.elements.lessonDisplay.innerHTML = challenge.sentence.split(' ').map(word => `<span class="word-in-sentence cursor-pointer">${word}</span>`).join(' ');
         
         this.elements.interactiveContainer.innerHTML = '';
@@ -245,6 +255,12 @@ class App {
         `;
         this.elements.submitBtn.classList.remove('hidden');
         this.elements.lessonGoalDisplay.textContent = 'Follow the 5-step guide above!';
+        // Show the 5-step guide elements for this lesson
+        this.elements.stepSay.classList.remove('hidden');
+        this.elements.stepCapital.classList.remove('hidden');
+        this.elements.stepSpace.classList.remove('hidden');
+        this.elements.stepEnd.classList.remove('hidden');
+        this.elements.stepRead.classList.remove('hidden');
     }
     
     _handleInteractiveClick(e) {
@@ -269,12 +285,10 @@ class App {
             }, 1500);
         }
 
-        // This is the corrected block for the "identify" lesson
-        if ((lesson.type === 'identify' || lesson.type === 'punctuate') && e.target.classList.contains('word-in-sentence')) {
+        if (e.target.classList.contains('word-in-sentence')) {
             e.target.classList.toggle('active');
             this.state.userAnswer = Array.from(this.elements.lessonDisplay.querySelectorAll('.word-in-sentence.active')).map(el => el.textContent.toLowerCase());
         }
-
 
         if ((lesson.type === 'build' || lesson.type === 'scramble') && e.target.classList.contains('word-button')) {
             const word = e.target.textContent;
