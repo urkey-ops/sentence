@@ -34,9 +34,9 @@
       { "sentence": "The sun shines.", "answer": ["shines"] }
     ]
   },
-  { 
-    "lesson": 4, 
-    "type": "scramble", 
+  {
+    "lesson": 4,
+    "type": "scramble",
     "goal": "Put the words in the right order!",
     "challenges": [
       { "words": ["we", "play", "outside"] },
@@ -46,6 +46,12 @@
   },
   { 
     "lesson": 5, 
+    "type": "build", 
+    "goal": "Let's build a sentence! (Naming Part + Telling Part)",
+    "structure": ["determiner", "noun", "verb", "punctuation"]
+  },
+  { 
+    "lesson": 6, 
     "type": "punctuate", 
     "goal": "Choose the right end mark.",
     "challenges": [
@@ -55,16 +61,9 @@
       { "sentence": "The puppy is cute", "answer": "."}
     ]
   },
-  { 
-    "lesson": 6, 
-    "type": "build",
-    "goal": "Let's build a sentence! (Naming Part + Telling Part)",
-    "structure": ["determiner", "noun", "verb", "punctuation"]
-  },
-  { 
-    "lesson": 7, 
+  {
+    "lesson": 7,
     "type": "guided_build",
-    "goal": "Use what you've learned to write a sentence!",
-    "challenges": []
+    "goal": "Write your own sentence following the 5 steps!"
   }
 ]
