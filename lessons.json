@@ -20,7 +20,7 @@
     "challenges": [
       { "sentence": "My mom smiles.", "answer": ["my", "mom"] },
       { "sentence": "The big red ball bounced.", "answer": ["the", "big", "red", "ball"] },
-      "sentence": "A small mouse ran.", "answer": ["a", "small", "mouse"] },
+      { "sentence": "A small mouse ran.", "answer": ["a", "small", "mouse"] },
       { "sentence": "The car stops.", "answer": ["the", "car"] }
     ]
   },
