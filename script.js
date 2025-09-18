@@ -32,7 +32,7 @@ class App {
             currentChallengeIndex: 0,
             currentSentenceArray: [],
             wordBank: [],
-            userSentence: '',
+            originalScrambleSentence: '', // New state variable
         };
 
         this.messageTimeout = null;
@@ -110,7 +110,6 @@ class App {
         this.elements.clearBtn.classList.add('hidden');
         this.elements.readAloudBtn.classList.remove('hidden');
         this.state.currentSentenceArray = [];
-        this.state.userSentence = '';
 
         this._resetSteps();
 
@@ -169,7 +168,10 @@ class App {
             return;
         }
         this.elements.placeholderText.style.display = 'none';
-        this.elements.lessonDisplay.innerHTML = challenge.sentence.split(' ').map(word => `<span class="word-in-sentence">${word}</span>`).join(' ');
+        
+        // This is the corrected line:
+        this.elements.lessonDisplay.innerHTML = challenge.sentence.split(' ').map(word => `<span class="word-in-sentence cursor-pointer">${word}</span>`).join(' ');
+        
         this.elements.interactiveContainer.innerHTML = '';
         this.elements.submitBtn.classList.remove('hidden');
         this.state.userAnswer = [];
@@ -185,6 +187,9 @@ class App {
                 this.state.wordBank.push(words[Math.floor(Math.random() * words.length)]);
             }
         });
+        
+        // Store the original sentence before shuffling
+        this.state.originalScrambleSentence = this.state.wordBank.join(' ');
         this.state.wordBank = this.state.wordBank.sort(() => 0.5 - Math.random());
         
         this._renderWordBank();
@@ -206,7 +211,11 @@ class App {
             return;
         }
         this.elements.placeholderText.style.display = 'none';
+        
+        // Store the original sentence before shuffling
+        this.state.originalScrambleSentence = challenge.words.join(' ');
         this.state.wordBank = challenge.words.slice().sort(() => 0.5 - Math.random());
+        
         this._renderWordBank();
         this.elements.clearBtn.classList.remove('hidden');
         this.elements.submitBtn.classList.remove('hidden');
@@ -306,16 +315,15 @@ class App {
                 break;
             case 'build':
             case 'scramble':
-                this.state.userSentence = this.state.currentSentenceArray.join(' ').toLowerCase();
-                const challengeWords = lesson.type === 'scramble' ? lesson.challenges[this.state.currentChallengeIndex].words.join(' ').toLowerCase() : null;
-                const isCorrect = lesson.type === 'scramble' ? this.state.userSentence === challengeWords : this.state.currentSentenceArray.length > 2;
+                // Corrected logic for both build and scramble lessons
+                const isCorrect = this.state.currentSentenceArray.join(' ').toLowerCase() === this.state.originalScrambleSentence.toLowerCase();
                 
                 if (isCorrect) {
                     this._showMessage('Excellent!', 'bg-success');
                     this.state.currentChallengeIndex++;
                     setTimeout(() => this._loadLesson(), 1000);
                 } else {
-                    this._showMessage('Make sure your sentence is complete!', 'bg-danger');
+                    this._showMessage('That doesn\'t look right. Try again!', 'bg-danger');
                 }
                 break;
             case 'guided_build':
@@ -350,10 +358,11 @@ class App {
         // Step 3: Space it
         setTimeout(() => {
             this._activateStep(this.elements.stepSpace);
-            if (words.length <= 1) {
-                this._showMessage('A sentence needs spaces between words.', 'bg-danger');
-                allCorrect = false;
-            } else {
+            // This is the corrected line:
+            if (words.length <= 1 && sentence.length > 0) {
+                 this._showMessage('A sentence needs spaces between words.', 'bg-danger');
+                 allCorrect = false;
+            } else if (words.length > 1) {
                 this._showMessage('Good job using spaces.', 'bg-success');
             }
         }, 2000);
