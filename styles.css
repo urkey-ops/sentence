@@ -1,10 +1,5 @@
 :root {
   --font-display: 'Comic Neue', cursive;
-  --color-primary: #6366f1;
-  --color-secondary: #f9a8d4;
-  --color-tertiary: #a78bfa;
-  --color-success: #10b981;
-  --color-danger: #ef4444;
 }
 
 body {
@@ -36,88 +31,69 @@ body {
   min-height: 50px;
   border-radius: 1.75rem;
   padding: 1rem 2rem;
-  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-}
-
-.lesson-button {
-  background-color: var(--color-primary);
-  color: white;
-  text-align: center;
-}
-.lesson-button:hover {
-  background-color: #4f46e5;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 10px -1px rgb(0 0 0 / 0.1), 0 4px 6px -2px rgb(0 0 0 / 0.1);
-}
-
-.back-button {
-  background-color: #6b7280;
-  color: white;
-}
-.back-button:hover {
-  background-color: #4b5563;
 }
 
 .action-button {
-  background-color: var(--color-success);
-  color: white;
+  background-color: #6366f1;
+  color: #fff;
 }
-.action-button:hover {
-  background-color: #059669;
+
+.action-button:hover:not(:disabled) {
+  background-color: #4338ca;
   transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.action-button.secondary-button {
-  background-color: var(--color-tertiary);
-}
-.action-button.secondary-button:hover {
-  background-color: #8b5cf6;
+.clear-button {
+  background-color: #d1d5db;
+  color: #374151;
 }
 
-.action-button.clear-button {
-  background-color: var(--color-danger);
-}
-.action-button.clear-button:hover {
-  background-color: #dc2626;
+.clear-button:hover:not(:disabled) {
+  background-color: #9ca3af;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .word-button {
   background-color: #e2e8f0;
-  color: #1f2937;
-  padding: 0.75rem 1.5rem;
-  font-size: 1.5rem;
+  color: #1a202c;
+}
+
+.word-button:hover:not(:disabled) {
+  background-color: #cbd5e1;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .word-button.picked {
-  background-color: #d1d5db;
-  transform: translateY(2px);
-  box-shadow: none;
-}
-.word-button:hover {
-  transform: translateY(-2px);
-}
-
-.word-button.active {
-  background-color: #fff;
-  border: 3px solid #6366f1;
+  background-color: #9ca3af;
+  cursor: not-allowed;
 }
 
 .punctuation-button {
-  background-color: var(--color-secondary);
-  color: white;
-  font-size: 1.5rem;
-  width: 50px;
-  height: 50px;
-  padding: 0;
-  border-radius: 50%;
+  background-color: #fbd38d;
+  color: #8b542f;
+  min-width: 50px;
 }
 
-#lessonDisplay .word-in-sentence {
-  background-color: #fce7f3;
-  color: #831843;
-  padding: 0.25rem 0.75rem;
-  border-radius: 1rem;
-  margin: 0.25rem;
+.punctuation-button:hover:not(:disabled) {
+  background-color: #f6ad55;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.lesson-button {
+  background-color: #ffc0cb;
+  color: #8b0000;
+  width: 100%;
+  text-align: left;
+}
+
+.lesson-button:hover {
+  background-color: #ff90a8;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .placeholder-text {
@@ -125,101 +101,36 @@ body {
   font-style: italic;
 }
 
-.message-box {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translateX(-50%) translateY(20px);
-  padding: 1rem 2rem;
-  border-radius: 1.5rem;
-  color: white;
-  font-weight: bold;
-  font-size: 1.5rem;
-  text-align: center;
-  transition: all 0.3s ease-in-out;
-  opacity: 0;
-  visibility: hidden;
-  z-index: 100;
+.word-in-sentence.active {
+  background-color: #f7941d;
+  color: #ffffff;
+  border-radius: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  transition: all 0.2s ease-in-out;
 }
-.message-box.visible { transform: translateX(-50%) translateY(0); opacity: 1; visibility: visible; }
+
+.message-box {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    opacity: 0;
+    visibility: hidden;
+    z-index: 100;
+    padding: 1rem 2rem;
+    border-radius: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    transition: all 0.3s ease-in-out;
+    font-weight: 700;
+}
+.message-box.visible {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+    visibility: visible;
+}
 .message-box.bg-success { background-color: #d4edda; color: #155724; }
 .message-box.bg-info { background-color: #cce5ff; color: #004085; }
 .message-box.bg-warning { background-color: #fff3cd; color: #856404; }
 .message-box.bg-danger { background-color: #f8d7da; color: #721c24; }
 
-.progress-bar { width: 100%; height: 14px; background-color: #e2e8f0; border-radius: 7px; overflow: hidden; margin-top: 1rem; }
-.progress-fill { height: 100%; width: 0%; background-color: #6366f1; transition: width 0.3s ease-in-out; border-radius: 7px; }
-
-.fade-in { animation: fadeIn 0.5s ease-in; }
-@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-.emoji { font-size: 3rem; }
-
-.thought-bubble {
-  position: relative;
-  background: #fff;
-  border-radius: 1rem;
-  padding: 1rem;
-  min-width: 200px;
-  max-width: 80%;
-  margin-top: 2rem;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-  text-align: center;
-  font-size: 2rem;
-}
-
-.thought-bubble::before {
-  content: '';
-  position: absolute;
-  top: -20px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 0;
-  height: 0;
-  border-left: 20px solid transparent;
-  border-right: 20px solid transparent;
-  border-bottom: 20px solid #fff;
-}
-
-.thought-bubble.complete {
-  background-color: #d4edda;
-  border: 3px solid var(--color-success);
-  animation: popIn 0.5s ease-out;
-}
-.thought-bubble.incomplete {
-  background-color: #f8d7da;
-  border: 3px solid var(--color-danger);
-  animation: shake 0.5s;
-}
-
-.step-icon {
-    font-size: 2.5rem;
-    padding: 0.5rem;
-    border-radius: 1rem;
-    background-color: #e2e8f0;
-    transition: transform 0.3s ease-in-out;
-}
-.step-icon.active {
-    transform: scale(1.1) rotate(5deg);
-    background-color: #f9a8d4;
-    box-shadow: 0 0 10px #f9a8d4;
-}
-
-@keyframes shake {
-  0%, 100% { transform: translateX(0) rotate(0deg); }
-  20%, 60% { transform: translateX(-5px) rotate(-2deg); }
-  40%, 80% { transform: translateX(5px) rotate(2deg); }
-}
-@keyframes popIn {
-  0% { transform: scale(0.5); opacity: 0; }
-  100% { transform: scale(1); opacity: 1; }
-}
-/* Add this to the end of your styles.css file */
-.word-in-sentence.active {
-    background-color: #f7941d; /* A cheerful orange */
-    color: #ffffff; /* White text for contrast */
-    border-radius: 0.5rem;
-    padding: 0.25rem 0.5rem;
-    transition: all 0.2s ease-in-out;
-}
-
+.hidden { display: none !important; }
