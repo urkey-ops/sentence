@@ -91,6 +91,7 @@ class App {
             }
         });
 
+        // Use a single handler for all interactive clicks within the container
         this.elements.interactiveContainer.addEventListener('click', this._handleInteractiveClick.bind(this));
         this.elements.lessonDisplay.addEventListener('click', this._handleInteractiveClick.bind(this));
 
@@ -125,9 +126,12 @@ class App {
         this.elements.lessonDisplay.innerHTML = '';
         this.elements.placeholderText.textContent = 'Let\'s get started!';
         this.elements.placeholderText.style.display = 'block';
+        
+        // Hide all action buttons by default
         this.elements.submitBtn.classList.add('hidden');
         this.elements.nextBtn.classList.add('hidden');
         this.elements.clearBtn.classList.add('hidden');
+
         this.state.currentSentenceArray = [];
         this._resetSteps();
 
@@ -188,9 +192,7 @@ class App {
         this.elements.placeholderText.style.display = 'none';
         this.elements.lessonDisplay.innerHTML = challenge.sentence.split(' ').map(word => `<span class="word-in-sentence cursor-pointer">${word}</span>`).join(' ');
         this.state.userAnswer = [];
-        this.elements.interactiveContainer.innerHTML = `
-            <button class="base-button action-button" id="submitBtn">Check Answer</button>
-        `;
+        // Only show the single submit button
         this.elements.submitBtn.classList.remove('hidden');
         setTimeout(() => this._handleReadAloud(challenge.sentence), 500);
     }
@@ -271,6 +273,14 @@ class App {
     _handleInteractiveClick(e) {
         const lesson = this.state.allLessonsData[this.state.currentLessonIndex];
         
+        // Handle Sentence or Not buttons
+        const answerButton = e.target.closest('button[data-answer]');
+        if (answerButton) {
+            this._handleSubmit(e);
+            return;
+        }
+
+        // Handle other lesson types
         if (lesson.type === 'scramble' || lesson.type === 'make_it_a_sentence' || lesson.type === 'silly_sentences') {
             const button = e.target.closest('.word-button');
             if (button && !button.disabled) {
