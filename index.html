@@ -13,46 +13,86 @@
 </head>
 <body class="bg-gradient-to-br from-indigo-200 via-purple-100 to-pink-200 min-h-screen flex items-center justify-center p-4">
 
-    <div id="themeSelector" class="w-full max-w-4xl mx-auto flex flex-col items-center justify-center gap-6 p-8 bg-white/70 backdrop-blur-lg rounded-[2.5rem] shadow-xl fade-in">
-        <h1 class="text-4xl md:text-5xl font-bold text-center text-gray-800">Sentence Learning Journey ✍️</h1>
-        <div id="lessonSelector" class="w-full grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 max-h-[500px] overflow-y-auto pr-2">
+    <div id="introScreen" class="w-full max-w-4xl mx-auto flex flex-col items-center justify-center gap-6 p-8 bg-white/70 backdrop-blur-lg rounded-[2.5rem] shadow-xl hidden">
+        <h2 class="text-4xl md:text-5xl font-extrabold text-center text-gray-800 animate-fade-in">Hi there, Sentence Builder!</h2>
+        <p class="text-xl md:text-2xl text-center text-gray-700 mt-2">Before we begin, remember the 5 simple steps to build a great sentence!</p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full mt-6">
+            <div class="flex flex-col items-center text-center p-4 bg-purple-100/70 rounded-xl shadow-md transform hover:scale-105 transition-transform duration-300">
+                <span class="text-6xl mb-2">🗣️</span>
+                <p class="font-bold text-lg md:text-xl text-gray-800">1. Say It!</p>
+                <p class="text-gray-600 text-sm">Say your sentence out loud.</p>
             </div>
+            <div class="flex flex-col items-center text-center p-4 bg-pink-100/70 rounded-xl shadow-md transform hover:scale-105 transition-transform duration-300">
+                <span class="text-6xl mb-2">🅰️</span>
+                <p class="font-bold text-lg md:text-xl text-gray-800">2. Capital!</p>
+                <p class="text-gray-600 text-sm">Start with a capital letter.</p>
+            </div>
+            <div class="flex flex-col items-center text-center p-4 bg-yellow-100/70 rounded-xl shadow-md transform hover:scale-105 transition-transform duration-300">
+                <span class="text-6xl mb-2">⬜</span>
+                <p class="font-bold text-lg md:text-xl text-gray-800">3. Spaces!</p>
+                <p class="text-gray-600 text-sm">Put spaces between words.</p>
+            </div>
+            <div class="flex flex-col items-center text-center p-4 bg-green-100/70 rounded-xl shadow-md transform hover:scale-105 transition-transform duration-300">
+                <span class="text-6xl mb-2">.?!</span>
+                <p class="font-bold text-lg md:text-xl text-gray-800">4. End It!</p>
+                <p class="text-gray-600 text-sm">Use a dot, ?, or !</p>
+            </div>
+            <div class="flex flex-col items-center text-center p-4 bg-blue-100/70 rounded-xl shadow-md transform hover:scale-105 transition-transform duration-300">
+                <span class="text-6xl mb-2">👂</span>
+                <p class="font-bold text-lg md:text-xl text-gray-800">5. Read It!</p>
+                <p class="text-gray-600 text-sm">Read it to make sure it sounds right.</p>
+            </div>
+        </div>
+        <button id="startLessonsBtn" class="action-button mt-6">Let's Go!</button>
     </div>
 
-    <div id="lessonView" class="w-full max-w-4xl mx-auto flex-col items-center justify-center gap-6 p-8 bg-white/70 backdrop-blur-lg rounded-[2.5rem] shadow-xl fade-in hidden">
-        <h1 id="lessonTitle" class="text-3xl md:text-4xl font-bold text-center text-gray-800"></h1>
+    <div id="themeSelector" class="w-full max-w-4xl mx-auto flex flex-col items-center justify-center gap-6 p-8 bg-white/70 backdrop-blur-lg rounded-[2.5rem] shadow-xl">
+        <h1 class="text-4xl md:text-5xl font-extrabold text-center text-gray-800">Sentence Journey</h1>
+        <p class="text-xl text-center text-gray-700">Choose a lesson to begin your adventure!</p>
+        <div id="lessonSelector" class="w-full grid grid-cols-1 md:grid-cols-2 gap-4">
+        </div>
+    </div>
+    
+    <div id="lessonView" class="w-full max-w-4xl mx-auto flex-col items-center justify-center gap-6 p-8 bg-white/70 backdrop-blur-lg rounded-[2.5rem] shadow-xl hidden">
+        <div class="flex items-center justify-between w-full">
+            <button id="backToLessonsBtn" class="base-button">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+            <div class="flex-grow text-center">
+                <h1 id="lessonTitle" class="text-4xl font-extrabold text-gray-800"></h1>
+            </div>
+            <button id="readAloudBtn" class="base-button">
+                <i class="fas fa-volume-up"></i>
+            </button>
+        </div>
         
-        <div class="w-full flex justify-center items-center my-4">
-            <button id="backToLessonsBtn" class="base-button back-button"><i class="fas fa-arrow-left"></i> Back to Lessons</button>
-        </div>
-
-        <div id="step-by-step-guide" class="hidden md:flex flex-row justify-center gap-4 mb-6">
-            <div id="step-say" class="step-icon">🗣️</div>
-            <div id="step-capital" class="step-icon">🅰️</div>
-            <div id="step-space" class="step-icon">⬜</div>
-            <div id="step-end" class="step-icon">.?!</div>
-            <div id="step-read" class="step-icon">👂</div>
-        </div>
-
-        <div id="lessonGoalDisplay" class="text-2xl font-semibold text-center mb-4 text-gray-800"></div>
+        <div id="lessonGoalDisplay" class="text-2xl font-semibold text-center mt-4 mb-4 text-gray-800"></div>
 
         <div id="lessonDisplay" class="w-full min-h-[100px] bg-white/60 rounded-2xl p-4 md:p-8 flex flex-wrap items-center justify-center gap-2 text-3xl md:text-4xl text-gray-800 border-2 border-dashed border-gray-400">
             <span id="placeholderText" class="placeholder-text">Let's get started!</span>
         </div>
 
         <div id="interactiveContainer" class="w-full flex flex-wrap justify-center gap-3 md:gap-4 mt-6">
-            </div>
+        </div>
         
         <div class="flex flex-wrap justify-center gap-4 mt-4">
             <button id="submitBtn" class="action-button hidden"><i class="fas fa-check"></i> Check Answer</button>
-            <button id="readAloudBtn" class="action-button secondary-button hidden"><i class="fas fa-volume-up"></i> Read Aloud</button>
-            <button id="nextBtn" class="action-button hidden"><i class="fas fa-arrow-right"></i> Next</button>
-            <button id="clearBtn" class="action-button hidden"><i class="fas fa-trash-alt"></i> Clear</button>
+            <button id="clearBtn" class="clear-button hidden"><i class="fas fa-eraser"></i> Clear</button>
+            <button id="nextBtn" class="action-button hidden">Next Lesson <i class="fas fa-arrow-right"></i></button>
+        </div>
+
+        <div class="flex flex-col md:flex-row justify-center gap-4 mt-8 text-center text-gray-600 hidden">
+            <span id="step-say" class="flex items-center gap-2 text-xl hidden">🗣️</span>
+            <span id="step-capital" class="flex items-center gap-2 text-xl hidden">🅰️</span>
+            <span id="step-space" class="flex items-center gap-2 text-xl hidden">⬜</span>
+            <span id="step-end" class="flex items-center gap-2 text-xl hidden">.?!</span>
+            <span id="step-read" class="flex items-center gap-2 text-xl hidden">👂</span>
         </div>
     </div>
-
+    
     <div id="messageBox" class="message-box"></div>
-
+    
     <script src="script.js"></script>
 </body>
 </html>
