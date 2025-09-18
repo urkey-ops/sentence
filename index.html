@@ -1,58 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sentence Learning Journey</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentence Learning Journey</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body class="bg-gradient-to-br from-indigo-200 via-purple-100 to-pink-200 min-h-screen flex items-center justify-center p-4">
 
-    <div id="themeSelector" class="w-full max-w-4xl mx-auto flex flex-col items-center justify-center gap-6 p-8 bg-white/70 backdrop-blur-lg rounded-[2.5rem] shadow-2xl">
-        <h1 class="text-5xl md:text-6xl font-extrabold text-indigo-800 font-display text-center">
-            What should we write about today?
-        </h1>
-        <div id="themeButtonsContainer" class="flex flex-wrap justify-center gap-4 mt-6">
-            </div>
-    </div>
+    <div id="appContainer" class="w-full max-w-4xl mx-auto flex flex-col items-center justify-center gap-6 p-8 bg-white/50 backdrop-blur-lg rounded-[2.5rem] shadow-2xl">
+        
+        <div id="messageBox" class="message-box"></div>
+        
+        <h1 class="text-5xl md:text-6xl font-extrabold text-indigo-800 font-display text-center drop-shadow-md">
+            Sentence Journey
+        </h1>
+        
+                <div id="lessonGoalDisplay" class="text-2xl font-semibold text-center mb-4 text-gray-800"></div>
 
-    <div id="appContainer" class="w-full max-w-4xl mx-auto flex-col items-center justify-center gap-6 p-8 bg-white/50 backdrop-blur-lg rounded-[2.5rem] shadow-2xl hidden">
-        
-        <div id="messageBox" class="message-box"></div>
-        
-        <h1 class="text-5xl md:text-6xl font-extrabold text-indigo-800 font-display text-center drop-shadow-md">
-            Sentence Journey
-        </h1>
-        
-        <div id="lessonDisplay" class="w-full min-h-[100px] bg-white/60 rounded-2xl p-4 md:p-8 flex flex-wrap items-center justify-center gap-2 text-3xl md:text-4xl text-gray-800 border-2 border-dashed border-gray-400">
-            <span id="placeholderText" class="placeholder-text">Let's get started!</span>
-        </div>
+        <div id="lessonDisplay" class="w-full min-h-[100px] bg-white/60 rounded-2xl p-4 md:p-8 flex flex-wrap items-center justify-center gap-2 text-3xl md:text-4xl text-gray-800 border-2 border-dashed border-gray-400">
+            <span id="placeholderText" class="placeholder-text">Let's get started!</span>
+        </div>
 
-        <div id="interactiveContainer" class="w-full flex flex-wrap justify-center gap-3 md:gap-4 mt-6">
-            </div>
-        
-        <div class="flex flex-wrap justify-center gap-4 mt-4">
-            <button id="submitBtn" class="action-button hidden"><i class="fas fa-check"></i> Check Answer</button>
-            <button id="readAloudBtn" class="action-button"><i class="fas fa-volume-up"></i> Read</button>
-            <button id="clearBtn" class="action-button"><i class="fas fa-trash-alt"></i> Clear</button>
-            <button id="goBackBtn" class="action-button"><i class="fas fa-undo"></i> Go Back</button>
-        </div>
+        <div id="interactiveContainer" class="w-full flex flex-wrap justify-center gap-3 md:gap-4 mt-6">
+        </div>
+        
+        <div class="flex flex-wrap justify-center gap-4 mt-4">
+            <button id="submitBtn" class="action-button hidden"><i class="fas fa-check"></i> Check Answer</button>
+            <button id="readAloudBtn" class="action-button"><i class="fas fa-volume-up"></i> Read</button>
+            <button id="clearBtn" class="action-button"><i class="fas fa-trash-alt"></i> Clear</button>
+            <button id="goBackBtn" class="action-button"><i class="fas fa-undo"></i> Go Back</button>
+        </div>
 
-        <div id="progressContainer" class="mt-4 flex flex-col items-center w-full max-w-md">
-            <p id="progressText" class="text-lg font-bold text-indigo-700 mb-2"></p>
-            <div class="progress-bar">
-                <div id="progressFill" class="progress-fill"></div>
-            </div>
-        </div>
+        <div id="progressContainer" class="mt-4 flex flex-col items-center w-full max-w-md">
+            <p id="progressText" class="text-lg font-bold text-indigo-700 mb-2"></p>
+            <div class="progress-bar">
+                <div id="progressFill" class="progress-fill"></div>
+            </div>
+        </div>
+    </div>
 
-    </div>
-
-    <script src="script.js"></script>
+    <script src="script.js"></script>
 
 </body>
 </html>
