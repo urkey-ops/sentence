@@ -17,7 +17,7 @@ body {
 
 .squircle { border-radius: 2rem; }
 
-.base-button, .word-button, .punctuation-button {
+.base-button, .word-button, .punctuation-button, .lesson-button {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -27,10 +27,19 @@ body {
   border: none;
   cursor: pointer;
   font-family: var(--font-display);
-  min-width: 50px;
   min-height: 50px;
   border-radius: 1.75rem;
   padding: 1rem 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transform: translateY(0);
+}
+
+.base-button:hover:not(:disabled), 
+.word-button:hover:not(:disabled),
+.punctuation-button:hover:not(:disabled),
+.lesson-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
 }
 
 .action-button {
@@ -40,8 +49,6 @@ body {
 
 .action-button:hover:not(:disabled) {
   background-color: #4338ca;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .clear-button {
@@ -51,24 +58,16 @@ body {
 
 .clear-button:hover:not(:disabled) {
   background-color: #9ca3af;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .word-button {
-  background-color: #e2e8f0;
-  color: #1a202c;
+  background-color: #93c5fd;
+  color: #1e40af;
+  min-width: 50px;
 }
 
 .word-button:hover:not(:disabled) {
-  background-color: #cbd5e1;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.word-button.picked {
-  background-color: #9ca3af;
-  cursor: not-allowed;
+  background-color: #60a5fa;
 }
 
 .punctuation-button {
@@ -79,8 +78,6 @@ body {
 
 .punctuation-button:hover:not(:disabled) {
   background-color: #f6ad55;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .lesson-button {
@@ -92,8 +89,6 @@ body {
 
 .lesson-button:hover {
   background-color: #ff90a8;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .placeholder-text {
@@ -110,27 +105,66 @@ body {
 }
 
 .message-box {
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%) translateY(100px);
-    opacity: 0;
-    visibility: hidden;
-    z-index: 100;
-    padding: 1rem 2rem;
-    border-radius: 1.5rem;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    transition: all 0.3s ease-in-out;
-    font-weight: 700;
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 1rem 2rem;
+  border-radius: 1.75rem;
+  font-weight: 700;
+  text-align: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+  z-index: 100;
 }
-.message-box.visible {
-    transform: translateX(-50%) translateY(0);
-    opacity: 1;
-    visibility: visible;
-}
-.message-box.bg-success { background-color: #d4edda; color: #155724; }
-.message-box.bg-info { background-color: #cce5ff; color: #004085; }
-.message-box.bg-warning { background-color: #fff3cd; color: #856404; }
-.message-box.bg-danger { background-color: #f8d7da; color: #721c24; }
 
-.hidden { display: none !important; }
+.message-box.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.message-box.success {
+  background-color: #d4edda;
+  color: #155724;
+  transform: translateX(-50%) scale(1.1);
+  animation: pop 0.5s ease-in-out;
+}
+
+.message-box.failure {
+  background-color: #f8d7da;
+  color: #721c24;
+  transform: translateX(-50%) rotate(-5deg);
+  animation: shake 0.5s ease-in-out;
+}
+
+@keyframes pop {
+    0% { transform: translateX(-50%) scale(0.9); }
+    100% { transform: translateX(-50%) scale(1); }
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(-50%) rotate(0deg); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-50%) rotate(-5deg); }
+    20%, 40%, 60%, 80% { transform: translateX(-50%) rotate(5deg); }
+}
+
+.lesson-container.make_it_a_sentence .fill-in {
+    background-color: #e2e8f0;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-style: italic;
+    color: #4a5568;
+}
+
+.word-bank {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+}
+
+.word-bank .word-button {
+    font-size: 1.25rem;
+    padding: 0.5rem 1rem;
+}
