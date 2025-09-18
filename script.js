@@ -32,7 +32,8 @@ class App {
             currentChallengeIndex: 0,
             currentSentenceArray: [],
             wordBank: [],
-            originalScrambleSentence: '', // New state variable
+            originalScrambleSentence: '',
+            userAnswer: []
         };
 
         this.messageTimeout = null;
@@ -73,7 +74,10 @@ class App {
             }
         });
 
+        // The corrected event listeners:
         this.elements.interactiveContainer.addEventListener('click', this._handleInteractiveClick.bind(this));
+        this.elements.lessonDisplay.addEventListener('click', this._handleInteractiveClick.bind(this));
+
         this.elements.submitBtn.addEventListener('click', this._handleSubmit.bind(this));
         this.elements.readAloudBtn.addEventListener('click', this._handleReadAloud.bind(this));
         this.elements.nextBtn.addEventListener('click', this._handleNext.bind(this));
@@ -169,7 +173,7 @@ class App {
         }
         this.elements.placeholderText.style.display = 'none';
         
-        // This is the corrected line:
+        // This is the corrected line to make words clickable and change the cursor
         this.elements.lessonDisplay.innerHTML = challenge.sentence.split(' ').map(word => `<span class="word-in-sentence cursor-pointer">${word}</span>`).join(' ');
         
         this.elements.interactiveContainer.innerHTML = '';
@@ -188,7 +192,6 @@ class App {
             }
         });
         
-        // Store the original sentence before shuffling
         this.state.originalScrambleSentence = this.state.wordBank.join(' ');
         this.state.wordBank = this.state.wordBank.sort(() => 0.5 - Math.random());
         
@@ -212,7 +215,6 @@ class App {
         }
         this.elements.placeholderText.style.display = 'none';
         
-        // Store the original sentence before shuffling
         this.state.originalScrambleSentence = challenge.words.join(' ');
         this.state.wordBank = challenge.words.slice().sort(() => 0.5 - Math.random());
         
@@ -267,10 +269,12 @@ class App {
             }, 1500);
         }
 
-        if (lesson.type === 'identify' && e.target.classList.contains('word-in-sentence')) {
+        // This is the corrected block for the "identify" lesson
+        if ((lesson.type === 'identify' || lesson.type === 'punctuate') && e.target.classList.contains('word-in-sentence')) {
             e.target.classList.toggle('active');
             this.state.userAnswer = Array.from(this.elements.lessonDisplay.querySelectorAll('.word-in-sentence.active')).map(el => el.textContent.toLowerCase());
         }
+
 
         if ((lesson.type === 'build' || lesson.type === 'scramble') && e.target.classList.contains('word-button')) {
             const word = e.target.textContent;
@@ -315,7 +319,6 @@ class App {
                 break;
             case 'build':
             case 'scramble':
-                // Corrected logic for both build and scramble lessons
                 const isCorrect = this.state.currentSentenceArray.join(' ').toLowerCase() === this.state.originalScrambleSentence.toLowerCase();
                 
                 if (isCorrect) {
@@ -342,9 +345,6 @@ class App {
         let allCorrect = true;
         this._activateStep(this.elements.stepSay);
 
-        // Step 1: Say it (implicit)
-        
-        // Step 2: Start with a Capital
         setTimeout(() => {
             this._activateStep(this.elements.stepCapital);
             if (!/^[A-Z]/.test(sentence)) {
@@ -355,10 +355,8 @@ class App {
             }
         }, 1000);
 
-        // Step 3: Space it
         setTimeout(() => {
             this._activateStep(this.elements.stepSpace);
-            // This is the corrected line:
             if (words.length <= 1 && sentence.length > 0) {
                  this._showMessage('A sentence needs spaces between words.', 'bg-danger');
                  allCorrect = false;
@@ -367,7 +365,6 @@ class App {
             }
         }, 2000);
 
-        // Step 4: End it
         setTimeout(() => {
             this._activateStep(this.elements.stepEnd);
             if (!/[.!?]$/.test(sentence)) {
@@ -378,7 +375,6 @@ class App {
             }
         }, 3000);
 
-        // Step 5: Read it
         setTimeout(() => {
             this._activateStep(this.elements.stepRead);
             if (allCorrect) {
