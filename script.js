@@ -178,11 +178,14 @@ class App {
         this.elements.interactiveContainer.appendChild(trueBtn);
         this.elements.interactiveContainer.appendChild(falseBtn);
         this.elements.lessonDisplay.textContent = challenge.text;
+        this.elements.placeholderText.style.display = 'none';
     }
 
     _renderIdentifyChallenge(challenge) {
         this.elements.clearBtn.classList.remove('hidden');
         this.elements.submitBtn.classList.remove('hidden');
+        this.elements.lessonDisplay.textContent = '';
+        this.elements.placeholderText.style.display = 'block';
 
         const words = challenge.sentence.split(' ');
         const wordBank = document.createElement('div');
@@ -202,6 +205,8 @@ class App {
     _renderScrambleChallenge(challenge) {
         this.elements.clearBtn.classList.remove('hidden');
         this.elements.submitBtn.classList.remove('hidden');
+        this.elements.lessonDisplay.textContent = '';
+        this.elements.placeholderText.style.display = 'block';
 
         const shuffledWords = this._shuffleArray([...challenge.words]);
         const wordBank = document.createElement('div');
@@ -222,6 +227,7 @@ class App {
         this.elements.clearBtn.classList.remove('hidden');
         this.elements.submitBtn.classList.remove('hidden');
         this.elements.lessonDisplay.textContent = challenge.incomplete_sentence;
+        this.elements.placeholderText.style.display = 'none';
         
         const wordBank = document.createElement('div');
         wordBank.classList.add('word-bank-button-container');
@@ -242,6 +248,8 @@ class App {
     _renderSillySentencesChallenge(challenge) {
         this.elements.clearBtn.classList.remove('hidden');
         this.elements.submitBtn.classList.remove('hidden');
+        this.elements.lessonDisplay.textContent = '';
+        this.elements.placeholderText.style.display = 'block';
         
         const container = document.createElement('div');
         container.classList.add('flex', 'flex-col', 'md:flex-row', 'gap-4', 'w-full');
@@ -275,6 +283,7 @@ class App {
 
     _renderPunctuationChoiceChallenge(challenge) {
         this.elements.lessonDisplay.textContent = challenge.sentence;
+        this.elements.placeholderText.style.display = 'none';
         
         const choicesContainer = document.createElement('div');
         choicesContainer.classList.add('flex', 'justify-center', 'gap-4', 'mt-4');
@@ -334,13 +343,13 @@ class App {
             otherButtons.forEach(btn => btn.disabled = true);
         }
 
-        const sentenceDisplay = this.elements.lessonDisplay;
+        this.elements.lessonDisplay.textContent = `${this.state.namingPart} ${this.state.tellingPart}`;
+
         if (this.state.namingPart && this.state.tellingPart) {
-            sentenceDisplay.textContent = `${this.state.namingPart} ${this.state.tellingPart}`;
             this._showMessage('Great job! You made a silly sentence!', 'success', 3000);
             this.elements.nextBtn.classList.remove('hidden');
         } else {
-            sentenceDisplay.textContent = this.state.namingPart || this.state.tellingPart;
+            this.elements.placeholderText.style.display = 'none';
         }
     }
 
@@ -427,7 +436,7 @@ class App {
         this.state.currentSentenceArray = [];
         this.state.namingPart = '';
         this.state.tellingPart = '';
-        this._renderCurrentSentence();
+        this.elements.lessonDisplay.textContent = '';
         this.elements.placeholderText.style.display = 'block';
         
         const wordButtons = this.elements.interactiveContainer.querySelectorAll('.word-button');
