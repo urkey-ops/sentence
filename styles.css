@@ -31,77 +31,84 @@ body {
   border-radius: 1.75rem;
   padding: 1rem 2rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transform: translateY(0);
-}
-
-.base-button:hover:not(:disabled), 
-.word-button:hover:not(:disabled),
-.punctuation-button:hover:not(:disabled),
-.lesson-button:hover:not(:disabled) {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-}
-
-.action-button {
-  background-color: #6366f1;
-  color: #fff;
-}
-
-.action-button:hover:not(:disabled) {
-  background-color: #4338ca;
-}
-
-.clear-button {
-  background-color: #d1d5db;
-  color: #374151;
-}
-
-.clear-button:hover:not(:disabled) {
-  background-color: #9ca3af;
-}
-
-.word-button {
-  background-color: #93c5fd;
-  color: #1e40af;
-  min-width: 50px;
-}
-
-.word-button:hover:not(:disabled) {
-  background-color: #60a5fa;
-}
-
-.punctuation-button {
-  background-color: #fbd38d;
-  color: #8b542f;
-  min-width: 50px;
-}
-
-.punctuation-button:hover:not(:disabled) {
-  background-color: #f6ad55;
 }
 
 .lesson-button {
-  background-color: #ffc0cb;
-  color: #8b0000;
-  width: 100%;
-  text-align: left;
+  padding: 1.5rem 1rem;
+  font-size: 1rem;
+  text-align: center;
+  background-color: #fff;
+  color: #555;
 }
 
 .lesson-button:hover {
-  background-color: #ff90a8;
+  background-color: #f0f0f0;
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
 }
 
-.placeholder-text {
-  color: #9ca3af;
-  font-style: italic;
+.action-button {
+  background-color: #8a2be2;
+  color: white;
+  padding: 1rem 2rem;
 }
 
-.word-in-sentence.active {
-  background-color: #f7941d;
-  color: #ffffff;
-  border-radius: 0.5rem;
-  padding: 0.25rem 0.5rem;
-  transition: all 0.2s ease-in-out;
+.action-button:hover {
+  background-color: #6a1fa2;
+}
+
+.clear-button {
+  background-color: #f44336;
+  color: white;
+  padding: 1rem 2rem;
+}
+
+.clear-button:hover {
+  background-color: #d32f2f;
+}
+
+.word-button {
+  background-color: #fff;
+  border: 2px solid #ddd;
+  padding: 0.5rem 1rem;
+  font-size: 1.25rem;
+  color: #333;
+  cursor: pointer;
+  transition: transform 0.1s ease, background-color 0.1s ease;
+}
+
+.word-button:hover:not(:disabled) {
+  transform: scale(1.05);
+  background-color: #f0f0f0;
+}
+
+.word-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.hidden { display: none; }
+
+.word-bank-button-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.silly-sentences-column {
+  border-radius: 1rem;
+  padding: 1.5rem;
+  transition: box-shadow 0.2s ease-in-out;
+  border: 2px dashed #ccc;
+}
+
+.silly-sentences-column.bg-purple-200 {
+  background-color: #e9d5ff;
+}
+
+.silly-sentences-column.bg-pink-200 {
+  background-color: #fbcfe8;
 }
 
 .message-box {
@@ -140,31 +147,13 @@ body {
 
 @keyframes pop {
     0% { transform: translateX(-50%) scale(0.9); }
-    100% { transform: translateX(-50%) scale(1); }
+    100% { transform: translateX(-50%) scale(1.1); }
 }
 
 @keyframes shake {
-    0%, 100% { transform: translateX(-50%) rotate(0deg); }
-    10%, 30%, 50%, 70%, 90% { transform: translateX(-50%) rotate(-5deg); }
-    20%, 40%, 60%, 80% { transform: translateX(-50%) rotate(5deg); }
-}
-
-.lesson-container.make_it_a_sentence .fill-in {
-    background-color: #e2e8f0;
-    padding: 0.5rem 1rem;
-    border-radius: 0.5rem;
-    font-style: italic;
-    color: #4a5568;
-}
-
-.word-bank {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 0.75rem;
-}
-
-.word-bank .word-button {
-    font-size: 1.25rem;
-    padding: 0.5rem 1rem;
+    0% { transform: translateX(-50%) rotate(-5deg); }
+    25% { transform: translateX(-50%) rotate(5deg); }
+    50% { transform: translateX(-50%) rotate(-5deg); }
+    75% { transform: translateX(-50%) rotate(5deg); }
+    100% { transform: translateX(-50%) rotate(-5deg); }
 }
