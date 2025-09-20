@@ -22,6 +22,12 @@
       { "sentence": "The big red ball bounced.", "answer": ["the", "big", "red", "ball"] },
       { "sentence": "A small mouse ran.", "answer": ["a", "small", "mouse"] },
       { "sentence": "The car stops.", "answer": ["the", "car"] }
+       { "sentence": "The boy runs fast", "answer": ["the", "boy"] }
+       { "sentence": "The sun is hot", "answer": ["the", "sun"] }
+       { "sentence": "My puppy likes to play.", "answer": ["my", "puppy"] }
+       { "sentence": "The girl reads.", "answer": ["the", "girl"] }
+      
+
     ]
   },
   { 
