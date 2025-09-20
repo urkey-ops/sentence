@@ -67,15 +67,18 @@ p {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
   font-weight: 700;
   transition: all 0.3s ease-in-out;
   border: none;
   cursor: pointer;
   font-family: var(--font-display);
   min-height: 60px;
-  padding: 0.75rem 1.5rem;
+  /* Increased padding to prevent overflow */
+  padding: 1rem 2rem;
   border-radius: 1.5rem;
   font-size: 1.5rem;
+  line-height: 1.2; /* Ensures vertical spacing */
   gap: 0.5rem;
   transform: translateY(0);
 }
@@ -142,6 +145,7 @@ p {
   padding: 0.75rem 1.25rem;
   border-radius: 1.5rem;
   font-size: 1.5rem;
+  line-height: 1.2;
 }
 
 .word-button:hover {
