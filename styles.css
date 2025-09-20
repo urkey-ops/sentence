@@ -31,86 +31,65 @@ body {
   border-radius: 1.75rem;
   padding: 1rem 2rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.lesson-button {
-  padding: 1.5rem 1rem;
-  font-size: 1rem;
-  text-align: center;
-  background-color: #fff;
-  color: #555;
-}
-
-.lesson-button:hover {
-  background-color: #f0f0f0;
-  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-  transform: translateY(-2px);
+  text-decoration: none;
+  color: inherit;
 }
 
 .action-button {
-  background-color: #8a2be2;
+  background-color: #6366f1;
   color: white;
-  padding: 1rem 2rem;
-}
-
-.action-button:hover {
-  background-color: #6a1fa2;
 }
 
 .clear-button {
-  background-color: #f44336;
-  color: white;
-  padding: 1rem 2rem;
+  background-color: #e5e7eb;
+  color: #4b5563;
 }
 
-.clear-button:hover {
-  background-color: #d32f2f;
+.back-button {
+  background-color: #fca5a5;
+  color: #b91c1c;
+}
+
+.lesson-button {
+  background-color: #e0f2fe;
+  color: #0c4a6e;
 }
 
 .word-button {
-  background-color: #fff;
-  border: 2px solid #ddd;
-  padding: 0.5rem 1rem;
-  font-size: 1.25rem;
-  color: #333;
-  cursor: pointer;
-  transition: transform 0.1s ease, background-color 0.1s ease;
+  background-color: #dbeafe;
+  color: #1e40af;
 }
 
-.word-button:hover:not(:disabled) {
-  transform: scale(1.05);
-  background-color: #f0f0f0;
+.punctuation-button {
+  background-color: #fef3c7;
+  color: #92400e;
+  font-size: 2.5rem;
+  width: 60px;
+  height: 60px;
+  min-height: 0;
+  padding: 0;
+  border-radius: 50%;
 }
 
-.word-button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
+.action-button:hover { background-color: #4f46e5; }
+.clear-button:hover { background-color: #d1d5db; }
+.back-button:hover { background-color: #ef4444; }
+.lesson-button:hover { background-color: #90cdf4; }
+.word-button:hover { background-color: #bfdbfe; }
+.punctuation-button:hover { background-color: #fcd34d; }
+
+/* Focus States for Accessibility */
+.action-button:focus,
+.clear-button:focus,
+.back-button:focus,
+.lesson-button:focus,
+.word-button:focus,
+.punctuation-button:focus {
+  outline: 4px solid #f9a8d4; /* A playful pink outline */
+  outline-offset: 2px;
 }
 
-.hidden { display: none; }
-
-.word-bank-button-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.75rem;
-}
-
-.silly-sentences-column {
-  border-radius: 1rem;
-  padding: 1.5rem;
-  transition: box-shadow 0.2s ease-in-out;
-  border: 2px dashed #ccc;
-}
-
-.silly-sentences-column.bg-purple-200 {
-  background-color: #e9d5ff;
-}
-
-.silly-sentences-column.bg-pink-200 {
-  background-color: #fbcfe8;
-}
-
+/* Animations and Messages */
 .message-box {
   position: fixed;
   bottom: 20px;
@@ -147,13 +126,14 @@ body {
 
 @keyframes pop {
     0% { transform: translateX(-50%) scale(0.9); }
-    100% { transform: translateX(-50%) scale(1.1); }
+    80% { transform: translateX(-50%) scale(1.1); }
+    100% { transform: translateX(-50%) scale(1); }
 }
 
 @keyframes shake {
-    0% { transform: translateX(-50%) rotate(-5deg); }
-    25% { transform: translateX(-50%) rotate(5deg); }
-    50% { transform: translateX(-50%) rotate(-5deg); }
-    75% { transform: translateX(-50%) rotate(5deg); }
-    100% { transform: translateX(-50%) rotate(-5deg); }
+    0% { transform: translateX(-50%) rotate(0deg); }
+    25% { transform: translateX(-50%) rotate(-5deg); }
+    50% { transform: translateX(-50%) rotate(5deg); }
+    75% { transform: translateX(-50%) rotate(-5deg); }
+    100% { transform: translateX(-50%) rotate(0deg); }
 }
