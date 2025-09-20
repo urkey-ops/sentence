@@ -2,6 +2,7 @@
   { 
     "lesson": 1, 
     "type": "sentence_or_not", 
+    "title": "What is a Sentence?",
     "goal": "Is this a complete sentence?",
     "challenges": [
       { "text": "The dog barks.", "isSentence": true },
@@ -16,51 +17,76 @@
   { 
     "lesson": 2, 
     "type": "identify", 
+    "title": "Meet the Naming Part",
     "goal": "Click the Naming Part (who or what the sentence is about).",
     "challenges": [
-      { "sentence": "My mom smiles.", "answer": ["my", "mom"] },
-      { "sentence": "The big red ball bounced.", "answer": ["the", "big", "red", "ball"] },
-      { "sentence": "A small mouse ran.", "answer": ["a", "small", "mouse"] },
-      { "sentence": "The car stops.", "answer": ["the", "car"] }
+      { "sentence": "My mom smiles.", "answer": ["my", "mom"], "key_words": ["mom"] },
+      { "sentence": "The big red ball bounced.", "answer": ["the", "big", "red", "ball"], "key_words": ["ball"] },
+      { "sentence": "A small mouse ran.", "answer": ["a", "small", "mouse"], "key_words": ["mouse"] },
+      { "sentence": "The car stops.", "answer": ["the", "car"], "key_words": ["car"] }
     ]
   },
   { 
     "lesson": 3, 
     "type": "identify", 
+    "title": "Meet the Telling Part",
     "goal": "Click the Telling Part (what the naming part is doing).",
     "challenges": [
-      { "sentence": "The cat naps.", "answer": ["naps"] },
-      { "sentence": "My friend is happy.", "answer": ["is", "happy"] },
-      { "sentence": "The sun shines.", "answer": ["shines"] }
+      { "sentence": "The cat naps.", "answer": ["naps"], "key_words": ["naps"] },
+      { "sentence": "My friend is happy.", "answer": ["is", "happy"], "key_words": ["is", "happy"] },
+      { "sentence": "The sun shines.", "answer": ["shines"], "key_words": ["shines"] }
     ]
   },
   {
     "lesson": 4,
     "type": "scramble",
+    "title": "Put It in Order",
     "goal": "Put the words in the right order!",
     "challenges": [
-      { "words": ["we", "play", "outside"] },
-      { "words": ["the", "sky", "is", "blue"] },
-      { "words": ["i", "go", "to", "school"] }
+      { "words": ["we", "play", "outside"], "correct_answer": "we play outside" },
+      { "words": ["the", "sky", "is", "blue"], "correct_answer": "the sky is blue" },
+      { "words": ["i", "go", "to", "school"], "correct_answer": "i go to school" }
     ]
   },
   { 
     "lesson": 5, 
     "type": "make_it_a_sentence", 
+    "title": "Make It a Sentence!",
     "goal": "Add a word to make a complete sentence!",
     "challenges": [
-        { "incomplete_sentence": "The red apple", "word_type": "verb", "correct_answer": "The red apple is on the table." },
-        { "incomplete_sentence": "Jumps high", "word_type": "noun", "correct_answer": "The boy jumps high." },
-        { "incomplete_sentence": "The baby", "word_type": "verb", "correct_answer": "The baby cries." }
+        { "incomplete_sentence": "The red apple", "word_type": "verb", "acceptable_answers": ["is on the table", "was big and red"] },
+        { "incomplete_sentence": "Jumps high", "word_type": "noun", "acceptable_answers": ["The boy jumps high", "The girl jumps high"] },
+        { "incomplete_sentence": "The baby", "word_type": "verb", "acceptable_answers": ["The baby sleeps", "The baby cries"] }
     ]
   },
-  { 
-    "lesson": 6, 
-    "type": "silly_sentences", 
-    "goal": "Let's make some silly sentences!",
+  {
+    "lesson": 6,
+    "type": "silly_sentences",
+    "title": "Silly Sentences",
+    "goal": "Make a silly sentence by picking a Naming Part and a Telling Part.",
     "challenges": [
-        { "description": "Make a sentence with a person and an action.", "word_types": ["noun", "verb"] },
-        { "description": "Make a sentence about an animal with a verb.", "word_types": ["noun", "verb"] }
+        { "naming_parts": ["The dog", "My teacher", "The moon", "A chair", "An apple"], "telling_parts": ["can sing.", "flies like a bird.", "eats a pizza.", "can run.", "can read a book."] }
+    ]
+  },
+  {
+    "lesson": 14,
+    "type": "punctuation_choice",
+    "title": "Sentences with Feelings",
+    "goal": "Choose the correct punctuation to end the sentence.",
+    "challenges": [
+      { "sentence": "The dog barked loudly", "correct_answer": "!", "choices": [".", "?", "!"] },
+      { "sentence": "Is the boy happy", "correct_answer": "?", "choices": [".", "?", "!"] },
+      { "sentence": "We went to the store", "correct_answer": ".", "choices": [".", "?", "!"] }
+    ]
+  },
+  {
+    "lesson": 22,
+    "type": "combine_sentences",
+    "title": "Combining Sentences",
+    "goal": "Combine two sentences into one using 'and'.",
+    "challenges": [
+      { "sentences": ["The cat sat.", "The cat purred."], "conjunction": "and", "correct_answer": "The cat sat and purred." },
+      { "sentences": ["The boy ran.", "The girl jumped."], "conjunction": "and", "correct_answer": "The boy ran and the girl jumped." }
     ]
   }
 ]
