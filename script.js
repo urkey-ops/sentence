@@ -113,15 +113,15 @@ class App {
 
     _loadLesson() {
         this._hideMessage();
-        this.elements.submitBtn.classList.add('hidden');
-        this.elements.nextBtn.classList.add('hidden');
-        this.elements.clearBtn.classList.add('hidden');
         
         const currentLesson = this.lessons[this.state.currentLessonIndex];
         this.elements.lessonTitle.textContent = `Lesson ${currentLesson.lesson}: ${currentLesson.title}`;
         this.elements.lessonGoalDisplay.textContent = currentLesson.goal;
         
-        currentLesson.challenges = this._shuffleArray(currentLesson.challenges);
+        // Shuffle only on the first challenge of a new lesson
+        if (this.state.currentChallengeIndex === 0) {
+            currentLesson.challenges = this._shuffleArray(currentLesson.challenges);
+        }
 
         this._renderChallenge();
     }
@@ -133,7 +133,11 @@ class App {
         this.elements.placeholderText.style.display = 'block';
         this.elements.lessonDisplay.textContent = '';
         this.elements.interactiveContainer.innerHTML = '';
+        
+        // Crucial fix: Hide buttons at the start of every challenge
         this.elements.clearBtn.classList.add('hidden');
+        this.elements.submitBtn.classList.add('hidden');
+        this.elements.nextBtn.classList.add('hidden');
         
         const currentLesson = this.lessons[this.state.currentLessonIndex];
         const currentChallenge = currentLesson.challenges[this.state.currentChallengeIndex];
