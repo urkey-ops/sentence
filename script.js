@@ -30,12 +30,13 @@ class App {
         this.state = {
             currentLessonIndex: 0,
             currentChallengeIndex: 0,
-            currentSentenceArray: []
+            currentSentenceArray: [],
+            namingPart: '',
+            tellingPart: ''
         };
         this.messageTimeout = null;
+        this.wordBankData = {};
 
-        // The only change: We no longer call _addEventListeners directly here.
-        // Instead, we call the async load function, which will handle the rest.
         this._loadLessonsFile();
     }
 
@@ -47,23 +48,27 @@ class App {
         this.elements.clearBtn.addEventListener('click', () => this._handleClear());
     }
 
-    _loadLessonsFile() {
-        fetch('lessons.json')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                this.lessons = data;
-                this._initialize(); // Now we call the initialization method
-            })
-            .catch(error => console.error('Error loading lessons:', error));
+    async _loadLessonsFile() {
+        try {
+            const lessonsResponse = await fetch('lessons.json');
+            if (!lessonsResponse.ok) {
+                throw new Error('Network response was not ok for lessons.json');
+            }
+            this.lessons = await lessonsResponse.json();
+
+            const wordsResponse = await fetch('words.json');
+            if (!wordsResponse.ok) {
+                throw new Error('Network response was not ok for words.json');
+            }
+            this.wordBankData = await wordsResponse.json();
+
+            this._initialize();
+        } catch (error) {
+            console.error('Error loading files:', error);
+        }
     }
     
     _initialize() {
-        // This method is called ONLY after lessons.json has been loaded successfully.
         this._addEventListeners();
         this._showIntroScreen();
     }
@@ -121,9 +126,10 @@ class App {
         this._renderChallenge();
     }
 
-    // --- RENDER FUNCTIONS FOR EACH LESSON TYPE ---
     _renderChallenge() {
         this.state.currentSentenceArray = [];
+        this.state.namingPart = '';
+        this.state.tellingPart = '';
         this.elements.placeholderText.style.display = 'block';
         this.elements.lessonDisplay.textContent = '';
         this.elements.interactiveContainer.innerHTML = '';
@@ -157,6 +163,7 @@ class App {
         }
     }
     
+    // --- RENDER FUNCTIONS FOR EACH LESSON TYPE ---
     _renderSentenceOrNotChallenge(challenge) {
         const trueBtn = document.createElement('button');
         trueBtn.textContent = 'Yes, it is!';
@@ -216,12 +223,12 @@ class App {
         this.elements.submitBtn.classList.remove('hidden');
         this.elements.lessonDisplay.textContent = challenge.incomplete_sentence;
         
-        // This would require a words.json file with verb/noun/etc. lists
-        const words = ["the", "dog", "cat", "runs", "jumps", "eats"]; // Example words
         const wordBank = document.createElement('div');
         wordBank.classList.add('word-bank-button-container');
 
-        words.forEach(word => {
+        const wordsToAdd = this.wordBankData.words[challenge.word_type];
+
+        this._shuffleArray(wordsToAdd).forEach(word => {
             const button = document.createElement('button');
             button.textContent = word;
             button.classList.add('word-button', 'squircle');
@@ -272,7 +279,7 @@ class App {
         const choicesContainer = document.createElement('div');
         choicesContainer.classList.add('flex', 'justify-center', 'gap-4', 'mt-4');
 
-        challenge.choices.forEach(choice => {
+        this._shuffleArray(challenge.choices).forEach(choice => {
             const button = document.createElement('button');
             button.textContent = choice;
             button.classList.add('punctuation-button', 'action-button', 'squircle');
@@ -284,17 +291,27 @@ class App {
     }
 
     _renderCombineSentencesChallenge(challenge) {
+        this.elements.lessonGoalDisplay.textContent = `Combine two sentences using '${challenge.conjunction}'.`;
         this.elements.lessonDisplay.innerHTML = `
             <div class="text-center">
                 <p class="text-xl mb-2">${challenge.sentences[0]}</p>
                 <p class="text-2xl font-bold text-purple-600">${challenge.conjunction}</p>
                 <p class="text-xl mt-2">${challenge.sentences[1]}</p>
             </div>
-            <div id="combineSentenceInput" class="bg-gray-100 p-4 rounded-xl shadow-inner min-h-[60px] flex items-center justify-center mt-4">
-                <p id="placeholderText" class="text-xl md:text-2xl font-semibold text-center text-gray-400">Your combined sentence goes here...</p>
+            <div id="combineSentenceInput" class="bg-gray-100 p-4 rounded-xl shadow-inner min-h-[60px] flex items-center justify-center mt-4" contenteditable="true">
+                <p id="placeholderText" class="text-xl md:text-2xl font-semibold text-center text-gray-400">Type your combined sentence here...</p>
             </div>
         `;
         
+        const combineInput = document.getElementById('combineSentenceInput');
+        combineInput.addEventListener('input', () => {
+            if (combineInput.textContent.trim().length > 0) {
+                this.elements.placeholderText.style.display = 'none';
+            } else {
+                this.elements.placeholderText.style.display = 'block';
+            }
+        });
+
         this.elements.submitBtn.classList.remove('hidden');
     }
 
@@ -307,21 +324,23 @@ class App {
     }
     
     _selectSillyPart(button, part, type) {
-        const sentenceDisplay = document.getElementById('lessonDisplay');
-        const namingPart = this.state.currentSentenceArray[0] || '';
-        const tellingPart = this.state.currentSentenceArray[1] || '';
-
         if (type === 'naming') {
-            this.state.currentSentenceArray[0] = part;
+            this.state.namingPart = part;
+            const otherButtons = button.parentElement.querySelectorAll('button');
+            otherButtons.forEach(btn => btn.disabled = true);
         } else if (type === 'telling') {
-            this.state.currentSentenceArray[1] = part;
+            this.state.tellingPart = part;
+            const otherButtons = button.parentElement.querySelectorAll('button');
+            otherButtons.forEach(btn => btn.disabled = true);
         }
 
-        sentenceDisplay.textContent = `${this.state.currentSentenceArray.join(' ')}`;
-        
-        if (this.state.currentSentenceArray.length === 2 && namingPart && tellingPart) {
+        const sentenceDisplay = this.elements.lessonDisplay;
+        if (this.state.namingPart && this.state.tellingPart) {
+            sentenceDisplay.textContent = `${this.state.namingPart} ${this.state.tellingPart}`;
             this._showMessage('Great job! You made a silly sentence!', 'success', 3000);
             this.elements.nextBtn.classList.remove('hidden');
+        } else {
+            sentenceDisplay.textContent = this.state.namingPart || this.state.tellingPart;
         }
     }
 
@@ -343,31 +362,24 @@ class App {
                 isCorrect = this._checkMakeItASentence(currentChallenge);
                 break;
             case 'combine_sentences':
-                const userSentence = document.getElementById('combineSentenceInput').textContent.trim().toLowerCase();
-                isCorrect = userSentence === currentChallenge.correct_answer.toLowerCase();
+                const userSentence = document.getElementById('combineSentenceInput').textContent.trim().toLowerCase().replace(/[.?!]/g, '');
+                isCorrect = userSentence === currentChallenge.correct_answer.toLowerCase().replace(/[.?!]/g, '');
                 break;
         }
 
         if (isCorrect) {
             this._showMessage('Correct! Great job!', 'success', 3000);
             this.elements.nextBtn.classList.remove('hidden');
+            this.elements.submitBtn.classList.add('hidden');
         } else {
             this._showMessage('Not quite, try again.', 'failure', 3000);
         }
     }
 
     _checkIdentify(challenge) {
-        const userAnswer = this.state.currentSentenceArray;
-        const correctAnswers = challenge.answer;
-        const keyWords = challenge.key_words;
-    
-        const isSubset = userAnswer.every(word => correctAnswers.includes(word));
-        if (!isSubset) {
-            return false;
-        }
-    
-        const hasKeyWords = keyWords.every(keyWord => userAnswer.includes(keyWord));
-        return hasKeyWords;
+        const userAnswer = this.state.currentSentenceArray.sort().join(' ');
+        const correctAnswers = challenge.answer.sort().join(' ');
+        return userAnswer === correctAnswers;
     }
     
     _checkScramble(challenge) {
@@ -376,8 +388,8 @@ class App {
     }
     
     _checkMakeItASentence(challenge) {
-        const fullSentence = `${challenge.incomplete_sentence} ${this.state.currentSentenceArray.join(' ').toLowerCase().trim()}`;
-        return challenge.acceptable_answers.some(answer => fullSentence.toLowerCase().includes(answer.toLowerCase()));
+        const fullSentence = `${challenge.incomplete_sentence.toLowerCase()} ${this.state.currentSentenceArray.join(' ').toLowerCase().trim()}`;
+        return challenge.acceptable_answers.some(answer => fullSentence.toLowerCase().trim() === answer.toLowerCase().trim());
     }
     
     _handleSentenceOrNot(userChoice, isCorrectSentence) {
@@ -413,6 +425,8 @@ class App {
 
     _handleClear() {
         this.state.currentSentenceArray = [];
+        this.state.namingPart = '';
+        this.state.tellingPart = '';
         this._renderCurrentSentence();
         this.elements.placeholderText.style.display = 'block';
         
