@@ -1,36 +1,68 @@
 :root {
-  /* Inspired by Duolingo's primary, vibrant colors */
-  --color-main: #58cc02; /* Green */
-  --color-primary: #1cb0f6; /* Blue */
-  --color-secondary: #ff4b4b; /* Red */
-  --color-tertiary: #a674ff; /* Purple */
-  --color-background: #f7f7f7; /* Off-white */
-  --color-text-dark: #3c3c3c; /* Dark gray */
-  --color-text-light: #ffffff; /* White */
-  --color-outline: #22c55e; /* Bright green for focus */
+  /* Playful & Interactive Color Palette */
+  --color-primary: #8e2de2; /* Deep purple */
+  --color-secondary: #4a00e0; /* Blue-purple */
+  --color-tertiary: #b06ab3; /* Lavender */
+  --color-background-light: #f5f5f5; /* Clean off-white */
+  --color-text-dark: #333333;
+  --color-text-light: #ffffff;
+  --color-shadow-dark: #6a1b9a; /* Darker shadow for buttons */
+  --color-shadow-light: #9c27b0; /* Lighter shadow for cards */
 
   --font-display: 'Comic Neue', cursive;
 }
 
 body {
   font-family: var(--font-display);
-  background-color: var(--color-background);
-  background-image:
-    radial-gradient(circle at 1px 1px, rgba(0,0,0,0.1) 1px, transparent 1px),
-    radial-gradient(circle at 10px 10px, rgba(0,0,0,0.1) 1px, transparent 1px);
-  background-size: 20px 20px;
-  background-position: 0 0, 10px 10px;
-  font-size: 1.25rem; /* Larger base font for readability */
+  background: linear-gradient(135deg, #e0eafc, #cfdef3);
+  background-size: 400% 400%;
+  animation: gradient-shift 15s ease infinite;
+  font-size: 1.25rem;
   margin: 0;
   padding: 0;
   color: var(--color-text-dark);
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 .squircle {
   border-radius: 1.5rem;
 }
 
-/* Base style for all buttons for consistency */
+/* Typography Hierarchy */
+h2 {
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--color-text-dark);
+  margin-bottom: 0.5rem;
+}
+
+h3 {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: 0.25rem;
+}
+
+p {
+  font-size: 1.25rem;
+  line-height: 1.4;
+}
+
+/* Main UI Containers - Card-like appearance */
+#introScreen, #lessonSelector, #lessonView {
+  background-color: var(--color-background-light);
+  border: 2px solid var(--color-tertiary);
+  border-radius: 2.5rem;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+}
+
+/* Base style for all buttons with a 'bouncy' feel */
 .base-button {
   display: inline-flex;
   align-items: center;
@@ -40,45 +72,50 @@ body {
   border: none;
   cursor: pointer;
   font-family: var(--font-display);
-  min-height: 55px; /* Consistent height */
-  padding: 0.75rem 1.5rem; /* Consistent padding */
-  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.2);
-  text-decoration: none;
-  font-size: 1.5rem; /* Larger font size for buttons */
+  min-height: 60px;
+  padding: 0.75rem 1.5rem;
+  border-radius: 1.5rem;
+  font-size: 1.5rem;
   gap: 0.5rem;
-  border-bottom: 5px solid rgba(0, 0, 0, 0.2);
+  transform: translateY(0);
 }
 
-/* Primary actions like 'Start' and 'Next' */
+.base-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 0 var(--color-shadow-dark), 0 0 20px var(--color-shadow-light);
+}
+
+.base-button:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 var(--color-shadow-dark);
+}
+
 .action-button {
-  background-color: var(--color-main);
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
   color: var(--color-text-light);
-  border-color: #468e0e;
+  box-shadow: 0 5px 0 var(--color-shadow-dark);
 }
 
-/* Clear button, with an outline style */
 .clear-button {
-  background-color: var(--color-background);
+  background-color: var(--color-background-light);
   color: var(--color-text-dark);
   border: 2px solid var(--color-text-dark);
   box-shadow: none;
 }
 
-/* Back to lessons button */
 .back-button {
-  background-color: var(--color-tertiary);
+  background: linear-gradient(135deg, var(--color-secondary), var(--color-primary));
   color: var(--color-text-light);
-  border-color: #8352d1;
+  box-shadow: 0 5px 0 var(--color-shadow-dark);
 }
 
-/* Lesson buttons on the selector screen */
 .lesson-button {
-  background-color: var(--color-primary);
+  background: linear-gradient(135deg, var(--color-tertiary), var(--color-primary));
   color: var(--color-text-light);
-  border-color: #0b70a3;
+  box-shadow: 0 5px 0 var(--color-shadow-dark);
 }
 
-/* Word bank buttons for building sentences */
+/* Word Bank Layout and Style */
 .word-bank-button-container {
   display: flex;
   flex-wrap: wrap;
@@ -87,18 +124,23 @@ body {
 }
 
 .word-button {
-  background-color: var(--color-background);
+  background-color: var(--color-background-light);
   color: var(--color-text-dark);
   border: 2px solid var(--color-text-dark);
-  min-height: 55px;
+  min-height: 60px;
   padding: 0.75rem 1.25rem;
   border-radius: 1.5rem;
   font-size: 1.5rem;
 }
 
-/* Punctuation buttons, using a distinct color */
+.word-button:hover {
+  background-color: var(--color-text-dark);
+  color: var(--color-text-light);
+}
+
+/* Punctuation buttons */
 .punctuation-button {
-  background-color: var(--color-secondary);
+  background: linear-gradient(45deg, var(--color-secondary), var(--color-primary));
   color: var(--color-text-light);
   min-height: 60px;
   min-width: 60px;
@@ -106,44 +148,24 @@ body {
   font-size: 2.5rem;
   padding: 0;
   border: none;
-  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.2);
-  border-bottom: 5px solid #c23939;
+  box-shadow: 0 5px 0 var(--color-shadow-dark);
 }
 
-/* Hover effects for visual feedback */
-.action-button:hover { background-color: #4d890b; }
-.clear-button:hover { background-color: var(--color-text-dark); color: var(--color-background); }
-.back-button:hover { background-color: #8c58da; }
-.lesson-button:hover { background-color: #1282b8; }
-.word-button:hover { background-color: var(--color-text-dark); color: var(--color-background); }
-.punctuation-button:hover { background-color: #e11d48; }
-
-/* Focus States for Accessibility */
-.base-button:focus,
-.action-button:focus,
-.clear-button:focus,
-.back-button:focus,
-.lesson-button:focus,
-.word-button:focus,
-.punctuation-button:focus {
-  outline: 4px solid var(--color-outline);
-  outline-offset: 2px;
-}
-
-/* Message Box Styles */
+/* Feedback Message Box - More playful */
 .message-box {
   position: fixed;
   bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
-  padding: 1rem 2rem;
-  border-radius: 1.75rem;
+  padding: 1.5rem 2rem;
+  border-radius: 2rem;
   font-weight: 700;
   text-align: center;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.5s ease, visibility 0.5s ease;
+  transition: all 0.5s ease-in-out;
   z-index: 100;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
 
 .message-box.visible {
@@ -152,16 +174,14 @@ body {
 }
 
 .message-box.success {
-  background-color: #d8fcd6;
-  color: #16a34a;
-  transform: translateX(-50%) scale(1.1);
-  animation: pop 0.5s ease-in-out;
+  background: linear-gradient(135deg, #d8fcd6, #a8e6a1);
+  color: #164e3b;
+  animation: pop 0.5s ease-out;
 }
 
 .message-box.failure {
-  background-color: #ffcccc;
-  color: #ef4444;
-  transform: translateX(-50%) rotate(-5deg);
+  background: linear-gradient(135deg, #ffcccc, #ff9999);
+  color: #c23939;
   animation: shake 0.5s ease-in-out;
 }
 
