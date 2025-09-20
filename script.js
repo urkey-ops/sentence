@@ -13,7 +13,6 @@ class App {
             lessonTitle: document.getElementById('lessonTitle'),
             lessonGoalDisplay: document.getElementById('lessonGoalDisplay'),
             lessonDisplay: document.getElementById('lessonDisplay'),
-            placeholderText: document.getElementById('placeholderText'),
             interactiveContainer: document.getElementById('interactiveContainer'),
             submitBtn: document.getElementById('submitBtn'),
             nextBtn: document.getElementById('nextBtn'),
@@ -130,8 +129,6 @@ class App {
         this.state.currentSentenceArray = [];
         this.state.namingPart = '';
         this.state.tellingPart = '';
-        this.elements.placeholderText.style.display = 'block';
-        this.elements.lessonDisplay.textContent = '';
         this.elements.interactiveContainer.innerHTML = '';
         
         // Crucial fix: Hide buttons at the start of every challenge
@@ -181,15 +178,13 @@ class App {
 
         this.elements.interactiveContainer.appendChild(trueBtn);
         this.elements.interactiveContainer.appendChild(falseBtn);
-        this.elements.lessonDisplay.textContent = challenge.text;
-        this.elements.placeholderText.style.display = 'none';
+        this._updateLessonDisplay(challenge.text);
     }
 
     _renderIdentifyChallenge(challenge) {
         this.elements.clearBtn.classList.remove('hidden');
         this.elements.submitBtn.classList.remove('hidden');
-        this.elements.lessonDisplay.textContent = '';
-        this.elements.placeholderText.style.display = 'block';
+        this._updateLessonDisplay('');
 
         const words = challenge.sentence.split(' ');
         const wordBank = document.createElement('div');
@@ -209,8 +204,7 @@ class App {
     _renderScrambleChallenge(challenge) {
         this.elements.clearBtn.classList.remove('hidden');
         this.elements.submitBtn.classList.remove('hidden');
-        this.elements.lessonDisplay.textContent = '';
-        this.elements.placeholderText.style.display = 'block';
+        this._updateLessonDisplay('');
 
         const shuffledWords = this._shuffleArray([...challenge.words]);
         const wordBank = document.createElement('div');
@@ -230,8 +224,7 @@ class App {
     _renderMakeItASentenceChallenge(challenge) {
         this.elements.clearBtn.classList.remove('hidden');
         this.elements.submitBtn.classList.remove('hidden');
-        this.elements.lessonDisplay.textContent = challenge.incomplete_sentence;
-        this.elements.placeholderText.style.display = 'none';
+        this._updateLessonDisplay(challenge.incomplete_sentence);
         
         const wordBank = document.createElement('div');
         wordBank.classList.add('word-bank-button-container');
@@ -252,8 +245,7 @@ class App {
     _renderSillySentencesChallenge(challenge) {
         this.elements.clearBtn.classList.remove('hidden');
         this.elements.submitBtn.classList.remove('hidden');
-        this.elements.lessonDisplay.textContent = '';
-        this.elements.placeholderText.style.display = 'block';
+        this._updateLessonDisplay('');
         
         const container = document.createElement('div');
         container.classList.add('flex', 'flex-col', 'md:flex-row', 'gap-4', 'w-full');
@@ -286,8 +278,7 @@ class App {
     }
 
     _renderPunctuationChoiceChallenge(challenge) {
-        this.elements.lessonDisplay.textContent = challenge.sentence;
-        this.elements.placeholderText.style.display = 'none';
+        this._updateLessonDisplay(challenge.sentence);
         
         const choicesContainer = document.createElement('div');
         choicesContainer.classList.add('flex', 'justify-center', 'gap-4', 'mt-4');
@@ -312,16 +303,17 @@ class App {
                 <p class="text-xl mt-2">${challenge.sentences[1]}</p>
             </div>
             <div id="combineSentenceInput" class="bg-gray-100 p-4 rounded-xl shadow-inner min-h-[60px] flex items-center justify-center mt-4" contenteditable="true">
-                <p id="placeholderText" class="text-xl md:text-2xl font-semibold text-center text-gray-400">Type your combined sentence here...</p>
+                <p class="text-xl md:text-2xl font-semibold text-center text-gray-400">Type your combined sentence here...</p>
             </div>
         `;
         
         const combineInput = document.getElementById('combineSentenceInput');
         combineInput.addEventListener('input', () => {
+            const placeholder = combineInput.querySelector('p');
             if (combineInput.textContent.trim().length > 0) {
-                this.elements.placeholderText.style.display = 'none';
+                if (placeholder) placeholder.style.display = 'none';
             } else {
-                this.elements.placeholderText.style.display = 'block';
+                if (placeholder) placeholder.style.display = 'block';
             }
         });
 
@@ -331,9 +323,8 @@ class App {
     // --- INTERACTIVE HANDLERS ---
     _selectWord(button, word) {
         this.state.currentSentenceArray.push(word);
-        this._renderCurrentSentence();
+        this._updateLessonDisplay(this.state.currentSentenceArray.join(' '));
         button.disabled = true;
-        this.elements.placeholderText.style.display = 'none';
     }
     
     _selectSillyPart(button, part, type) {
@@ -347,13 +338,12 @@ class App {
             otherButtons.forEach(btn => btn.disabled = true);
         }
 
-        this.elements.lessonDisplay.textContent = `${this.state.namingPart} ${this.state.tellingPart}`;
+        const fullSentence = `${this.state.namingPart} ${this.state.tellingPart}`;
+        this._updateLessonDisplay(fullSentence);
 
         if (this.state.namingPart && this.state.tellingPart) {
             this._showMessage('Great job! You made a silly sentence!', 'success', 3000);
             this.elements.nextBtn.classList.remove('hidden');
-        } else {
-            this.elements.placeholderText.style.display = 'none';
         }
     }
 
@@ -401,8 +391,8 @@ class App {
     }
     
     _checkMakeItASentence(challenge) {
-        const fullSentence = `${challenge.incomplete_sentence.toLowerCase()} ${this.state.currentSentenceArray.join(' ').toLowerCase().trim()}`;
-        return challenge.acceptable_answers.some(answer => fullSentence.toLowerCase().trim() === answer.toLowerCase().trim());
+        const fullSentence = `${challenge.incomplete_sentence.toLowerCase().replace(/\s*$/, ' ')}${this.state.currentSentenceArray.join(' ').toLowerCase().trim()}`;
+        return challenge.acceptable_answers.some(answer => fullSentence.trim() === answer.toLowerCase().trim());
     }
     
     _handleSentenceOrNot(userChoice, isCorrectSentence) {
@@ -440,8 +430,7 @@ class App {
         this.state.currentSentenceArray = [];
         this.state.namingPart = '';
         this.state.tellingPart = '';
-        this.elements.lessonDisplay.textContent = '';
-        this.elements.placeholderText.style.display = 'block';
+        this._updateLessonDisplay('');
         
         const wordButtons = this.elements.interactiveContainer.querySelectorAll('.word-button');
         wordButtons.forEach(button => {
@@ -449,8 +438,12 @@ class App {
         });
     }
 
-    _renderCurrentSentence() {
-        this.elements.lessonDisplay.textContent = this.state.currentSentenceArray.join(' ');
+    _updateLessonDisplay(text) {
+        if (!text || text.trim() === '') {
+            this.elements.lessonDisplay.innerHTML = `<p class="text-xl md:text-2xl font-semibold text-center text-gray-400">Your sentence will appear here...</p>`;
+        } else {
+            this.elements.lessonDisplay.innerHTML = `<p class="text-xl md:text-2xl font-semibold text-center">${text}</p>`;
+        }
     }
 
     _showMessage(text, className, duration = 3000) {
