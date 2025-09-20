@@ -1,7 +1,6 @@
 [
   { 
     "lesson": 1, 
-    "title": "What is a Sentence?",
     "type": "sentence_or_not", 
     "goal": "Is this a complete sentence?",
     "challenges": [
@@ -16,7 +15,6 @@
   },
   { 
     "lesson": 2, 
-    "title": "Meet the Naming Part",
     "type": "identify", 
     "goal": "Click the Naming Part (who or what the sentence is about).",
     "challenges": [
@@ -28,7 +26,6 @@
   },
   { 
     "lesson": 3, 
-    "title": "Find the Telling Part",
     "type": "identify", 
     "goal": "Click the Telling Part (what the naming part is doing).",
     "challenges": [
@@ -39,148 +36,50 @@
   },
   {
     "lesson": 4,
-    "title": "Unscramble the Sentence",
     "type": "scramble",
     "goal": "Put the words in the right order!",
     "challenges": [
-      { "words": ["we", "play", "outside"], "correct_answer": "we play outside" },
-      { "words": ["the", "sky", "is", "blue"], "correct_answer": "the sky is blue" },
-      { "words": ["i", "go", "to", "school"], "correct_answer": "i go to school" }
+      { "words": ["we", "play", "outside"] },
+      { "words": ["the", "sky", "is", "blue"] },
+      { "words": ["i", "go", "to", "school"] }
     ]
   },
   { 
     "lesson": 5, 
-    "title": "Make it a Sentence",
     "type": "make_it_a_sentence", 
     "goal": "Add a word to make a complete sentence!",
     "challenges": [
-        { "incomplete_sentence": "The red apple", "word_type": "verb", "acceptable_answers": ["the red apple is on the table.", "the red apple drops.", "the red apple rolls."] },
-        { "incomplete_sentence": "Jumps high", "word_type": "noun", "acceptable_answers": ["the boy jumps high.", "my friend jumps high."] },
-        { "incomplete_sentence": "The baby", "word_type": "verb", "acceptable_answers": ["the baby sleeps.", "the baby eats.", "the baby laughs."] }
+        { "incomplete_sentence": "The red apple", "word_type": "verb", "correct_answer": "The red apple is on the table." },
+        { "incomplete_sentence": "Jumps high", "word_type": "noun", "correct_answer": "The boy jumps high." },
+        { "incomplete_sentence": "The baby", "word_type": "verb", "correct_answer": "The baby sleeps soundly." }
     ]
   },
   { 
     "lesson": 6, 
-    "title": "More Naming Parts",
-    "type": "identify", 
-    "goal": "Click the Naming Part.",
+    "type": "silly_sentences", 
+    "goal": "Make a silly sentence by picking a naming and telling part!",
     "challenges": [
-      { "sentence": "The small dog barks.", "answer": ["the", "small", "dog"] },
-      { "sentence": "A huge plane flies.", "answer": ["a", "huge", "plane"] },
-      { "sentence": "My new shoes fit.", "answer": ["my", "new", "shoes"] }
+        { "naming_parts": ["The fluffy cat", "My robot friend", "A tiny wizard"], "telling_parts": ["danced on the moon.", "ate a giant cookie.", "flew through the sky."] },
+        { "naming_parts": ["A purple elephant", "The singing tree", "A sleepy cloud"], "telling_parts": ["wore a top hat.", "read a book.", "painted a rainbow."] }
     ]
   },
-  { 
-    "lesson": 7, 
-    "title": "More Telling Parts",
-    "type": "identify", 
-    "goal": "Click the Telling Part.",
+  {
+    "lesson": 7,
+    "type": "punctuation_choice",
+    "goal": "Choose the correct punctuation mark for the sentence.",
     "challenges": [
-      { "sentence": "My mom laughs happily.", "answer": ["laughs", "happily"] },
-      { "sentence": "The big bear sleeps soundly.", "answer": ["sleeps", "soundly"] },
-      { "sentence": "He runs very fast.", "answer": ["runs", "very", "fast"] }
+        { "sentence": "Where are you going", "choices": ["!", "?", "."], "correct_answer": "?" },
+        { "sentence": "The sun is hot today", "choices": ["!", "?", "."], "correct_answer": "." },
+        { "sentence": "I am so excited", "choices": ["!", "?", "."], "correct_answer": "!" }
     ]
   },
   {
     "lesson": 8,
-    "title": "More Unscrambling",
-    "type": "scramble",
-    "goal": "Put the words in the right order!",
-    "challenges": [
-      { "words": ["the", "happy", "dog", "runs"], "correct_answer": "the happy dog runs" },
-      { "words": ["my", "teacher", "is", "kind"], "correct_answer": "my teacher is kind" },
-      { "words": ["we", "sing", "a", "song"], "correct_answer": "we sing a song" }
-    ]
-  },
-  { 
-    "lesson": 9, 
-    "title": "Is it a Sentence? (Part 2)",
-    "type": "sentence_or_not", 
-    "goal": "Is this a complete sentence?",
-    "challenges": [
-      { "text": "Up on the roof.", "isSentence": false },
-      { "text": "The mouse ran.", "isSentence": true },
-      { "text": "Walked to the store.", "isSentence": false },
-      { "text": "I can read.", "isSentence": true }
-    ]
-  },
-  { 
-    "lesson": 10, 
-    "title": "More Sentence Building",
-    "type": "make_it_a_sentence", 
-    "goal": "Add a word to make a complete sentence!",
-    "challenges": [
-        { "incomplete_sentence": "The old woman", "word_type": "verb", "acceptable_answers": ["the old woman walks.", "the old woman smiles.", "the old woman talks."] },
-        { "incomplete_sentence": "Sings a song", "word_type": "noun", "acceptable_answers": ["my friend sings a song.", "she sings a song."] }
-    ]
-  },
-  { 
-    "lesson": 11, 
-    "title": "Advanced Naming Parts",
-    "type": "identify", 
-    "goal": "Click the Naming Part.",
-    "challenges": [
-      { "sentence": "My little brother plays.", "answer": ["my", "little", "brother"] },
-      { "sentence": "That big balloon floated.", "answer": ["that", "big", "balloon"] }
-    ]
-  },
-  { 
-    "lesson": 12, 
-    "title": "Advanced Telling Parts",
-    "type": "identify", 
-    "goal": "Click the Telling Part.",
-    "challenges": [
-      { "sentence": "The tall tree sways gently.", "answer": ["sways", "gently"] },
-      { "sentence": "A fast car sped by.", "answer": ["sped", "by"] }
-    ]
-  },
-  {
-    "lesson": 13,
-    "title": "Advanced Unscrambling",
-    "type": "scramble",
-    "goal": "Put the words in the right order!",
-    "challenges": [
-      { "words": ["the", "happy", "little", "girl", "smiles"], "correct_answer": "the happy little girl smiles" },
-      { "words": ["our", "class", "reads", "a", "book"], "correct_answer": "our class reads a book" }
-    ]
-  },
-  {
-    "lesson": 14,
-    "title": "Punctuation Practice",
-    "type": "punctuation_choice",
-    "goal": "Choose the right punctuation mark for the sentence!",
-    "challenges": [
-      { "sentence": "I love ice cream", "choices": [".", "?", "!"], "correct_answer": "." },
-      { "sentence": "Are you going home", "choices": [".", "?", "!"], "correct_answer": "?" },
-      { "sentence": "What a beautiful day", "choices": [".", "?", "!"], "correct_answer": "!" }
-    ]
-  },
-  {
-    "lesson": 15,
-    "title": "Combine Sentences",
     "type": "combine_sentences",
-    "goal": "Combine these two sentences using the word!",
+    "goal": "Combine two sentences to make one new sentence.",
     "challenges": [
-      { 
-        "sentences": ["The sun is shining.", "It is warm outside."], 
-        "conjunction": "and", 
-        "correct_answer": "the sun is shining and it is warm outside." 
-      },
-      { 
-        "sentences": ["I like dogs.", "I do not like cats."], 
-        "conjunction": "but", 
-        "correct_answer": "i like dogs but i do not like cats." 
-      }
-    ]
-  },
-  { 
-    "lesson": 16, 
-    "title": "Silly Sentences",
-    "type": "silly_sentences", 
-    "goal": "Make a silly sentence by combining a naming part and a telling part!",
-    "challenges": [
-      { "naming_parts": ["A big banana", "My shoes"], "telling_parts": ["can fly.", "jumps high."] },
-      { "naming_parts": ["The sun", "A tiny worm"], "telling_parts": ["wore a hat.", "sang a song."] }
+        { "sentences": ["The dog is fluffy.", "The dog is happy."], "conjunction": "and", "correct_answer": "The fluffy dog is happy." },
+        { "sentences": ["It is raining.", "We can still play inside."], "conjunction": "but", "correct_answer": "It is raining but we can still play inside." }
     ]
   }
 ]
