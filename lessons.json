@@ -2,7 +2,6 @@
   { 
     "lesson": 1, 
     "type": "sentence_or_not", 
-    "title": "What is a Sentence?",
     "goal": "Is this a complete sentence?",
     "challenges": [
       { "text": "The dog barks.", "isSentence": true },
@@ -17,30 +16,27 @@
   { 
     "lesson": 2, 
     "type": "identify", 
-    "title": "Meet the Naming Part",
     "goal": "Click the Naming Part (who or what the sentence is about).",
     "challenges": [
-      { "sentence": "My mom smiles.", "answer": ["my", "mom"], "key_words": ["mom"] },
-      { "sentence": "The big red ball bounced.", "answer": ["the", "big", "red", "ball"], "key_words": ["ball"] },
-      { "sentence": "A small mouse ran.", "answer": ["a", "small", "mouse"], "key_words": ["mouse"] },
-      { "sentence": "The car stops.", "answer": ["the", "car"], "key_words": ["car"] }
+      { "sentence": "My mom smiles.", "answer": ["my", "mom"] },
+      { "sentence": "The big red ball bounced.", "answer": ["the", "big", "red", "ball"] },
+      { "sentence": "A small mouse ran.", "answer": ["a", "small", "mouse"] },
+      { "sentence": "The car stops.", "answer": ["the", "car"] }
     ]
   },
   { 
     "lesson": 3, 
     "type": "identify", 
-    "title": "Meet the Telling Part",
     "goal": "Click the Telling Part (what the naming part is doing).",
     "challenges": [
-      { "sentence": "The cat naps.", "answer": ["naps"], "key_words": ["naps"] },
-      { "sentence": "My friend is happy.", "answer": ["is", "happy"], "key_words": ["is", "happy"] },
-      { "sentence": "The sun shines.", "answer": ["shines"], "key_words": ["shines"] }
+      { "sentence": "The cat naps.", "answer": ["naps"] },
+      { "sentence": "My friend is happy.", "answer": ["is", "happy"] },
+      { "sentence": "The sun shines.", "answer": ["shines"] }
     ]
   },
   {
     "lesson": 4,
     "type": "scramble",
-    "title": "Put It in Order",
     "goal": "Put the words in the right order!",
     "challenges": [
       { "words": ["we", "play", "outside"], "correct_answer": "we play outside" },
@@ -51,42 +47,124 @@
   { 
     "lesson": 5, 
     "type": "make_it_a_sentence", 
-    "title": "Make It a Sentence!",
     "goal": "Add a word to make a complete sentence!",
     "challenges": [
-        { "incomplete_sentence": "The red apple", "word_type": "verb", "acceptable_answers": ["is on the table", "was big and red"] },
-        { "incomplete_sentence": "Jumps high", "word_type": "noun", "acceptable_answers": ["The boy jumps high", "The girl jumps high"] },
-        { "incomplete_sentence": "The baby", "word_type": "verb", "acceptable_answers": ["The baby sleeps", "The baby cries"] }
+        { "incomplete_sentence": "The red apple", "word_type": "verb", "acceptable_answers": ["The red apple is on the table.", "The red apple drops.", "The red apple rolls."] },
+        { "incomplete_sentence": "Jumps high", "word_type": "noun", "acceptable_answers": ["The boy jumps high.", "My friend jumps high."] },
+        { "incomplete_sentence": "The baby", "word_type": "verb", "acceptable_answers": ["The baby sleeps.", "The baby eats.", "The baby laughs."] }
+    ]
+  },
+  { 
+    "lesson": 6, 
+    "type": "identify", 
+    "goal": "Click the Naming Part.",
+    "challenges": [
+      { "sentence": "The small dog barks.", "answer": ["the", "small", "dog"] },
+      { "sentence": "A huge plane flies.", "answer": ["a", "huge", "plane"] },
+      { "sentence": "My new shoes fit.", "answer": ["my", "new", "shoes"] }
+    ]
+  },
+  { 
+    "lesson": 7, 
+    "type": "identify", 
+    "goal": "Click the Telling Part.",
+    "challenges": [
+      { "sentence": "My mom laughs happily.", "answer": ["laughs", "happily"] },
+      { "sentence": "The big bear sleeps soundly.", "answer": ["sleeps", "soundly"] },
+      { "sentence": "He runs very fast.", "answer": ["runs", "very", "fast"] }
     ]
   },
   {
-    "lesson": 6,
-    "type": "silly_sentences",
-    "title": "Silly Sentences",
-    "goal": "Make a silly sentence by picking a Naming Part and a Telling Part.",
+    "lesson": 8,
+    "type": "scramble",
+    "goal": "Put the words in the right order!",
     "challenges": [
-        { "naming_parts": ["The dog", "My teacher", "The moon", "A chair", "An apple"], "telling_parts": ["can sing.", "flies like a bird.", "eats a pizza.", "can run.", "can read a book."] }
+      { "words": ["the", "happy", "dog", "runs"], "correct_answer": "the happy dog runs" },
+      { "words": ["my", "teacher", "is", "kind"], "correct_answer": "my teacher is kind" },
+      { "words": ["we", "sing", "a", "song"], "correct_answer": "we sing a song" }
+    ]
+  },
+  { 
+    "lesson": 9, 
+    "type": "sentence_or_not", 
+    "goal": "Is this a complete sentence?",
+    "challenges": [
+      { "text": "Up on the roof.", "isSentence": false },
+      { "text": "The mouse ran.", "isSentence": true },
+      { "text": "Walked to the store.", "isSentence": false },
+      { "text": "I can read.", "isSentence": true }
+    ]
+  },
+  { 
+    "lesson": 10, 
+    "type": "make_it_a_sentence", 
+    "goal": "Add a word to make a complete sentence!",
+    "challenges": [
+        { "incomplete_sentence": "The old woman", "word_type": "verb", "acceptable_answers": ["The old woman walks.", "The old woman smiles.", "The old woman talks."] },
+        { "incomplete_sentence": "Sings a song", "word_type": "noun", "acceptable_answers": ["My friend sings a song.", "She sings a song."] }
+    ]
+  },
+  { 
+    "lesson": 11, 
+    "type": "identify", 
+    "goal": "Click the Naming Part.",
+    "challenges": [
+      { "sentence": "My little brother plays.", "answer": ["my", "little", "brother"] },
+      { "sentence": "That big balloon floated.", "answer": ["that", "big", "balloon"] }
+    ]
+  },
+  { 
+    "lesson": 12, 
+    "type": "identify", 
+    "goal": "Click the Telling Part.",
+    "challenges": [
+      { "sentence": "The tall tree sways gently.", "answer": ["sways", "gently"] },
+      { "sentence": "A fast car sped by.", "answer": ["sped", "by"] }
+    ]
+  },
+  {
+    "lesson": 13,
+    "type": "scramble",
+    "goal": "Put the words in the right order!",
+    "challenges": [
+      { "words": ["the", "happy", "little", "girl", "smiles"], "correct_answer": "the happy little girl smiles" },
+      { "words": ["our", "class", "reads", "a", "book"], "correct_answer": "our class reads a book" }
     ]
   },
   {
     "lesson": 14,
     "type": "punctuation_choice",
-    "title": "Sentences with Feelings",
-    "goal": "Choose the correct punctuation to end the sentence.",
+    "goal": "Choose the right punctuation mark for the sentence!",
     "challenges": [
-      { "sentence": "The dog barked loudly", "correct_answer": "!", "choices": [".", "?", "!"] },
-      { "sentence": "Is the boy happy", "correct_answer": "?", "choices": [".", "?", "!"] },
-      { "sentence": "We went to the store", "correct_answer": ".", "choices": [".", "?", "!"] }
+      { "sentence": "I love ice cream", "choices": [".", "?", "!"], "correct_answer": "." },
+      { "sentence": "Are you going home", "choices": [".", "?", "!"], "correct_answer": "?" },
+      { "sentence": "What a beautiful day", "choices": [".", "?", "!"], "correct_answer": "!" }
     ]
   },
   {
-    "lesson": 22,
+    "lesson": 15,
     "type": "combine_sentences",
-    "title": "Combining Sentences",
-    "goal": "Combine two sentences into one using 'and'.",
+    "goal": "Combine these two sentences using the word!",
     "challenges": [
-      { "sentences": ["The cat sat.", "The cat purred."], "conjunction": "and", "correct_answer": "The cat sat and purred." },
-      { "sentences": ["The boy ran.", "The girl jumped."], "conjunction": "and", "correct_answer": "The boy ran and the girl jumped." }
+      { 
+        "sentences": ["The sun is shining.", "It is warm outside."], 
+        "conjunction": "and", 
+        "correct_answer": "the sun is shining and it is warm outside." 
+      },
+      { 
+        "sentences": ["I like dogs.", "I do not like cats."], 
+        "conjunction": "but", 
+        "correct_answer": "i like dogs but i do not like cats." 
+      }
+    ]
+  },
+  { 
+    "lesson": 16, 
+    "type": "silly_sentences", 
+    "goal": "Make a silly sentence by combining a naming part and a telling part!",
+    "challenges": [
+      { "naming_parts": ["A big banana", "My shoes"], "telling_parts": ["can fly.", "jumps high."] },
+      { "naming_parts": ["The sun", "A tiny worm"], "telling_parts": ["wore a hat.", "sang a song."] }
     ]
   }
 ]
