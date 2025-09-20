@@ -1,6 +1,7 @@
 [
   { 
     "lesson": 1, 
+    "title": "What is a Sentence?",
     "type": "sentence_or_not", 
     "goal": "Is this a complete sentence?",
     "challenges": [
@@ -15,6 +16,7 @@
   },
   { 
     "lesson": 2, 
+    "title": "Meet the Naming Part",
     "type": "identify", 
     "goal": "Click the Naming Part (who or what the sentence is about).",
     "challenges": [
@@ -26,6 +28,7 @@
   },
   { 
     "lesson": 3, 
+    "title": "Find the Telling Part",
     "type": "identify", 
     "goal": "Click the Telling Part (what the naming part is doing).",
     "challenges": [
@@ -36,6 +39,7 @@
   },
   {
     "lesson": 4,
+    "title": "Unscramble the Sentence",
     "type": "scramble",
     "goal": "Put the words in the right order!",
     "challenges": [
@@ -46,16 +50,18 @@
   },
   { 
     "lesson": 5, 
+    "title": "Make it a Sentence",
     "type": "make_it_a_sentence", 
     "goal": "Add a word to make a complete sentence!",
     "challenges": [
-        { "incomplete_sentence": "The red apple", "word_type": "verb", "acceptable_answers": ["The red apple is on the table.", "The red apple drops.", "The red apple rolls."] },
-        { "incomplete_sentence": "Jumps high", "word_type": "noun", "acceptable_answers": ["The boy jumps high.", "My friend jumps high."] },
-        { "incomplete_sentence": "The baby", "word_type": "verb", "acceptable_answers": ["The baby sleeps.", "The baby eats.", "The baby laughs."] }
+        { "incomplete_sentence": "The red apple", "word_type": "verb", "acceptable_answers": ["the red apple is on the table.", "the red apple drops.", "the red apple rolls."] },
+        { "incomplete_sentence": "Jumps high", "word_type": "noun", "acceptable_answers": ["the boy jumps high.", "my friend jumps high."] },
+        { "incomplete_sentence": "The baby", "word_type": "verb", "acceptable_answers": ["the baby sleeps.", "the baby eats.", "the baby laughs."] }
     ]
   },
   { 
     "lesson": 6, 
+    "title": "More Naming Parts",
     "type": "identify", 
     "goal": "Click the Naming Part.",
     "challenges": [
@@ -66,6 +72,7 @@
   },
   { 
     "lesson": 7, 
+    "title": "More Telling Parts",
     "type": "identify", 
     "goal": "Click the Telling Part.",
     "challenges": [
@@ -76,6 +83,7 @@
   },
   {
     "lesson": 8,
+    "title": "More Unscrambling",
     "type": "scramble",
     "goal": "Put the words in the right order!",
     "challenges": [
@@ -86,6 +94,7 @@
   },
   { 
     "lesson": 9, 
+    "title": "Is it a Sentence? (Part 2)",
     "type": "sentence_or_not", 
     "goal": "Is this a complete sentence?",
     "challenges": [
@@ -97,15 +106,17 @@
   },
   { 
     "lesson": 10, 
+    "title": "More Sentence Building",
     "type": "make_it_a_sentence", 
     "goal": "Add a word to make a complete sentence!",
     "challenges": [
-        { "incomplete_sentence": "The old woman", "word_type": "verb", "acceptable_answers": ["The old woman walks.", "The old woman smiles.", "The old woman talks."] },
-        { "incomplete_sentence": "Sings a song", "word_type": "noun", "acceptable_answers": ["My friend sings a song.", "She sings a song."] }
+        { "incomplete_sentence": "The old woman", "word_type": "verb", "acceptable_answers": ["the old woman walks.", "the old woman smiles.", "the old woman talks."] },
+        { "incomplete_sentence": "Sings a song", "word_type": "noun", "acceptable_answers": ["my friend sings a song.", "she sings a song."] }
     ]
   },
   { 
     "lesson": 11, 
+    "title": "Advanced Naming Parts",
     "type": "identify", 
     "goal": "Click the Naming Part.",
     "challenges": [
@@ -115,6 +126,7 @@
   },
   { 
     "lesson": 12, 
+    "title": "Advanced Telling Parts",
     "type": "identify", 
     "goal": "Click the Telling Part.",
     "challenges": [
@@ -124,6 +136,7 @@
   },
   {
     "lesson": 13,
+    "title": "Advanced Unscrambling",
     "type": "scramble",
     "goal": "Put the words in the right order!",
     "challenges": [
@@ -133,6 +146,7 @@
   },
   {
     "lesson": 14,
+    "title": "Punctuation Practice",
     "type": "punctuation_choice",
     "goal": "Choose the right punctuation mark for the sentence!",
     "challenges": [
@@ -143,6 +157,7 @@
   },
   {
     "lesson": 15,
+    "title": "Combine Sentences",
     "type": "combine_sentences",
     "goal": "Combine these two sentences using the word!",
     "challenges": [
@@ -160,6 +175,7 @@
   },
   { 
     "lesson": 16, 
+    "title": "Silly Sentences",
     "type": "silly_sentences", 
     "goal": "Make a silly sentence by combining a naming part and a telling part!",
     "challenges": [
