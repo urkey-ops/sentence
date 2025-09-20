@@ -14,58 +14,34 @@
 <body class="bg-gradient-to-br from-indigo-200 via-purple-100 to-pink-200 min-h-screen flex items-center justify-center p-4 font-display">
 
     <div id="introScreen" class="w-full max-w-4xl mx-auto flex flex-col items-center justify-center gap-6 p-8 bg-white/70 backdrop-blur-lg rounded-[2.5rem] shadow-xl">
-        <h2 class="text-4xl md:text-5xl font-extrabold text-center text-gray-800 animate-fade-in-down">Welcome, Sentence Builder!</h2>
-        <p class="text-lg md:text-xl text-center text-gray-600">Let's learn the 5 steps to writing a super sentence!</p>
-        <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mt-4">
-            <div class="text-center">
-                <i class="fas fa-comment-dots text-4xl text-purple-600 mb-2"></i>
-                <p>1. Say it!</p>
-            </div>
-            <div class="text-center">
-                <i class="fas fa-font text-4xl text-pink-600 mb-2"></i>
-                <p>2. Capital!</p>
-            </div>
-            <div class="text-center">
-                <i class="fas fa-ruler-horizontal text-4xl text-yellow-600 mb-2"></i>
-                <p>3. Space!</p>
-            </div>
-            <div class="text-center">
-                <i class="fas fa-stop-circle text-4xl text-green-600 mb-2"></i>
-                <p>4. End it!</p>
-            </div>
-            <div class="text-center">
-                <i class="fas fa-book-open text-4xl text-blue-600 mb-2"></i>
-                <p>5. Read it!</p>
-            </div>
-        </div>
-        <button id="startLessonsBtn" class="base-button bg-pink-500 hover:bg-pink-600 text-white shadow-lg animate-fade-in-up">Start Lessons!</button>
+        <h2 class="text-4xl md:text-5xl font-extrabold text-center text-gray-800 animate-fade-in">Sentence Learning Journey!</h2>
+        <p class="text-lg md:text-xl text-center text-gray-600 animate-fade-in-delay">Start your adventure to become a master sentence builder!</p>
+        <button id="startLessonsBtn" class="action-button animate-fade-in-delay-more">Start Lessons <i class="fas fa-arrow-right"></i></button>
     </div>
 
-    <div id="themeSelector" class="w-full max-w-4xl mx-auto hidden">
-        </div>
-
-    <div id="lessonSelector" class="w-full max-w-4xl mx-auto p-8 bg-white/70 backdrop-blur-lg rounded-[2.5rem] shadow-xl hidden">
-        <h2 class="text-3xl md:text-4xl font-extrabold text-center text-gray-800 mb-6">Choose a Lesson</h2>
-        <div id="lessonButtonsContainer" class="grid grid-cols-2 md:grid-cols-3 gap-4">
+    <div id="lessonSelector" class="hidden w-full max-w-4xl mx-auto flex flex-col items-center gap-6 p-8 bg-white/70 backdrop-blur-lg rounded-[2.5rem] shadow-xl">
+        <h2 class="text-4xl md:text-5xl font-extrabold text-center text-gray-800">Choose a Lesson</h2>
+        <div id="lessonButtonsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full">
             </div>
     </div>
 
-    <div id="lessonView" class="w-full max-w-4xl mx-auto p-8 bg-white/70 backdrop-blur-lg rounded-[2.5rem] shadow-xl hidden">
-        <button id="backToLessonsBtn" class="base-button text-gray-600 hover:text-gray-800 mb-4 self-start"><i class="fas fa-arrow-left"></i> Back to Lessons</button>
-        <h3 id="lessonTitle" class="text-xl md:text-2xl font-bold text-center text-gray-800 mb-2"></h3>
-        <p id="lessonGoalDisplay" class="text-lg md:text-xl text-center text-gray-600 mb-6"></p>
-
-        <div id="interactiveContainer" class="flex flex-col items-center justify-center gap-6">
-            <div id="sentenceDisplay" class="bg-gray-100 p-4 rounded-xl shadow-inner min-h-[60px] flex items-center justify-center">
-                <p id="lessonDisplay" class="text-xl md:text-2xl font-semibold text-center text-gray-800"></p>
-                <p id="placeholderText" class="text-xl md:text-2xl font-semibold text-center text-gray-400">Your sentence goes here...</p>
-            </div>
+    <div id="lessonView" class="hidden w-full max-w-4xl mx-auto flex flex-col items-center gap-6 p-8 bg-white/70 backdrop-blur-lg rounded-[2.5rem] shadow-xl">
+        <div class="flex flex-col items-center text-center">
+            <h3 id="lessonTitle" class="text-3xl md:text-4xl font-extrabold text-purple-700"></h3>
+            <p id="lessonGoalDisplay" class="text-xl md:text-2xl text-pink-600 font-semibold mt-2"></p>
         </div>
-
+        
+        <div id="lessonDisplay" class="bg-gray-100 p-4 rounded-xl shadow-inner min-h-[60px] flex items-center justify-center">
+            </div>
+        
+        <div id="interactiveContainer" class="flex flex-wrap justify-center gap-4 mt-6">
+            </div>
+        
         <div class="flex flex-wrap justify-center gap-4 mt-4">
             <button id="submitBtn" class="action-button hidden"><i class="fas fa-check"></i> Check Answer</button>
             <button id="clearBtn" class="clear-button hidden"><i class="fas fa-eraser"></i> Clear</button>
-            <button id="nextBtn" class="action-button hidden">Next Lesson <i class="fas fa-arrow-right"></i></button>
+            <button id="nextBtn" class="action-button hidden">Next Challenge <i class="fas fa-arrow-right"></i></button>
+            <button id="backToLessonsBtn" class="back-button hidden">Back to Lessons</button>
         </div>
 
         <div class="flex flex-row flex-wrap justify-center gap-4 mt-8 text-center text-gray-600">
@@ -73,13 +49,12 @@
             <div id="step-capital" class="flex flex-col items-center gap-2 text-xl hidden"><i class="fas fa-font text-2xl text-pink-600"></i>Capital!</div>
             <div id="step-space" class="flex flex-col items-center gap-2 text-xl hidden"><i class="fas fa-ruler-horizontal text-2xl text-yellow-600"></i>Space!</div>
             <div id="step-end" class="flex flex-col items-center gap-2 text-xl hidden"><i class="fas fa-stop-circle text-2xl text-green-600"></i>End it!</div>
-            <div id="step-read" class="flex flex-col items-center gap-2 text-xl hidden"><i class="fas fa-book-open text-2xl text-blue-600"></i>Read it!</div>
+            <div id="step-read" class="flex flex-col items-center gap-2 text-xl hidden"><i class="fas fa-book-reader text-2xl text-blue-600"></i>Read it!</div>
         </div>
     </div>
-
+    
     <div id="messageBox" class="message-box"></div>
 
     <script src="script.js"></script>
-    <script src="lessons.json"></script>
 </body>
 </html>
