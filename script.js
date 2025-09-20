@@ -34,7 +34,8 @@ class App {
         };
         this.messageTimeout = null;
 
-        this._addEventListeners();
+        // The only change: We no longer call _addEventListeners directly here.
+        // Instead, we call the async load function, which will handle the rest.
         this._loadLessonsFile();
     }
 
@@ -44,6 +45,33 @@ class App {
         this.elements.submitBtn.addEventListener('click', () => this._handleSubmit());
         this.elements.nextBtn.addEventListener('click', () => this._handleNext());
         this.elements.clearBtn.addEventListener('click', () => this._handleClear());
+    }
+
+    _loadLessonsFile() {
+        fetch('lessons.json')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                this.lessons = data;
+                this._initialize(); // Now we call the initialization method
+            })
+            .catch(error => console.error('Error loading lessons:', error));
+    }
+    
+    _initialize() {
+        // This method is called ONLY after lessons.json has been loaded successfully.
+        this._addEventListeners();
+        this._showIntroScreen();
+    }
+
+    _showIntroScreen() {
+        this.elements.introScreen.classList.remove('hidden');
+        this.elements.lessonSelector.classList.add('hidden');
+        this.elements.lessonView.classList.add('hidden');
     }
 
     _showLessonSelector() {
@@ -57,29 +85,13 @@ class App {
         this._loadLessonButtons();
     }
 
-    _loadLessonsFile() {
-        fetch('lessons.json')
-            .then(response => response.json())
-            .then(data => {
-                this.lessons = data;
-                this._showIntroScreen();
-            })
-            .catch(error => console.error('Error loading lessons:', error));
-    }
-
-    _showIntroScreen() {
-        this.elements.introScreen.classList.remove('hidden');
-        this.elements.lessonSelector.classList.add('hidden');
-        this.elements.lessonView.classList.add('hidden');
-    }
-
     _loadLessonButtons() {
         const container = document.getElementById('lessonButtonsContainer');
         container.innerHTML = '';
         this.lessons.forEach((lesson, index) => {
             const button = document.createElement('button');
             button.classList.add('lesson-button', 'squircle');
-            button.textContent = `Lesson ${lesson.lesson}: ${lesson.title}`; // Use the new 'title' property
+            button.textContent = `Lesson ${lesson.lesson}: ${lesson.title}`;
             button.addEventListener('click', () => this._startLesson(index));
             container.appendChild(button);
         });
@@ -104,12 +116,12 @@ class App {
         this.elements.lessonTitle.textContent = `Lesson ${currentLesson.lesson}: ${currentLesson.title}`;
         this.elements.lessonGoalDisplay.textContent = currentLesson.goal;
         
-        // Shuffle challenges for replayability
         currentLesson.challenges = this._shuffleArray(currentLesson.challenges);
 
         this._renderChallenge();
     }
 
+    // --- RENDER FUNCTIONS FOR EACH LESSON TYPE ---
     _renderChallenge() {
         this.state.currentSentenceArray = [];
         this.elements.placeholderText.style.display = 'block';
@@ -144,8 +156,7 @@ class App {
                 break;
         }
     }
-
-    // --- RENDER FUNCTIONS FOR EACH LESSON TYPE ---
+    
     _renderSentenceOrNotChallenge(challenge) {
         const trueBtn = document.createElement('button');
         trueBtn.textContent = 'Yes, it is!';
@@ -350,13 +361,11 @@ class App {
         const correctAnswers = challenge.answer;
         const keyWords = challenge.key_words;
     
-        // 1. Check if user's selection is a subset of the correct answer
         const isSubset = userAnswer.every(word => correctAnswers.includes(word));
         if (!isSubset) {
             return false;
         }
     
-        // 2. Check if the user's selection contains all the required key words
         const hasKeyWords = keyWords.every(keyWord => userAnswer.includes(keyWord));
         return hasKeyWords;
     }
@@ -384,7 +393,7 @@ class App {
     _handlePunctuationChoice(userChoice, correctAnswer) {
         const isCorrect = userChoice === correctAnswer;
         if (isCorrect) {
-            this._showMessage('Correct! That's a feeling sentence.', 'success', 3000);
+            this._showMessage('Correct! That\'s a feeling sentence.', 'success', 3000);
             this.elements.nextBtn.classList.remove('hidden');
         } else {
             this._showMessage('Not quite, try again.', 'failure', 3000);
