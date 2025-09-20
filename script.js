@@ -212,7 +212,7 @@
             const wordsToAdd = this.wordBankData.words[challenge.word_type];
 
             this._shuffleArray(wordsToAdd).forEach(word => {
-                const button = this._createButton(word, 'word-button', () => this._selectWord(button, word.toLowerCase()));
+                const button = this._createButton(word, 'word-button', () => this._selectWord(button, word, challenge.incomplete_sentence));
                 wordBank.appendChild(button);
             });
 
@@ -288,11 +288,21 @@
             this.elements.submitBtn.classList.remove('hidden');
         }
 
-        _selectWord(button, word) {
-            this.state.currentSentenceArray.push(word);
+        // --- CORRECTED LOGIC FOR LESSON 5 ---
+        _selectWord(button, word, incompleteSentence) {
+            const currentLesson = this.lessons[this.state.currentLessonIndex];
+            
+            // For Lesson 5, append the selected word to the incomplete sentence.
+            if (currentLesson.type === 'make_it_a_sentence') {
+                this.state.currentSentenceArray = [incompleteSentence, word];
+            } else {
+                this.state.currentSentenceArray.push(word);
+            }
+            
             this._updateLessonDisplay(this.state.currentSentenceArray.join(' '));
             button.disabled = true;
         }
+        // --- END CORRECTION ---
         
         _selectSillyPart(button, part, type) {
             const otherButtons = button.parentElement.querySelectorAll('button');
@@ -355,11 +365,14 @@
             return userAnswer === challenge.correct_answer.toLowerCase();
         }
         
+        // --- CORRECTED LOGIC FOR LESSON 5 ---
         _checkMakeItASentence(challenge) {
-            const fullSentence = `${challenge.incomplete_sentence.toLowerCase().replace(/\s*$/, ' ')}${this.state.currentSentenceArray.join(' ').toLowerCase().trim()}`;
-            return challenge.acceptable_answers.some(answer => fullSentence.trim() === answer.toLowerCase().trim());
+            const fullSentence = this.state.currentSentenceArray.join(' ').trim();
+            const correctAnswer = challenge.correct_answer.trim();
+            return fullSentence.toLowerCase() === correctAnswer.toLowerCase();
         }
-        
+        // --- END CORRECTION ---
+
         _handleSentenceOrNot(userChoice, isCorrectSentence) {
             const isCorrect = userChoice === isCorrectSentence;
             if (isCorrect) {
@@ -395,7 +408,16 @@
             this.state.currentSentenceArray = [];
             this.state.namingPart = '';
             this.state.tellingPart = '';
-            this._updateLessonDisplay('');
+            
+            const currentLesson = this.lessons[this.state.currentLessonIndex];
+            const currentChallenge = currentLesson.challenges[this.state.currentChallengeIndex];
+            
+            // Added check for incomplete sentence
+            if (currentLesson.type === 'make_it_a_sentence') {
+                this._updateLessonDisplay(currentChallenge.incomplete_sentence);
+            } else {
+                 this._updateLessonDisplay('');
+            }
             
             const wordButtons = this.elements.interactiveContainer.querySelectorAll('.word-button');
             wordButtons.forEach(button => {
