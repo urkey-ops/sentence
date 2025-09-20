@@ -1,7 +1,8 @@
 [
-  { 
-    "lesson": 1, 
-    "type": "sentence_or_not", 
+  {
+    "lesson": 1,
+    "title": "What is a Sentence?",
+    "type": "sentence_or_not",
     "goal": "Is this a complete sentence?",
     "challenges": [
       { "text": "The dog barks.", "isSentence": true },
@@ -13,26 +14,22 @@
       { "text": "The boy runs fast.", "isSentence": true }
     ]
   },
-  { 
-    "lesson": 2, 
-    "type": "identify", 
+  {
+    "lesson": 2,
+    "title": "The Naming Part",
+    "type": "identify",
     "goal": "Click the Naming Part (who or what the sentence is about).",
     "challenges": [
       { "sentence": "My mom smiles.", "answer": ["my", "mom"] },
       { "sentence": "The big red ball bounced.", "answer": ["the", "big", "red", "ball"] },
       { "sentence": "A small mouse ran.", "answer": ["a", "small", "mouse"] },
       { "sentence": "The car stops.", "answer": ["the", "car"] }
-       { "sentence": "The boy runs fast", "answer": ["the", "boy"] }
-       { "sentence": "The sun is hot", "answer": ["the", "sun"] }
-       { "sentence": "My puppy likes to play.", "answer": ["my", "puppy"] }
-       { "sentence": "The girl reads.", "answer": ["the", "girl"] }
-      
-
     ]
   },
-  { 
-    "lesson": 3, 
-    "type": "identify", 
+  {
+    "lesson": 3,
+    "title": "The Telling Part",
+    "type": "identify",
     "goal": "Click the Telling Part (what the naming part is doing).",
     "challenges": [
       { "sentence": "The cat naps.", "answer": ["naps"] },
@@ -42,6 +39,7 @@
   },
   {
     "lesson": 4,
+    "title": "Scrambled Sentences",
     "type": "scramble",
     "goal": "Put the words in the right order!",
     "challenges": [
@@ -50,9 +48,10 @@
       { "words": ["i", "go", "to", "school"] }
     ]
   },
-  { 
-    "lesson": 5, 
-    "type": "make_it_a_sentence", 
+  {
+    "lesson": 5,
+    "title": "Complete the Sentence",
+    "type": "make_it_a_sentence",
     "goal": "Add a word to make a complete sentence!",
     "challenges": [
         { "incomplete_sentence": "The red apple", "word_type": "verb", "correct_answer": "The red apple is on the table." },
@@ -60,9 +59,10 @@
         { "incomplete_sentence": "The baby", "word_type": "verb", "correct_answer": "The baby sleeps soundly." }
     ]
   },
-  { 
-    "lesson": 6, 
-    "type": "silly_sentences", 
+  {
+    "lesson": 6,
+    "title": "Silly Sentences",
+    "type": "silly_sentences",
     "goal": "Make a silly sentence by picking a naming and telling part!",
     "challenges": [
         { "naming_parts": ["The fluffy cat", "My robot friend", "A tiny wizard"], "telling_parts": ["danced on the moon.", "ate a giant cookie.", "flew through the sky."] },
@@ -71,6 +71,7 @@
   },
   {
     "lesson": 7,
+    "title": "Punctuation!",
     "type": "punctuation_choice",
     "goal": "Choose the correct punctuation mark for the sentence.",
     "challenges": [
@@ -81,6 +82,7 @@
   },
   {
     "lesson": 8,
+    "title": "Combine Sentences",
     "type": "combine_sentences",
     "goal": "Combine two sentences to make one new sentence.",
     "challenges": [
