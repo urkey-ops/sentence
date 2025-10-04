@@ -4,53 +4,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sentence Learning Journey</title>
-    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
-<body class="bg-gradient-to-br from-indigo-200 via-purple-100 to-pink-200 min-h-screen flex items-center justify-center p-4 font-display">
+<body>
 
-    <div id="introScreen" class="w-full max-w-4xl mx-auto flex flex-col items-center justify-center gap-6 p-8 bg-white/70 backdrop-blur-lg rounded-[2.5rem] shadow-xl">
-        <h2 class="text-4xl md:text-5xl font-extrabold text-center text-gray-800 animate-fade-in">Sentence Learning Journey!</h2>
-        <p class="text-lg md:text-xl text-center text-gray-600 animate-fade-in-delay">Start your adventure to become a master sentence builder!</p>
-        <button id="startLessonsBtn" class="action-button animate-fade-in-delay-more">Start Lessons <i class="fas fa-arrow-right"></i></button>
+    <div id="introScreen" class="main-screen">
+        <h2>Sentence Learning Journey!</h2>
+        <p class="intro-text">Start your adventure to become a master sentence builder!</p>
+        <button id="startLessonsBtn" class="action-button">Start Lessons <i class="fas fa-arrow-right"></i></button>
     </div>
 
-    <div id="lessonSelector" class="hidden w-full max-w-4xl mx-auto flex flex-col items-center gap-6 p-8 bg-white/70 backdrop-blur-lg rounded-[2.5rem] shadow-xl">
-        <h2 class="text-4xl md:text-5xl font-extrabold text-center text-gray-800">Choose a Lesson</h2>
-        <div id="lessonButtonsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full">
+    <div id="lessonSelector" class="hidden main-screen lesson-selector">
+        <h2>Choose a Lesson</h2>
+        <div id="lessonButtonsContainer" class="lesson-buttons-grid">
             </div>
     </div>
 
-    <div id="lessonView" class="hidden w-full max-w-4xl mx-auto flex flex-col items-center gap-6 p-8 bg-white/70 backdrop-blur-lg rounded-[2.5rem] shadow-xl">
-        <div class="flex flex-col items-center text-center">
-            <h3 id="lessonTitle" class="text-3xl md:text-4xl font-extrabold text-purple-700"></h3>
-            <p id="lessonGoalDisplay" class="text-xl md:text-2xl text-pink-600 font-semibold mt-2"></p>
-            <span id="progressIndicator" class="text-md text-gray-500 mt-1"></span>
+    <div id="lessonView" class="hidden main-screen lesson-view">
+        <div class="view-header">
+            <h3 id="lessonTitle"></h3>
+            <p id="lessonGoalDisplay" class="lesson-goal"></p>
+            <span id="progressIndicator" class="progress-indicator"></span>
         </div>
         
-        <div id="lessonDisplay" class="bg-gray-100 p-4 rounded-xl shadow-inner min-h-[60px] flex items-center justify-center">
+        <div id="lessonDisplay" class="lesson-display-box">
             </div>
         
-        <div id="interactiveContainer" class="flex flex-wrap justify-center gap-4 mt-6">
+        <div id="interactiveContainer" class="interactive-container">
             </div>
         
-        <div class="flex flex-wrap justify-center gap-4 mt-4">
+        <div class="control-buttons-group">
             <button id="submitBtn" class="action-button hidden"><i class="fas fa-check"></i> Check Answer</button>
             <button id="clearBtn" class="clear-button hidden"><i class="fas fa-eraser"></i> Clear</button>
             <button id="nextBtn" class="action-button hidden">Next Challenge <i class="fas fa-arrow-right"></i></button>
             <button id="backToLessonsBtn" class="back-button hidden">Back to Lessons</button>
         </div>
 
-        <div class="flex flex-row flex-wrap justify-center gap-4 mt-8 text-center text-gray-600">
-            <div id="step-say" class="flex flex-col items-center gap-2 text-xl hidden"><i class="fas fa-comment-dots text-2xl text-purple-600"></i>Say it!</div>
-            <div id="step-capital" class="flex flex-col items-center gap-2 text-xl hidden"><i class="fas fa-font text-2xl text-pink-600"></i>Capital!</div>
-            <div id="step-space" class="flex flex-col items-center gap-2 text-xl hidden"><i class="fas fa-ruler-horizontal text-2xl text-yellow-600"></i>Space!</div>
-            <div id="step-end" class="flex flex-col items-center gap-2 text-xl hidden"><i class="fas fa-stop-circle text-2xl text-green-600"></i>End it!</div>
-            <div id="step-read" class="flex flex-col items-center gap-2 text-xl hidden"><i class="fas fa-book-reader text-2xl text-blue-600"></i>Read it!</div>
+        <div class="hidden-steps-container">
+            <div id="step-say" class="hidden step-tip"><i class="fas fa-comment-dots"></i>Say it!</div>
+            <div id="step-capital" class="hidden step-tip"><i class="fas fa-font"></i>Capital!</div>
+            <div id="step-space" class="hidden step-tip"><i class="fas fa-ruler-horizontal"></i>Space!</div>
+            <div id="step-end" class="hidden step-tip"><i class="fas fa-stop-circle"></i>End it!</div>
+            <div id="step-read" class="hidden step-tip"><i class="fas fa-book-reader"></i>Read it!</div>
         </div>
     </div>
     
