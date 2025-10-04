@@ -1,15 +1,15 @@
 :root {
   /* A fresh, vibrant, and cohesive color palette */
-  --color-primary: #5c6bc0; /* Soft Blue */
-  --color-secondary: #8e2de2; /* Soft Purple */
-  --color-tertiary: #a8e6a1; /* Soft Green */
+  --color-primary: #42a5f5; /* Sky Blue (Brighter) */
+  --color-secondary: #7e57c2; /* Bright Purple (Richer) */
+  --color-tertiary: #81c784; /* Vibrant Green (Richer) */
   --color-background-1: #eef2f3; /* Very light grey */
   --color-background-2: #ffffff; /* Clean white for cards */
   --color-text-dark: #333333;
   --color-text-light: #ffffff;
   --color-shadow-light: rgba(0, 0, 0, 0.08);
-  --color-purple-light: #e9d5ff; /* bg-purple-200 equivalent */
-  --color-pink-light: #fbcfe8; /* bg-pink-200 equivalent */
+  --color-purple-light: #d1c4e9; /* Naming Part BG */
+  --color-pink-light: #f8bbd0; /* Telling Part BG */
 
   --font-display: 'Comic Neue', cursive;
 }
@@ -23,9 +23,11 @@
 
 body {
   font-family: var(--font-display);
-  background: linear-gradient(135deg, #e0eafc, #cfdef3);
+  /* Brighter background gradient */
+  background: linear-gradient(135deg, #e1f5fe, #bbdefb);
   background-size: 300% 300%;
-  animation: gradient-shift 20s ease infinite; 
+  /* Faster, more energetic animation */
+  animation: gradient-shift 15s ease infinite; 
   font-size: 1.25rem;
   margin: 0;
   padding: 0;
@@ -71,9 +73,11 @@ p {
 /* Main UI Containers - Soft, elegant card-like appearance */
 #introScreen, #lessonSelector, #lessonView {
   background-color: var(--color-background-2);
-  border: 1px solid rgba(0,0,0,0.1);
+  /* Enhanced "Sticker" effect with a thicker border */
+  border: 3px solid var(--color-text-dark); 
   border-radius: 2.5rem;
-  box-shadow: 0 4px 8px var(--color-shadow-light);
+  /* Lifted shadow for more pop */
+  box-shadow: 0 8px 15px var(--color-shadow-light); 
   transition: transform 0.3s ease;
 }
 
@@ -111,10 +115,12 @@ p {
   line-height: 1.2; 
   gap: 0.5rem;
   transform: translateY(0);
+  /* Added text shadow for "puffy" pop effect */
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.1); 
 }
 
 .base-button:hover {
-  box-shadow: 0 0 10px rgba(142, 45, 226, 0.4); 
+  box-shadow: 0 0 10px rgba(126, 87, 194, 0.4); /* Used brighter secondary color for hover effect */
   transform: translateY(-2px);
 }
 
@@ -125,11 +131,13 @@ p {
 .action-button {
   background: var(--color-primary);
   color: var(--color-text-light);
-  box-shadow: 0 4px 0 rgba(92, 107, 192, 0.8);
+  /* Deeper "squishy" shadow */
+  box-shadow: 0 6px 0 rgba(66, 165, 245, 0.9);
 }
 
 .action-button:active {
-  box-shadow: 0 2px 0 rgba(92, 107, 192, 0.8);
+  /* Button sinks deeper */
+  box-shadow: 0 2px 0 rgba(66, 165, 245, 0.9);
 }
 
 .clear-button {
@@ -142,21 +150,25 @@ p {
 .back-button {
   background: var(--color-secondary);
   color: var(--color-text-light);
-  box-shadow: 0 4px 0 rgba(142, 45, 226, 0.8);
+  /* Deeper "squishy" shadow */
+  box-shadow: 0 6px 0 rgba(126, 87, 194, 0.9);
 }
 
 .back-button:active {
-  box-shadow: 0 2px 0 rgba(142, 45, 226, 0.8);
+  /* Button sinks deeper */
+  box-shadow: 0 2px 0 rgba(126, 87, 194, 0.9);
 }
 
 .lesson-button {
   background: var(--color-tertiary);
   color: var(--color-text-dark); 
-  box-shadow: 0 4px 0 rgba(168, 230, 161, 0.8);
+  /* Deeper "squishy" shadow */
+  box-shadow: 0 6px 0 rgba(129, 199, 132, 0.9);
 }
 
 .lesson-button:active {
-  box-shadow: 0 2px 0 rgba(168, 230, 161, 0.8);
+  /* Button sinks deeper */
+  box-shadow: 0 2px 0 rgba(129, 199, 132, 0.9);
 }
 
 /* Word Bank Layout and Style */
@@ -199,17 +211,19 @@ p {
   font-size: 2.5rem;
   padding: 0;
   border: none;
-  box-shadow: 0 4px 0 rgba(142, 45, 226, 0.8);
+  /* Deeper "squishy" shadow */
+  box-shadow: 0 6px 0 rgba(126, 87, 194, 0.9);
 }
 
 .punctuation-button:active {
-  box-shadow: 0 2px 0 rgba(142, 45, 226, 0.8);
+  /* Button sinks deeper */
+  box-shadow: 0 2px 0 rgba(126, 87, 194, 0.9);
 }
 
 /* Focus States for Accessibility */
 .base-button:focus,
 .word-button:focus {
-  outline: 3px solid rgba(142, 45, 226, 0.6);
+  outline: 3px solid rgba(126, 87, 194, 0.6);
   outline-offset: 2px;
 }
 
@@ -236,9 +250,10 @@ p {
 }
 
 .message-box.success {
-  background: linear-gradient(135deg, #d8fcd6, #a8e6a1);
+  background: linear-gradient(135deg, #d8fcd6, var(--color-tertiary));
   color: #164e3b;
-  animation: fadeIn 0.5s ease;
+  /* Enhanced bouncy animation for success */
+  animation: successPop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 }
 
 .message-box.failure {
@@ -250,6 +265,11 @@ p {
 @keyframes fadeIn {
     from { opacity: 0; transform: translateX(-50%) scale(0.95); }
     to { opacity: 1; transform: translateX(-50%) scale(1); }
+}
+@keyframes successPop {
+    0% { opacity: 0; transform: translateX(-50%) scale(0.5); }
+    80% { opacity: 1; transform: translateX(-50%) scale(1.1); }
+    100% { opacity: 1; transform: translateX(-50%) scale(1); }
 }
 
 /* --- Semantic UI Classes --- */
@@ -371,76 +391,76 @@ p {
 
 /* Silly Sentences Challenge */
 .silly-sentences-container {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
 }
 @media (min-width: 768px) { 
-  .silly-sentences-container {
-    flex-direction: row;
-  }
+    .silly-sentences-container {
+        flex-direction: row;
+    }
 }
 
 .silly-sentences-column {
-  padding: 1.5rem;
-  border-radius: 1.5rem;
-  flex: 1;
-  text-align: center;
+    padding: 1.5rem;
+    border-radius: 1.5rem;
+    flex: 1;
+    text-align: center;
 }
 
 .naming-part-column {
-  background-color: var(--color-purple-light); 
+    background-color: var(--color-purple-light); 
 }
 
 .telling-part-column {
-  background-color: var(--color-pink-light); 
+    background-color: var(--color-pink-light); 
 }
 
 .column-title {
-  font-size: 1.25rem; 
-  font-weight: bold;
-  margin-bottom: 0.5rem; 
+    font-size: 1.25rem; 
+    font-weight: bold;
+    margin-bottom: 0.5rem; 
 }
 
 /* Punctuation Choices Container */
 .punctuation-choices-container {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
 }
 
 /* Combine Sentences Challenge */
 .combine-sentences-display {
-  text-align: center;
+    text-align: center;
 }
 
 .combine-sentence-part {
-  font-size: 1.25rem; 
-  margin-top: 0.5rem; 
-  margin-bottom: 0.5rem; 
+    font-size: 1.25rem; 
+    margin-top: 0.5rem; 
+    margin-bottom: 0.5rem; 
 }
 
 .combine-conjunction {
-  font-size: 1.5rem; 
-  font-weight: bold;
-  color: #7c3aed; 
+    font-size: 1.5rem; 
+    font-weight: bold;
+    color: #7c3aed; 
 }
 
 .combine-input {
-  width: 100%;
-  background-color: #f7f7f7; 
-  padding: 1rem;
-  border-radius: 0.75rem; 
-  box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06); 
-  min-height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 1rem;
-  font-size: 1.5rem;
-  font-family: var(--font-display);
-  resize: vertical; 
-  border: 1px solid #d1d5db; 
+    width: 100%;
+    background-color: #f7f7f7; 
+    padding: 1rem;
+    border-radius: 0.75rem; 
+    box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06); 
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
+    font-size: 1.5rem;
+    font-family: var(--font-display);
+    resize: vertical; 
+    border: 1px solid #d1d5db; 
 }
