@@ -23,6 +23,11 @@ body {
   margin: 0;
   padding: 0;
   color: var(--color-text-dark);
+  min-height: 100vh;
+  display: flex; /* Added for layout */
+  align-items: center; /* Added for layout */
+  justify-content: center; /* Added for layout */
+  padding: 1rem; /* Added for layout */
 }
 
 @keyframes gradient-shift {
@@ -123,7 +128,7 @@ p {
 
 .lesson-button {
   background: var(--color-tertiary);
-  color: var(--color-text-dark); /* Changed to dark text for better contrast on light green */
+  color: var(--color-text-dark); 
   box-shadow: 0 4px 0 rgba(168, 230, 161, 0.8);
 }
 
@@ -225,12 +230,130 @@ p {
 }
 
 /* ----------------------------------------------------------------- */
-/* NEW SEMANTIC CLASSES EXTRACTED FROM JAVASCRIPT */
+/* NEW SEMANTIC CLASSES EXTRACTED FROM JAVASCRIPT AND HTML */
 /* ----------------------------------------------------------------- */
+
+/* Main Containers (Replacing all those Tailwind classes on the primary divs) */
+.main-screen {
+    /* w-full max-w-4xl mx-auto flex flex-col items-center justify-center gap-6 p-8 */
+    width: 100%;
+    max-width: 900px; /* Equivalent to max-w-4xl */
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem; /* gap-6 */
+    padding: 2rem; /* p-8 */
+}
+
+.intro-text {
+    /* text-lg md:text-xl text-center text-gray-600 */
+    text-align: center;
+    color: #4b5563; /* text-gray-600 */
+}
+
+.lesson-selector .lesson-buttons-grid {
+    /* grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full */
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    width: 100%;
+}
+@media (min-width: 768px) {
+    .lesson-selector .lesson-buttons-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media (min-width: 1024px) {
+    .lesson-selector .lesson-buttons-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Lesson View Structure */
+.view-header {
+    /* flex flex-col items-center text-center */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.lesson-goal {
+    /* text-xl md:text-2xl text-pink-600 font-semibold mt-2 */
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #db2777; /* text-pink-600 */
+    margin-top: 0.5rem;
+}
+
+.progress-indicator {
+    /* text-md text-gray-500 mt-1 */
+    font-size: 1rem;
+    color: #6b7280; /* text-gray-500 */
+    margin-top: 0.25rem;
+}
+
+.lesson-display-box {
+    /* bg-gray-100 p-4 rounded-xl shadow-inner min-h-[60px] flex items-center justify-center */
+    background-color: #f3f4f6; /* bg-gray-100 */
+    padding: 1rem;
+    border-radius: 0.75rem; /* rounded-xl */
+    box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06); /* shadow-inner */
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.interactive-container {
+    /* flex flex-wrap justify-center gap-4 mt-6 */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    width: 100%;
+}
+
+.control-buttons-group {
+    /* flex flex-wrap justify-center gap-4 mt-4 */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+/* Hidden Steps/Tips */
+.hidden-steps-container {
+    /* flex flex-row flex-wrap justify-center gap-4 mt-8 text-center text-gray-600 */
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+    text-align: center;
+    color: #4b5563; /* text-gray-600 */
+}
+
+.step-tip {
+    /* flex flex-col items-center gap-2 text-xl */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.25rem; /* text-xl */
+}
+.step-tip i {
+    font-size: 1.5rem; /* Icon size */
+}
 
 /* Lesson Display Area */
 #lessonDisplay {
-  /* Added base styles for the lesson display container */
   min-height: 60px;
   display: flex;
   align-items: center;
@@ -240,13 +363,13 @@ p {
 }
 
 .lesson-display-text {
-  font-size: 1.5rem; /* Equivalent to md:text-2xl (higher end of text-xl) */
+  font-size: 1.5rem; 
   font-weight: 600;
   color: var(--color-text-dark);
 }
 
 .lesson-display-placeholder {
-  font-size: 1.5rem; /* Equivalent to md:text-2xl */
+  font-size: 1.5rem; 
   font-weight: 600;
   color: #9ca3af; /* text-gray-400 equivalent */
 }
