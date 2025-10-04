@@ -22,13 +22,15 @@
          * @param {string} text - The text to display.
          */
         updateLessonDisplay(text) {
+            // Replaced utility classes with a single semantic class
+            this.elements.lessonDisplay.classList.remove('lesson-display-text', 'lesson-display-placeholder'); 
+
             if (!text || text.trim() === '') {
-                // Using textContent for safety when rendering user-generated text
                 this.elements.lessonDisplay.textContent = 'Your sentence will appear here...';
-                this.elements.lessonDisplay.classList.add('text-gray-400', 'font-semibold');
+                this.elements.lessonDisplay.classList.add('lesson-display-placeholder');
             } else {
                 this.elements.lessonDisplay.textContent = text;
-                this.elements.lessonDisplay.classList.remove('text-gray-400', 'font-semibold');
+                this.elements.lessonDisplay.classList.add('lesson-display-text');
             }
         }
 
@@ -42,7 +44,8 @@
         createButton(text, className, onClick) {
             const button = document.createElement('button');
             button.textContent = text;
-            button.classList.add(className, 'squircle');
+            // Ensure all buttons use the base style
+            button.classList.add('base-button', 'squircle', className); 
             button.addEventListener('click', onClick);
             return button;
         }
@@ -57,6 +60,7 @@
             if (!container) return; 
             container.innerHTML = ''; // Clear container
             lessons.forEach((lesson, index) => {
+                // Uses the specific lesson-button class
                 const button = this.createButton(`Lesson ${lesson.lesson}: ${lesson.title}`, 'lesson-button', () => startLessonCallback(index));
                 container.appendChild(button);
             });
@@ -71,7 +75,8 @@
             this.elements.introScreen.classList.toggle('hidden', screenName !== 'intro');
             this.elements.lessonSelector.classList.toggle('hidden', screenName !== 'selector');
             this.elements.lessonView.classList.toggle('hidden', screenName !== 'view');
-            this.elements.backToLessonsBtn.classList.toggle('hidden', !showBackButton);
+            // Back button uses the specific back-button class
+            this.elements.backToLessonsBtn.classList.toggle('hidden', !showBackButton); 
         }
 
         /**
@@ -114,13 +119,13 @@
             this.toggleControlButtons({ submit: false, clear: false, next: false });
             this.elements.interactiveContainer.innerHTML = '';
             
+            // Uses action-button class
             const trueBtn = this.createButton('Yes, it is!', 'action-button', () => handlerCallback(true));
             const falseBtn = this.createButton('No, it is not.', 'action-button', () => handlerCallback(false));
 
             this.elements.interactiveContainer.appendChild(trueBtn);
             this.elements.interactiveContainer.appendChild(falseBtn);
             
-            // This now uses textContent from updateLessonDisplay
             this.updateLessonDisplay(challenge.text); 
         }
 
@@ -129,9 +134,11 @@
             this.updateLessonDisplay('');
 
             const wordBank = document.createElement('div');
-            wordBank.classList.add('word-bank-button-container');
+            // Uses existing class
+            wordBank.classList.add('word-bank-button-container'); 
 
             words.forEach(word => {
+                // Uses existing word-button class
                 const button = this.createButton(word, 'word-button', (e) => selectWordCallback(e.target, word));
                 wordBank.appendChild(button);
             });
@@ -145,12 +152,14 @@
             this.updateLessonDisplay('');
 
             const container = document.createElement('div');
-            container.classList.add('flex', 'flex-col', 'md:flex-row', 'gap-4', 'w-full');
+            // Replaced utility classes with a semantic container class
+            container.classList.add('silly-sentences-container'); 
             
             // Naming Part Container
             const namingPartContainer = document.createElement('div');
-            namingPartContainer.classList.add('silly-sentences-column', 'bg-purple-200', 'flex-1', 'text-center');
-            namingPartContainer.innerHTML = '<h4 class="text-xl font-bold mb-2">Choose a Naming Part</h4>';
+            // Replaced utility classes with semantic column classes
+            namingPartContainer.classList.add('silly-sentences-column', 'naming-part-column'); 
+            namingPartContainer.innerHTML = '<h4 class="column-title">Choose a Naming Part</h4>';
             challenge.naming_parts.forEach(part => {
                 const button = this.createButton(part, 'word-button', (e) => selectSillyPartCallback(e.target, part, 'naming'));
                 namingPartContainer.appendChild(button);
@@ -158,8 +167,9 @@
             
             // Telling Part Container
             const tellingPartContainer = document.createElement('div');
-            tellingPartContainer.classList.add('silly-sentences-column', 'bg-pink-200', 'flex-1', 'text-center');
-            tellingPartContainer.innerHTML = '<h4 class="text-xl font-bold mb-2">Choose a Telling Part</h4>';
+            // Replaced utility classes with semantic column classes
+            tellingPartContainer.classList.add('silly-sentences-column', 'telling-part-column'); 
+            tellingPartContainer.innerHTML = '<h4 class="column-title">Choose a Telling Part</h4>';
             challenge.telling_parts.forEach(part => {
                 const button = this.createButton(part, 'word-button', (e) => selectSillyPartCallback(e.target, part, 'telling'));
                 tellingPartContainer.appendChild(button);
@@ -176,9 +186,11 @@
             this.updateLessonDisplay(challenge.sentence);
 
             const choicesContainer = document.createElement('div');
-            choicesContainer.classList.add('flex', 'justify-center', 'gap-4', 'mt-4');
+            // Replaced utility classes with a semantic choices container class
+            choicesContainer.classList.add('punctuation-choices-container'); 
 
             challenge.choices.forEach(choice => {
+                // Uses existing punctuation-button class
                 const button = this.createButton(choice, 'punctuation-button', () => handlerCallback(choice));
                 choicesContainer.appendChild(button);
             });
@@ -192,13 +204,15 @@
          */
         renderCombineSentencesChallenge(challenge) {
             this.elements.lessonGoalDisplay.textContent = `Combine two sentences using '${challenge.conjunction}'.`;
+            
+            // Replaced all utility classes with semantic classes in the HTML structure
             this.elements.lessonDisplay.innerHTML = `
-                <div class="text-center">
-                    <p class="text-xl mb-2">${challenge.sentences[0]}</p>
-                    <p class="text-2xl font-bold text-purple-600">${challenge.conjunction}</p>
-                    <p class="text-xl mt-2">${challenge.sentences[1]}</p>
+                <div class="combine-sentences-display">
+                    <p class="combine-sentence-part">${challenge.sentences[0]}</p>
+                    <p class="combine-conjunction">${challenge.conjunction}</p>
+                    <p class="combine-sentence-part">${challenge.sentences[1]}</p>
                 </div>
-                <textarea id="combineSentenceInput" rows="3" placeholder="Type your combined sentence here..." class="w-full bg-gray-100 p-4 rounded-xl shadow-inner text-xl md:text-2xl font-semibold mt-4"></textarea>
+                <textarea id="combineSentenceInput" rows="3" placeholder="Type your combined sentence here..." class="combine-input"></textarea>
             `;
             
             // Remove previous listeners to prevent duplicates
@@ -206,11 +220,9 @@
             if (combineInput && this._currentInputHandler) {
                  combineInput.removeEventListener('input', this._currentInputHandler);
             }
-            // No need for a complex handler now; standard textarea handles placeholder.
             this._currentInputHandler = null; 
 
             this.elements.interactiveContainer.innerHTML = '';
-            // The display area for this challenge is the lessonDisplay, so interactive container is kept clear
             this.toggleControlButtons({ submit: true, clear: false, next: false });
         }
     }
@@ -220,6 +232,7 @@
      * The main application logic and state controller.
      */
     class App {
+        // ... (rest of App class remains unchanged as it contains no visual CSS class strings)
         constructor() {
             this.elements = this._getElements();
             this.ui = new UIController(this.elements);
@@ -227,11 +240,10 @@
             this.state = {
                 currentLessonIndex: 0,
                 currentChallengeIndex: 0,
-                // Stores the words/parts selected by the user for the current challenge
                 currentSelectionArray: [], 
                 namingPart: '',
                 tellingPart: '',
-                currentChallengeData: null // Store current challenge for easy access
+                currentChallengeData: null 
             };
             this.messageTimeout = null;
             this.wordBankData = {};
@@ -249,11 +261,10 @@
         }
 
         _getElements() {
-            // Centralized DOM element fetching
             return {
                 introScreen: document.getElementById('introScreen'),
                 startLessonsBtn: document.getElementById('startLessonsBtn'),
-                themeSelector: document.getElementById('themeSelector'), // Unused, but kept for future expansion
+                themeSelector: document.getElementById('themeSelector'),
                 lessonSelector: document.getElementById('lessonSelector'),
                 lessonView: document.getElementById('lessonView'),
                 lessonTitle: document.getElementById('lessonTitle'),
@@ -279,14 +290,12 @@
 
         async _loadLessonsFile() {
             try {
-                // Fetch lessons.json
                 const lessonsResponse = await fetch('lessons.json');
                 if (!lessonsResponse.ok) {
                     throw new Error('Network response was not ok for lessons.json');
                 }
                 this.lessons = await lessonsResponse.json();
 
-                // Fetch words.json
                 const wordsResponse = await fetch('words.json');
                 if (!wordsResponse.ok) {
                     throw new Error('Network response was not ok for words.json');
@@ -305,7 +314,6 @@
             this._showIntroScreen();
         }
 
-        // --- Screen Transitions (Use UIController) ---
         _showIntroScreen() {
             this.ui.toggleScreens('intro');
         }
@@ -330,7 +338,6 @@
             this.elements.lessonTitle.textContent = `Lesson ${currentLesson.lesson}: ${currentLesson.title}`;
             this.elements.lessonGoalDisplay.textContent = currentLesson.goal;
             
-            // Shuffle only on the first load of a lesson
             if (this.state.currentChallengeIndex === 0) {
                 currentLesson.challenges = this._shuffleArray(currentLesson.challenges);
             }
@@ -338,9 +345,7 @@
             this._renderChallenge();
         }
 
-        // --- Challenge Rendering (Delegated to UIController) ---
         _renderChallenge() {
-            // Reset state
             this.state.currentSelectionArray = [];
             this.state.namingPart = '';
             this.state.tellingPart = '';
@@ -348,13 +353,12 @@
             
             const currentLesson = this.lessons[this.state.currentLessonIndex];
             const currentChallenge = currentLesson.challenges[this.state.currentChallengeIndex];
-            this.state.currentChallengeData = currentChallenge; // Store for easy check access
+            this.state.currentChallengeData = currentChallenge;
 
             this.elements.progressIndicator.textContent = `Challenge ${this.state.currentChallengeIndex + 1} of ${currentLesson.challenges.length}`;
 
             const handler = this.challengeHandlers[currentLesson.type];
             if (handler) {
-                // Pass challenge data, but keep `this` context for all internal calls
                 handler.call(this, currentChallenge);
             } else {
                 const errorMsg = `No handler found for lesson type: ${currentLesson.type}`;
@@ -364,12 +368,10 @@
         }
         
         _renderSentenceOrNotChallenge(challenge) {
-            // Callback now only passes the user choice, correctness check is in App
             this.ui.renderSentenceOrNotChallenge(challenge, this._handleSentenceOrNot.bind(this));
         }
 
         _renderIdentifyChallenge(challenge) {
-            // Extract and prepare words for the word bank
             const words = challenge.sentence.split(' ').map(word => word.replace(/[.?!]/g, ''));
             
             this.ui.renderWordBankChallenge(this._shuffleArray(words), (button, word) => {
@@ -386,14 +388,12 @@
         }
         
         _renderMakeItASentenceChallenge(challenge) {
-            // Pre-fill with incomplete part, preserving the structure for joining later
             this.state.currentSelectionArray = [challenge.incomplete_sentence, '']; 
             this.ui.updateLessonDisplay(this.state.currentSelectionArray[0]);
 
             const wordsToAdd = this.wordBankData.words[challenge.word_type];
             
             this.ui.renderWordBankChallenge(this._shuffleArray(wordsToAdd), (button, word) => {
-                // isAppendable flag is removed; logic is handled by challenge type
                 this._selectWord(button, word, true); 
             });
         }
@@ -403,28 +403,16 @@
         }
 
         _renderPunctuationChoiceChallenge(challenge) {
-            // Callback now only passes the user choice, correctness check is in App
             this.ui.renderPunctuationChoiceChallenge(challenge, this._handlePunctuationChoice.bind(this));
         }
 
         _renderCombineSentencesChallenge(challenge) {
-            // UI handles most of the display, the submit button uses the central _handleSubmit
             this.ui.renderCombineSentencesChallenge(challenge);
         }
-
-        // --- Interaction Logic (Core to App) ---
         
-        /**
-         * Selects a word/part for sentence construction challenges.
-         * @param {HTMLElement} button - The button element clicked.
-         * @param {string} word - The word/part value.
-         * @param {boolean} isReplacable - Flag for MakeItASentence to replace the selection.
-         */
         _selectWord(button, word, isReplacable = false) {
             if (isReplacable) {
-                // For MakeItASentence: replace the second item (the word to be added)
                 this.state.currentSelectionArray[1] = word;
-                // Re-enable all buttons, then disable the current selection
                 const buttons = this.elements.interactiveContainer.querySelectorAll('.word-button');
                 buttons.forEach(btn => btn.disabled = false);
                 button.disabled = true;
@@ -435,17 +423,15 @@
             
             this.ui.updateLessonDisplay(this.state.currentSelectionArray.join(' '));
 
-            // Show submit button only if a selection has been made (for replacable types)
             if (isReplacable && this.state.currentSelectionArray[1]) {
                  this.elements.submitBtn.classList.remove('hidden');
             }
         }
         
         _selectSillyPart(button, part, type) {
-            // Disable other buttons in the same column
             const otherButtons = button.parentElement.querySelectorAll('button');
             otherButtons.forEach(btn => btn.disabled = true);
-            button.classList.add('selected'); // Visual feedback
+            button.classList.add('selected'); 
             
             if (type === 'naming') {
                 this.state.namingPart = part;
@@ -456,16 +442,11 @@
             const fullSentence = `${this.state.namingPart} ${this.state.tellingPart}`;
             this.ui.updateLessonDisplay(fullSentence);
 
-            // Trigger submit handler if both parts are selected.
             if (this.state.namingPart && this.state.tellingPart) {
-                this._handleSubmit(true); // Auto-pass for this challenge type
+                this._handleSubmit(true); 
             }
         }
 
-        /**
-         * Central handler for submission for challenges that use the submit button.
-         * @param {boolean} forceCorrect - Forces the challenge to be marked as correct (used by silly_sentences auto-pass).
-         */
         _handleSubmit(forceCorrect = false) {
             const currentLesson = this.lessons[this.state.currentLessonIndex];
             const currentChallenge = this.state.currentChallengeData;
@@ -497,27 +478,21 @@
             }
         }
         
-        // --- Answer Checking Logic ---
-        
         _checkWordSequence(type, challenge) {
-            // Handles Identify, Scramble, and MakeItASentence (which uses a 2-part array)
             const userAnswer = this.state.currentSelectionArray.join(' ').toLowerCase().trim();
             const correctAnswer = challenge.correct_answer.toLowerCase().trim();
 
             if (type === 'identify') {
-                // For Identify, word order doesn't matter (answer is a list of words to select)
                 const userWords = this.state.currentSelectionArray.sort().join(' ');
                 const correctWords = challenge.answer.sort().join(' ');
                 return userWords === correctWords;
             }
             
-            // For scramble and make_it_a_sentence, exact sentence match is required (case-insensitive)
             return userAnswer === correctAnswer;
         }
 
         _checkCombineSentences(challenge) {
             const combineInput = document.getElementById('combineSentenceInput');
-            // Use basic cleanup. NOTE: Complex grammar checking would require a separate service/library.
             const userSentence = combineInput ? combineInput.value.trim().toLowerCase().replace(/[.,?!]/g, '') : '';
             const correctAnswer = challenge.correct_answer.toLowerCase().replace(/[.,?!]/g, '');
             
@@ -558,7 +533,6 @@
         }
 
         _handleClear() {
-            // Reset common state elements
             this.state.currentSelectionArray = [];
             this.state.namingPart = '';
             this.state.tellingPart = '';
@@ -566,7 +540,6 @@
             const currentLessonType = this.lessons[this.state.currentLessonIndex].type;
             const currentChallenge = this.state.currentChallengeData;
             
-            // Re-display the incomplete sentence and reset selection array if applicable
             if (currentLessonType === 'make_it_a_sentence') {
                 this.state.currentSelectionArray = [currentChallenge.incomplete_sentence, ''];
                 this.ui.updateLessonDisplay(currentChallenge.incomplete_sentence);
@@ -575,21 +548,17 @@
                 this.ui.updateLessonDisplay('');
             }
             
-            // Re-enable word/part selection buttons
             const wordButtons = this.elements.interactiveContainer.querySelectorAll('.word-button');
             wordButtons.forEach(button => {
                 button.disabled = false;
                 button.classList.remove('selected');
             });
             
-            // Clear combine sentence input if present
             const combineInput = document.getElementById('combineSentenceInput');
             if (combineInput) {
                 combineInput.value = '';
             }
         }
-        
-        // --- Utility Methods ---
         
         _showMessage(text, className, duration = 3000) {
             this.messageTimeout = this.ui.showMessage(text, className, duration, this.messageTimeout, this._hideMessage.bind(this));
