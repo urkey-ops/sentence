@@ -232,7 +232,6 @@
      * The main application logic and state controller.
      */
     class App {
-        // ... (rest of App class remains unchanged as it contains no visual CSS class strings)
         constructor() {
             this.elements = this._getElements();
             this.ui = new UIController(this.elements);
