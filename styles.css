@@ -8,6 +8,8 @@
   --color-text-dark: #333333;
   --color-text-light: #ffffff;
   --color-shadow-light: rgba(0, 0, 0, 0.08);
+  --color-purple-light: #e9d5ff; /* bg-purple-200 equivalent */
+  --color-pink-light: #fbcfe8; /* bg-pink-200 equivalent */
 
   --font-display: 'Comic Neue', cursive;
 }
@@ -121,7 +123,7 @@ p {
 
 .lesson-button {
   background: var(--color-tertiary);
-  color: var(--color-text-light);
+  color: var(--color-text-dark); /* Changed to dark text for better contrast on light green */
   box-shadow: 0 4px 0 rgba(168, 230, 161, 0.8);
 }
 
@@ -151,6 +153,12 @@ p {
 .word-button:hover {
   background-color: var(--color-text-dark);
   color: var(--color-background-2);
+}
+
+.word-button.selected {
+  background-color: var(--color-primary);
+  color: var(--color-text-light);
+  border-color: var(--color-primary);
 }
 
 /* Punctuation buttons */
@@ -214,4 +222,108 @@ p {
 @keyframes fadeIn {
     from { opacity: 0; transform: translateX(-50%) scale(0.95); }
     to { opacity: 1; transform: translateX(-50%) scale(1); }
+}
+
+/* ----------------------------------------------------------------- */
+/* NEW SEMANTIC CLASSES EXTRACTED FROM JAVASCRIPT */
+/* ----------------------------------------------------------------- */
+
+/* Lesson Display Area */
+#lessonDisplay {
+  /* Added base styles for the lesson display container */
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 1rem;
+}
+
+.lesson-display-text {
+  font-size: 1.5rem; /* Equivalent to md:text-2xl (higher end of text-xl) */
+  font-weight: 600;
+  color: var(--color-text-dark);
+}
+
+.lesson-display-placeholder {
+  font-size: 1.5rem; /* Equivalent to md:text-2xl */
+  font-weight: 600;
+  color: #9ca3af; /* text-gray-400 equivalent */
+}
+
+/* Silly Sentences Challenge */
+.silly-sentences-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+}
+@media (min-width: 768px) { /* md:flex-row equivalent */
+  .silly-sentences-container {
+    flex-direction: row;
+  }
+}
+
+.silly-sentences-column {
+  padding: 1.5rem;
+  border-radius: 1.5rem;
+  flex: 1;
+  text-align: center;
+}
+
+.naming-part-column {
+  background-color: var(--color-purple-light); /* bg-purple-200 */
+}
+
+.telling-part-column {
+  background-color: var(--color-pink-light); /* bg-pink-200 */
+}
+
+.column-title {
+  font-size: 1.25rem; /* text-xl */
+  font-weight: bold;
+  margin-bottom: 0.5rem; /* mb-2 */
+}
+
+/* Punctuation Choices Container */
+.punctuation-choices-container {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+/* Combine Sentences Challenge */
+.combine-sentences-display {
+  text-align: center;
+}
+
+.combine-sentence-part {
+  font-size: 1.25rem; /* text-xl */
+  margin-top: 0.5rem; /* mt-2 */
+  margin-bottom: 0.5rem; /* mb-2 */
+}
+
+.combine-conjunction {
+  font-size: 1.5rem; /* text-2xl */
+  font-weight: bold;
+  color: #7c3aed; /* text-purple-600 equivalent */
+}
+
+.combine-input {
+  /* Input/Textarea styles */
+  width: 100%;
+  background-color: #f7f7f7; /* bg-gray-100 equivalent */
+  padding: 1rem;
+  border-radius: 0.75rem; /* rounded-xl */
+  box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06); /* shadow-inner equivalent */
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
+  font-size: 1.5rem;
+  font-family: var(--font-display);
+  resize: vertical; /* Allow resizing if needed */
+  border: 1px solid #d1d5db; /* A slight border for definition */
 }
