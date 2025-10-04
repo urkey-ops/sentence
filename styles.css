@@ -14,20 +14,28 @@
   --font-display: 'Comic Neue', cursive;
 }
 
+/* --- Core Layout Fix --- */
+
+/* The .hidden class is critical for toggling screen visibility in JS */
+.hidden {
+  display: none !important;
+}
+
 body {
   font-family: var(--font-display);
   background: linear-gradient(135deg, #e0eafc, #cfdef3);
   background-size: 300% 300%;
-  animation: gradient-shift 20s ease infinite; /* Slower, calmer animation */
+  animation: gradient-shift 20s ease infinite; 
   font-size: 1.25rem;
   margin: 0;
   padding: 0;
   color: var(--color-text-dark);
   min-height: 100vh;
-  display: flex; /* Added for layout */
-  align-items: center; /* Added for layout */
-  justify-content: center; /* Added for layout */
-  padding: 1rem; /* Added for layout */
+  
+  /* FIX: Use grid to center content while allowing screens to stack */
+  display: grid; 
+  place-items: center; 
+  padding: 1rem; 
 }
 
 @keyframes gradient-shift {
@@ -69,7 +77,23 @@ p {
   transition: transform 0.3s ease;
 }
 
-/* Base style for all buttons with subtle effects */
+/* Main Screen Structure */
+.main-screen {
+    /* Ensures screen takes up available space when visible */
+    width: 100%;
+    max-width: 900px; 
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem; 
+    padding: 2rem; 
+}
+
+
+/* --- Button Styles --- */
+
 .base-button {
   display: inline-flex;
   align-items: center;
@@ -81,17 +105,16 @@ p {
   cursor: pointer;
   font-family: var(--font-display);
   min-height: 60px;
-  /* Increased padding to prevent overflow */
   padding: 1rem 2rem;
   border-radius: 1.5rem;
   font-size: 1.5rem;
-  line-height: 1.2; /* Ensures vertical spacing */
+  line-height: 1.2; 
   gap: 0.5rem;
   transform: translateY(0);
 }
 
 .base-button:hover {
-  box-shadow: 0 0 10px rgba(142, 45, 226, 0.4); /* Soft glow on hover */
+  box-shadow: 0 0 10px rgba(142, 45, 226, 0.4); 
   transform: translateY(-2px);
 }
 
@@ -229,32 +252,14 @@ p {
     to { opacity: 1; transform: translateX(-50%) scale(1); }
 }
 
-/* ----------------------------------------------------------------- */
-/* NEW SEMANTIC CLASSES EXTRACTED FROM JAVASCRIPT AND HTML */
-/* ----------------------------------------------------------------- */
-
-/* Main Containers (Replacing all those Tailwind classes on the primary divs) */
-.main-screen {
-    /* w-full max-w-4xl mx-auto flex flex-col items-center justify-center gap-6 p-8 */
-    width: 100%;
-    max-width: 900px; /* Equivalent to max-w-4xl */
-    margin-left: auto;
-    margin-right: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.5rem; /* gap-6 */
-    padding: 2rem; /* p-8 */
-}
+/* --- Semantic UI Classes --- */
 
 .intro-text {
-    /* text-lg md:text-xl text-center text-gray-600 */
     text-align: center;
-    color: #4b5563; /* text-gray-600 */
+    color: #4b5563; 
 }
 
 .lesson-selector .lesson-buttons-grid {
-    /* grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full */
     display: grid;
     grid-template-columns: 1fr;
     gap: 1rem;
@@ -271,9 +276,7 @@ p {
     }
 }
 
-/* Lesson View Structure */
 .view-header {
-    /* flex flex-col items-center text-center */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -281,26 +284,23 @@ p {
 }
 
 .lesson-goal {
-    /* text-xl md:text-2xl text-pink-600 font-semibold mt-2 */
     font-size: 1.5rem;
     font-weight: 600;
-    color: #db2777; /* text-pink-600 */
+    color: #db2777; 
     margin-top: 0.5rem;
 }
 
 .progress-indicator {
-    /* text-md text-gray-500 mt-1 */
     font-size: 1rem;
-    color: #6b7280; /* text-gray-500 */
+    color: #6b7280; 
     margin-top: 0.25rem;
 }
 
 .lesson-display-box {
-    /* bg-gray-100 p-4 rounded-xl shadow-inner min-h-[60px] flex items-center justify-center */
-    background-color: #f3f4f6; /* bg-gray-100 */
+    background-color: #f3f4f6; 
     padding: 1rem;
-    border-radius: 0.75rem; /* rounded-xl */
-    box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06); /* shadow-inner */
+    border-radius: 0.75rem; 
+    box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06); 
     min-height: 60px;
     display: flex;
     align-items: center;
@@ -309,7 +309,6 @@ p {
 }
 
 .interactive-container {
-    /* flex flex-wrap justify-center gap-4 mt-6 */
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -319,7 +318,6 @@ p {
 }
 
 .control-buttons-group {
-    /* flex flex-wrap justify-center gap-4 mt-4 */
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -327,9 +325,7 @@ p {
     margin-top: 1rem;
 }
 
-/* Hidden Steps/Tips */
 .hidden-steps-container {
-    /* flex flex-row flex-wrap justify-center gap-4 mt-8 text-center text-gray-600 */
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -337,19 +333,18 @@ p {
     gap: 1rem;
     margin-top: 2rem;
     text-align: center;
-    color: #4b5563; /* text-gray-600 */
+    color: #4b5563; 
 }
 
 .step-tip {
-    /* flex flex-col items-center gap-2 text-xl */
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 0.5rem;
-    font-size: 1.25rem; /* text-xl */
+    font-size: 1.25rem; 
 }
 .step-tip i {
-    font-size: 1.5rem; /* Icon size */
+    font-size: 1.5rem; 
 }
 
 /* Lesson Display Area */
@@ -371,7 +366,7 @@ p {
 .lesson-display-placeholder {
   font-size: 1.5rem; 
   font-weight: 600;
-  color: #9ca3af; /* text-gray-400 equivalent */
+  color: #9ca3af; 
 }
 
 /* Silly Sentences Challenge */
@@ -381,7 +376,7 @@ p {
   gap: 1rem;
   width: 100%;
 }
-@media (min-width: 768px) { /* md:flex-row equivalent */
+@media (min-width: 768px) { 
   .silly-sentences-container {
     flex-direction: row;
   }
@@ -395,17 +390,17 @@ p {
 }
 
 .naming-part-column {
-  background-color: var(--color-purple-light); /* bg-purple-200 */
+  background-color: var(--color-purple-light); 
 }
 
 .telling-part-column {
-  background-color: var(--color-pink-light); /* bg-pink-200 */
+  background-color: var(--color-pink-light); 
 }
 
 .column-title {
-  font-size: 1.25rem; /* text-xl */
+  font-size: 1.25rem; 
   font-weight: bold;
-  margin-bottom: 0.5rem; /* mb-2 */
+  margin-bottom: 0.5rem; 
 }
 
 /* Punctuation Choices Container */
@@ -422,24 +417,23 @@ p {
 }
 
 .combine-sentence-part {
-  font-size: 1.25rem; /* text-xl */
-  margin-top: 0.5rem; /* mt-2 */
-  margin-bottom: 0.5rem; /* mb-2 */
+  font-size: 1.25rem; 
+  margin-top: 0.5rem; 
+  margin-bottom: 0.5rem; 
 }
 
 .combine-conjunction {
-  font-size: 1.5rem; /* text-2xl */
+  font-size: 1.5rem; 
   font-weight: bold;
-  color: #7c3aed; /* text-purple-600 equivalent */
+  color: #7c3aed; 
 }
 
 .combine-input {
-  /* Input/Textarea styles */
   width: 100%;
-  background-color: #f7f7f7; /* bg-gray-100 equivalent */
+  background-color: #f7f7f7; 
   padding: 1rem;
-  border-radius: 0.75rem; /* rounded-xl */
-  box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06); /* shadow-inner equivalent */
+  border-radius: 0.75rem; 
+  box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06); 
   min-height: 60px;
   display: flex;
   align-items: center;
@@ -447,6 +441,6 @@ p {
   margin-top: 1rem;
   font-size: 1.5rem;
   font-family: var(--font-display);
-  resize: vertical; /* Allow resizing if needed */
-  border: 1px solid #d1d5db; /* A slight border for definition */
+  resize: vertical; 
+  border: 1px solid #d1d5db; 
 }
