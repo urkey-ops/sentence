@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sentence Learning Journey</title>
+    <meta name="description" content="An interactive learning application for building sentence skills">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
@@ -11,50 +12,64 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
-    <div id="introScreen" class="main-screen">
-        <h2>Sentence Learning Journey! <i class="fas fa-hat-wizard" style="color: #f59e0b;"></i></h2>
-        <p class="intro-text">Start your adventure to become a master sentence builder!</p>
-        <button id="startLessonsBtn" class="action-button">Start Lessons <i class="fas fa-arrow-right"></i></button>
-    </div>
-
-    <div id="lessonSelector" class="hidden main-screen lesson-selector">
-        <h2>Choose a Lesson</h2>
-        <div id="lessonButtonsContainer" class="lesson-buttons-grid">
-            </div>
-    </div>
-
-    <div id="lessonView" class="hidden main-screen lesson-view">
-        <div class="view-header">
-            <h3 id="lessonTitle"></h3>
-            <p id="lessonGoalDisplay" class="lesson-goal"></p>
-            <span id="progressIndicator" class="progress-indicator"></span>
+    <noscript>
+        <div style="padding: 2rem; text-align: center; background: #fff; border-radius: 1rem; margin: 2rem;">
+            <h2>JavaScript Required</h2>
+            <p>This application requires JavaScript to function. Please enable JavaScript in your browser settings.</p>
         </div>
-        
-        <div id="lessonDisplay" class="lesson-display-box">
-            </div>
-        
-        <div id="interactiveContainer" class="interactive-container">
-            </div>
-        
-        <div class="control-buttons-group">
-            <button id="submitBtn" class="action-button hidden"><i class="fas fa-check"></i> Check Answer</button>
-            <button id="clearBtn" class="clear-button hidden"><i class="fas fa-eraser"></i> Clear</button>
-            <button id="nextBtn" class="action-button hidden">Next Challenge <i class="fas fa-arrow-right"></i></button>
-            <button id="backToLessonsBtn" class="back-button hidden">Back to Lessons</button>
-        </div>
+    </noscript>
 
-        <div class="hidden-steps-container">
-            <div id="step-say" class="hidden step-tip"><i class="fas fa-comment-dots"></i>Say it!</div>
-            <div id="step-capital" class="hidden step-tip"><i class="fas fa-font"></i>Capital!</div>
-            <div id="step-space" class="hidden step-tip"><i class="fas fa-ruler-horizontal"></i>Space!</div>
-            <div id="step-end" class="hidden step-tip"><i class="fas fa-stop-circle"></i>End it!</div>
-            <div id="step-read" class="hidden step-tip"><i class="fas fa-book-reader"></i>Read it!</div>
-        </div>
-    </div>
+    <main>
+        <section id="introScreen" class="main-screen">
+            <h2>
+                Sentence Learning Journey! 
+                <i class="fas fa-hat-wizard wizard-icon" aria-hidden="true"></i>
+            </h2>
+            <p class="intro-text">Start your adventure to become a master sentence builder!</p>
+            <button id="startLessonsBtn" class="base-button squircle action-button">
+                Start Lessons 
+                <i class="fas fa-arrow-right" aria-hidden="true"></i>
+            </button>
+        </section>
+
+        <section id="lessonSelector" class="hidden main-screen lesson-selector">
+            <h2>Choose a Lesson</h2>
+            <div id="lessonButtonsContainer"></div>
+        </section>
+
+        <section id="lessonView" class="hidden main-screen lesson-view">
+            <div class="view-header">
+                <h3 id="lessonTitle"></h3>
+                <p id="lessonGoalDisplay" class="lesson-goal"></p>
+                <span id="progressIndicator" class="progress-indicator"></span>
+            </div>
+            
+            <div id="lessonDisplay" class="lesson-display-box" role="status" aria-live="polite"></div>
+            
+            <div id="interactiveContainer" class="interactive-container"></div>
+            
+            <nav class="control-buttons-group" aria-label="Lesson controls">
+                <button id="submitBtn" class="base-button squircle action-button hidden">
+                    <i class="fas fa-check" aria-hidden="true"></i> 
+                    Check Answer
+                </button>
+                <button id="clearBtn" class="base-button squircle clear-button hidden">
+                    <i class="fas fa-eraser" aria-hidden="true"></i> 
+                    Clear
+                </button>
+                <button id="nextBtn" class="base-button squircle action-button hidden">
+                    Next Challenge 
+                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                </button>
+                <button id="backToLessonsBtn" class="base-button squircle back-button hidden">
+                    Back to Lessons
+                </button>
+            </nav>
+        </section>
+    </main>
     
-    <div id="messageBox" class="message-box"></div>
-
+    <div id="messageBox" class="message-box" role="alert" aria-live="assertive"></div>
+    
     <script src="script.js"></script>
 </body>
 </html>
