@@ -43,9 +43,9 @@
     "type": "scramble",
     "goal": "Put the words in the right order!",
     "challenges": [
-      { "words": ["we", "play", "outside"] },
-      { "words": ["the", "sky", "is", "blue"] },
-      { "words": ["i", "go", "to", "school"] }
+      { "words": ["we", "play", "outside"], "correct_answer": "we play outside" },
+      { "words": ["the", "sky", "is", "blue"], "correct_answer": "the sky is blue" },
+      { "words": ["i", "go", "to", "school"], "correct_answer": "i go to school" }
     ]
   },
   {
@@ -54,9 +54,9 @@
     "type": "make_it_a_sentence",
     "goal": "Add a word to make a complete sentence!",
     "challenges": [
-        { "incomplete_sentence": "The red apple", "word_type": "verb", "correct_answer": "The red apple is on the table." },
-        { "incomplete_sentence": "Jumps high", "word_type": "noun", "correct_answer": "The boy jumps high." },
-        { "incomplete_sentence": "The baby", "word_type": "verb", "correct_answer": "The baby sleeps soundly." }
+      { "incomplete_sentence": "The red apple", "word_type": "verb", "correct_answer": "The red apple is on the table." },
+      { "incomplete_sentence": "Jumps high", "word_type": "noun", "correct_answer": "The boy jumps high." },
+      { "incomplete_sentence": "The baby", "word_type": "verb", "correct_answer": "The baby sleeps soundly." }
     ]
   },
   {
@@ -65,8 +65,8 @@
     "type": "silly_sentences",
     "goal": "Make a silly sentence by picking a naming and telling part!",
     "challenges": [
-        { "naming_parts": ["The fluffy cat", "My robot friend", "A tiny wizard"], "telling_parts": ["danced on the moon.", "ate a giant cookie.", "flew through the sky."] },
-        { "naming_parts": ["A purple elephant", "The singing tree", "A sleepy cloud"], "telling_parts": ["wore a top hat.", "read a book.", "painted a rainbow."] }
+      { "naming_parts": ["The fluffy cat", "My robot friend", "A tiny wizard"], "telling_parts": ["danced on the moon.", "ate a giant cookie.", "flew through the sky."] },
+      { "naming_parts": ["A purple elephant", "The singing tree", "A sleepy cloud"], "telling_parts": ["wore a top hat.", "read a book.", "painted a rainbow."] }
     ]
   },
   {
@@ -75,9 +75,9 @@
     "type": "punctuation_choice",
     "goal": "Choose the correct punctuation mark for the sentence.",
     "challenges": [
-        { "sentence": "Where are you going", "choices": ["!", "?", "."], "correct_answer": "?" },
-        { "sentence": "The sun is hot today", "choices": ["!", "?", "."], "correct_answer": "." },
-        { "sentence": "I am so excited", "choices": ["!", "?", "."], "correct_answer": "!" }
+      { "sentence": "Where are you going", "choices": ["!", "?", "."], "correct_answer": "?" },
+      { "sentence": "The sun is hot today", "choices": ["!", "?", "."], "correct_answer": "." },
+      { "sentence": "I am so excited", "choices": ["!", "?", "."], "correct_answer": "!" }
     ]
   },
   {
@@ -86,8 +86,8 @@
     "type": "combine_sentences",
     "goal": "Combine two sentences to make one new sentence.",
     "challenges": [
-        { "sentences": ["The dog is fluffy.", "The dog is happy."], "conjunction": "and", "correct_answer": "The fluffy dog is happy." },
-        { "sentences": ["It is raining.", "We can still play inside."], "conjunction": "but", "correct_answer": "It is raining but we can still play inside." }
+      { "sentences": ["The dog is fluffy.", "The dog is happy."], "conjunction": "and", "correct_answer": "The fluffy dog is happy." },
+      { "sentences": ["It is raining.", "We can still play inside."], "conjunction": "but", "correct_answer": "It is raining but we can still play inside." }
     ]
   }
 ]
